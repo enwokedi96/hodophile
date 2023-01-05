@@ -5,6 +5,6 @@ This is a user-friendly website that allows users to search known holiday destin
 This is the height of life!!!
 Enjoy Every moment!!
 Feel the Joy!!
-❤️
-new
+❤️❤️
+
 
