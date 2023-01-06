@@ -3,7 +3,8 @@ $(document).ready(
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
         var manualSearch = $('#services-manual');
-        var closeManual = $("#close")
+        var closeManual = $("#close");
+        
         // add click event for manual search
         manual.on('click', function(){
             manualAuto.attr('class','hide')
