@@ -3,7 +3,7 @@
     <head>
         <title>Hodophile Site</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     </head>
     <body>
 <!--Nav Bar-->
@@ -46,7 +46,7 @@
               <div class="col">
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
+                      <h5 class="card-title">Manual</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                       <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
@@ -55,7 +55,7 @@
               <div class="col">
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
+                      <h5 class="card-title">Automatic</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                       <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
@@ -63,6 +63,71 @@
               </div>
             </div>
           </div>
+
+<!-- When user clicks manual, display search options, same as above -->
+  <div class="container" id="services">
+    <div class="row">
+      <!-- display location and listings -->
+      <!-- first search option -->
+      <div class="col-lg-12 col-md-12 border border-secondary rounded" id="manual-search">
+        <!-- <p>(for veteran holidayers)</p> -->
+        <div class="mb-2" role="document">
+          <h3>The old-fashion search</h3>
+          <p>(for veteran holidayers)</p>
+          <div class="md-form mb-2">
+            <i class="fas fa-map-marker-alt"></i>
+            <label for="enter-location" class="h6">Enter destination</label>
+            <input type="text" id="enter-location" class="form-control validate" placeholder="start typing and select a suggestion" required>
+            <div id="recommendations" class="hide"></div>
+          </div>
+          <!-- state duration of stay -->
+          <div class="md-form mb-3 mt-2" id="stay-duration">
+            <i class="fas fa-calendar"> Enter duration of stay</i><br>
+            <div class="input-group">
+              <label for="from-date"  class="h6 mt-2">From -</label>
+              <input type="date" value="2023-01-01" id="from-date" class="form-control validate" required>
+              <label for="to-date" class="h6 mt-2 ml-2"> To -</label>
+              <input type="date" value="2023-01-01" id="to-date" class="form-control validate" required>
+            </div> 
+          </div>
+          <!-- number of rooms -->
+          <div class="input-group mb-3">
+            <!-- put in expected number of adults -->
+            <div class="h6 mt-2"><i class="fas fa-user"></i> Adults -</div>
+            <div class="input-group-prepend">
+              <button id="decrease-adults" class="btn btn-outline-danger" type="button"><i class="fas fa-chevron-down"></i></button>
+            </div>
+            <input id="adults" type="text" class="form-control" value="1">
+            <div class="input-group-append">
+              <button id="increase-adults" class="btn btn-outline-primary" type="button"><i class="fas fa-chevron-up"></i></button>
+            </div>
+            <!-- put in expected number of rooms -->
+            <div class="h6 mt-2 ml-2"><i class="fas fa-bed"></i> Rooms -</div>
+            <div class="input-group-prepend">
+              <button id="decrease-rooms" class="btn btn-outline-danger" type="button"><i class="fas fa-chevron-down"></i></button>
+            </div>
+            <input id="rooms" type="text" class="form-control" value="1">
+            <div class="input-group-append">
+              <button id="increase-rooms" class="btn btn-outline-primary" type="button"><i class="fas fa-chevron-up"></i></button>
+            </div>
+          </div>
+          <!--  -->
+          <!-- filter hotel search by what metric? -->
+          <div class="input-group mb-3">
+            <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Filter -</div>
+            <select class="custom-select" id="filter-options">
+              <option selected>Choose preferred hotel filter...</option>
+              <option value="popularity">Popularity</option>
+              <option value="price">Price</option>
+              <option value="review_score">Review Score</option>
+            </select>
+          </div>
+          <!-- submit all -->
+            <div class="move-center mb-3">
+              <button class="btn btn-deep-orange btn-primary">Submit</button>
+            </div> 
+        </div>
+      </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
