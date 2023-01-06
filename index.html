@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
         <link rel="stylesheet" href="./css/reset.css">
     </head>
-    <body>
+    
+<body>
 
 <!--Nav Bar-->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -44,9 +45,9 @@
               </figcaption>
             </figure>
 <!--Manual/Automatic container-->
-    <div class="container text-center" id="manual-automatic">
-        <div class="row align-items-center">
-          <div class="col">
+    <div class="container-md text-center" id="manual-automatic">
+        <div class="row align-items-center" >
+          <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Manual</h5>
@@ -55,7 +56,7 @@
                 </div>
               </div>
           </div>
-          <div class="col">
+          <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Automatic</h5>
@@ -67,16 +68,17 @@
         </div>
       </div>
 
+  <!-- When user clicks manual, display search options, same as above -->
   <div class="container-md hide" id="services-manual">
-    <!-- When user clicks manual, display search options, same as above -->
-    <div class="row m-3">
+    <div class="row">
       <!-- display location and listings -->
       <!-- first search option -->
       <div class="col-lg-12 col-md-12 border border-secondary rounded" id="manual-search">
-        
         <!-- include button to close div -->
         <br>
-        <div class="d-grid d-md-flex justify-content-md-end"><button id="close" style="border: 1px solid black; type="button" class="btn-close"  aria-label="Close"></button></div>
+        <div class="d-grid d-md-flex justify-content-md-end">
+          <button id="close" type="button" class="btn-close"  aria-label="Close"></button>
+        </div>
         <!-- <p>(for veteran holidayers)</p> -->
          <div class="mb-2" role="document">
           <h3>The old-fashion search</h3>
@@ -150,5 +152,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- my js script -->
     <script src="./js/script.js"></script>  
+
   </body>
+
 </html>
