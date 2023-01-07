@@ -16,8 +16,10 @@ $(document).ready(
 
         // add click event for manual search
         closeManual.on('click', function () {
-            manualSearch.addClass('hide')
-            manualAuto.removeClass('hide')
+            manualSearch.addClass('hide');
+            manualAuto.removeClass('hide');
+            // reset counters
+            $("#adults").val(`1`); $("#rooms").val(`1`)
         })
 
         // image transitions in the background
@@ -32,7 +34,6 @@ $(document).ready(
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
-            console.log(bg)
             imageTag.css({
                 "background-image": bg,
                 "background-size": "cover"
@@ -42,24 +43,47 @@ $(document).ready(
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
-        // set increment and decrement factor for rooms and adults fields
-        function changeCount(id, jTag){
+        // apply to adults event and field
+        $("#increase-adults").on("click",function (event){
             // increase count
-            if (id.includes('increase')) {
-                $(`#${id}`).on("click", function () {
-                    currentNumRooms = parseInt(currentNumRooms) + 1;
-                    jTag.val(`${currentNumRooms}`);
-                })}
-            // decrease count
-            else if (id.includes('decrease')){
-                $(`#${id}`).on("click", function(){        
-                    if (parseInt(currentNumRooms)>1){
-                        currentNumRooms = parseInt(currentNumRooms) - 1;
-                        jTag.val(`${currentNumRooms}`);}
-                    else{
-                        console.log("Boi, you can't book lower than a room!!")
-                    }
-                })}
+            var num = parseInt($("#adults").val());
+            if (num>=29) {
+                console.log("Boi, you can't book higher than number 29!!");
             }
+            else {num += 1;}
+            // update value
+            $("#adults").val(`${num}`)
+        })
+        $("#decrease-adults").on("click",function (event){
+            var num = parseInt($("#adults").val());
+            // decrease count
+            if (num==1) {
+                console.log("Boi, you can't book lower than number one!!");}
+            else {num -= 1;}
+            // update value
+            $("#adults").val(`${num}`)
+        })
+
+        // apply to rooms event and field
+        $("#increase-rooms").on("click",function (event){
+            // increase count
+            var num = parseInt($("#rooms").val());
+            if (num>=29) {
+                console.log("Boi, you can't book higher than number 29!!");}
+            else {num += 1;}
+            // update value
+            $("#rooms").val(`${num}`)
+        })
+        $("#decrease-rooms").on("click",function (event){
+            var num = parseInt($("#rooms").val());
+            // decrease count
+            if (num==1) {
+                console.log("Boi, you can't book lower than number one!!");
+            }
+            else {num -= 1;}
+            // update value
+            $("#rooms").val(`${num}`)
+        })
+
         }
     )
