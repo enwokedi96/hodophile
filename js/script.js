@@ -36,7 +36,23 @@ $(document).ready(
                 "background-size": "cover"
             });
         }
+        
+        // sift randomly through images every 3 seconds
+        setInterval(changeImage, 3000);
 
-        setInterval(changeImage, 3000)
+        // set increment and decrement factor for 
+        function changeCount(){
+            // increase count
+            $("#increase-rooms").on("click", function(){
+                currentNumRooms = parseInt(currentNumRooms) + 1;
+                $("#rooms").val(`${currentNumRooms}`);
+            })
+            // decrease count
+            $("#decrease-rooms").on("click", function(){
+            if (parseInt(currentNumRooms)>1){
+                currentNumRooms = parseInt(currentNumRooms) - 1;
+                $("#rooms").val(`${currentNumRooms}`);}
+            else(console.log("Boi, you can't book lower than a room!!"))
+        })}
     }
 )
