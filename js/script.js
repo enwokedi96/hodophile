@@ -56,12 +56,10 @@ $(document).ready(
                     if (parseInt(currentNumRooms)>1){
                         currentNumRooms = parseInt(currentNumRooms) - 1;
                         jTag.val(`${currentNumRooms}`);}
-                    else(console.log("Boi, you can't book lower than a room!!"))
-                    }
-                    else (console.log("Boi, you can't book lower than a room!!"))
-                }
-                )
+                    else{
+                        console.log("Boi, you can't book lower than a room!!")
+                    })}
+                
             }
         }
-    }
-)
+    )
