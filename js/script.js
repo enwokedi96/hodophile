@@ -21,7 +21,6 @@ $(document).ready(
         // image transitions in the background
         function changeImage() {
             const images = [
-<<<<<<< HEAD
                 'url("/images/egypt.jpg")',
                 'url("/images/egypt1.jpg")',
                 'url("/images/italy2.jpg")',
@@ -32,14 +31,12 @@ $(document).ready(
                 'url("/images/statue-of-liberty-us.jpg")',
 
 
-=======
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
                 'url("./images/kenya.jpg")',
                 'url("./images/maldives1.jpg")',
                 'url("./images/paris.jpg")',
->>>>>>> 37e193938a8294401333e85c5b6af467db3feae5
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
