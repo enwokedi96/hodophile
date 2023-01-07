@@ -6,7 +6,7 @@ $(document).ready(
         var closeManual = $("#close"); // close button
         const imageTag = $('#image') // tag attached to body
         var currentNumRooms = $("#rooms").val();
-        var currentNumAdults = $("#rooms").val();
+        var currentNumAdults = $("#adults").val();
 
         // add click event for manual search
         manual.on('click', function () {
@@ -23,19 +23,6 @@ $(document).ready(
         // image transitions in the background
         function changeImage() {
             const images = [
-<<<<<<< HEAD
-                'url("/images/egypt.jpg")',
-                'url("/images/egypt1.jpg")',
-                'url("/images/italy2.jpg")',
-                'url("/images/maldives1.jpg")',
-                'url("/images/paris.jpg")',
-                'url("/images/masai-mara-kenya.jpg")',
-                'url("/images/peru.jpg")',
-                'url("/images/statue-of-liberty-us.jpg")',
-
-
-=======
->>>>>>> bb52eac938dfe0d02c3ff1a373b08ee3a132dc7d
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
@@ -56,19 +43,19 @@ $(document).ready(
         setInterval(changeImage, 3000);
 
         // set increment and decrement factor for rooms and adults fields
-        function changeCount(id){
+        function changeCount(id, jTag){
             // increase count
             if (id.includes('increase')){
                 $(`#${id}`).on("click", function(){
                     currentNumRooms = parseInt(currentNumRooms) + 1;
-                    $("#rooms").val(`${currentNumRooms}`);
+                    jTag.val(`${currentNumRooms}`);
                 })}
             // decrease count
-            if (id.includes('decrease')){
+            else if (id.includes('decrease')){
                 $(`#${id}`).on("click", function(){        
                     if (parseInt(currentNumRooms)>1){
                         currentNumRooms = parseInt(currentNumRooms) - 1;
-                        $("#rooms").val(`${currentNumRooms}`);}
+                        jTag.val(`${currentNumRooms}`);}
                     else(console.log("Boi, you can't book lower than a room!!"))
                     }
                 )
