@@ -23,19 +23,6 @@ $(document).ready(
         // image transitions in the background
         function changeImage() {
             const images = [
-<<<<<<< HEAD
-                'url("/images/egypt.jpg")',
-                'url("/images/egypt1.jpg")',
-                'url("/images/italy2.jpg")',
-                'url("/images/maldives1.jpg")',
-                'url("/images/paris.jpg")',
-                'url("/images/masai-mara-kenya.jpg")',
-                'url("/images/peru.jpg")',
-                'url("/images/statue-of-liberty-us.jpg")',
-
-
-=======
->>>>>>> bb52eac938dfe0d02c3ff1a373b08ee3a132dc7d
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
@@ -51,26 +38,28 @@ $(document).ready(
                 "background-size": "cover"
             });
         }
-        
+
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
         // set increment and decrement factor for rooms and adults fields
-        function changeCount(id){
+        function changeCount(id) {
             // increase count
-            if (id.includes('increase')){
-                $(`#${id}`).on("click", function(){
+            if (id.includes('increase')) {
+                $(`#${id}`).on("click", function () {
                     currentNumRooms = parseInt(currentNumRooms) + 1;
                     $("#rooms").val(`${currentNumRooms}`);
-                })}
+                })
+            }
             // decrease count
-            if (id.includes('decrease')){
-                $(`#${id}`).on("click", function(){        
-                    if (parseInt(currentNumRooms)>1){
+            if (id.includes('decrease')) {
+                $(`#${id}`).on("click", function () {
+                    if (parseInt(currentNumRooms) > 1) {
                         currentNumRooms = parseInt(currentNumRooms) - 1;
-                        $("#rooms").val(`${currentNumRooms}`);}
-                    else(console.log("Boi, you can't book lower than a room!!"))
+                        $("#rooms").val(`${currentNumRooms}`);
                     }
+                    else (console.log("Boi, you can't book lower than a room!!"))
+                }
                 )
             }
         }
