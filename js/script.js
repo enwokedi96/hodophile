@@ -4,7 +4,9 @@ $(document).ready(
         var manual = $('#manual'); // manual button
         var manualSearch = $('#services-manual');
         var closeManual = $("#close"); // close button
-        const imageTag = $('#image')
+        const imageTag = $('#image') // tag attached to body
+        var currentNumRooms = $("#rooms").val();
+        var currentNumAdults = $("#rooms").val();
 
         // add click event for manual search
         manual.on('click', function () {
@@ -21,6 +23,7 @@ $(document).ready(
         // image transitions in the background
         function changeImage() {
             const images = [
+<<<<<<< HEAD
                 'url("/images/egypt.jpg")',
                 'url("/images/egypt1.jpg")',
                 'url("/images/italy2.jpg")',
@@ -31,6 +34,8 @@ $(document).ready(
                 'url("/images/statue-of-liberty-us.jpg")',
 
 
+=======
+>>>>>>> bb52eac938dfe0d02c3ff1a373b08ee3a132dc7d
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
@@ -40,7 +45,7 @@ $(document).ready(
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
-            //console.log(bg)
+            console.log(bg)
             imageTag.css({
                 "background-image": bg,
                 "background-size": "cover"
@@ -50,19 +55,24 @@ $(document).ready(
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
-        // set increment and decrement factor for 
-        function changeCount(){
+        // set increment and decrement factor for rooms and adults fields
+        function changeCount(id){
             // increase count
-            $("#increase-rooms").on("click", function(){
-                currentNumRooms = parseInt(currentNumRooms) + 1;
-                $("#rooms").val(`${currentNumRooms}`);
-            })
+            if (id.includes('increase')){
+                $(`#${id}`).on("click", function(){
+                    currentNumRooms = parseInt(currentNumRooms) + 1;
+                    $("#rooms").val(`${currentNumRooms}`);
+                })}
             // decrease count
-            $("#decrease-rooms").on("click", function(){
-            if (parseInt(currentNumRooms)>1){
-                currentNumRooms = parseInt(currentNumRooms) - 1;
-                $("#rooms").val(`${currentNumRooms}`);}
-            else(console.log("Boi, you can't book lower than a room!!"))
-        })}
+            if (id.includes('decrease')){
+                $(`#${id}`).on("click", function(){        
+                    if (parseInt(currentNumRooms)>1){
+                        currentNumRooms = parseInt(currentNumRooms) - 1;
+                        $("#rooms").val(`${currentNumRooms}`);}
+                    else(console.log("Boi, you can't book lower than a room!!"))
+                    }
+                )
+            }
+        }
     }
 )
