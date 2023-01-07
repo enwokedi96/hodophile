@@ -28,9 +28,13 @@ $(document).ready(
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
-                'url("./images/kenya.jpg")',
                 'url("./images/maldives1.jpg")',
                 'url("./images/paris.jpg")',
+                'url("./images/italy-rome-colosseum.jpg")',
+                'url("./images/peru.jpg")',
+                'url("./images/masai-mara-kenya.jpg")',
+                'url("./images/statue-of-liberty-us.jpg")',
+
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
