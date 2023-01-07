@@ -6,7 +6,7 @@ $(document).ready(
         var closeManual = $("#close"); // close button
         const imageTag = $('#image') // tag attached to body
         var currentNumRooms = $("#rooms").val();
-        var currentNumAdults = $("#rooms").val();
+        var currentNumAdults = $("#adults").val();
 
         // add click event for manual search
         manual.on('click', function () {
@@ -38,28 +38,28 @@ $(document).ready(
                 "background-size": "cover"
             });
         }
-        
+
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
         // set increment and decrement factor for rooms and adults fields
-        function changeCount(id){
+        function changeCount(id, jTag){
             // increase count
-            if (id.includes('increase')){
-                $(`#${id}`).on("click", function(){
+            if (id.includes('increase')) {
+                $(`#${id}`).on("click", function () {
                     currentNumRooms = parseInt(currentNumRooms) + 1;
-                    $("#rooms").val(`${currentNumRooms}`);
+                    jTag.val(`${currentNumRooms}`);
                 })}
             // decrease count
-            if (id.includes('decrease')){
+            else if (id.includes('decrease')){
                 $(`#${id}`).on("click", function(){        
                     if (parseInt(currentNumRooms)>1){
                         currentNumRooms = parseInt(currentNumRooms) - 1;
-                        $("#rooms").val(`${currentNumRooms}`);}
-                    else(console.log("Boi, you can't book lower than a room!!"))
-                    }
-                )
+                        jTag.val(`${currentNumRooms}`);}
+                    else{
+                        console.log("Boi, you can't book lower than a room!!")
+                    })}
+                
             }
         }
-    }
-)
+    )
