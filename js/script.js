@@ -38,15 +38,15 @@ $(document).ready(
                 "background-size": "cover"
             });
         }
-        
+
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
         // set increment and decrement factor for rooms and adults fields
         function changeCount(id, jTag){
             // increase count
-            if (id.includes('increase')){
-                $(`#${id}`).on("click", function(){
+            if (id.includes('increase')) {
+                $(`#${id}`).on("click", function () {
                     currentNumRooms = parseInt(currentNumRooms) + 1;
                     jTag.val(`${currentNumRooms}`);
                 })}
@@ -58,6 +58,8 @@ $(document).ready(
                         jTag.val(`${currentNumRooms}`);}
                     else(console.log("Boi, you can't book lower than a room!!"))
                     }
+                    else (console.log("Boi, you can't book lower than a room!!"))
+                }
                 )
             }
         }
