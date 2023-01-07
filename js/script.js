@@ -21,12 +21,12 @@ $(document).ready(
         // image transitions in the background
         function changeImage() {
             const images = [
-                'url("/images/egypt.jpg")',
-                'url("/images/egypt1.jpg")',
-                'url("/images/italy2.jpg")',
-                'url("/images/kenya.jpg")',
-                'url("/images/maldives1.jpg")',
-                'url("/images/paris.jpg")',
+                'url("./images/egypt.jpg")',
+                'url("./images/egypt1.jpg")',
+                'url("./images/italy2.jpg")',
+                'url("./images/kenya.jpg")',
+                'url("./images/maldives1.jpg")',
+                'url("./images/paris.jpg")',
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
