@@ -58,8 +58,9 @@ $(document).ready(
                         jTag.val(`${currentNumRooms}`);}
                     else{
                         console.log("Boi, you can't book lower than a room!!")
-                    })}
-                
+                    }
+                }
+                )}
             }
         }
     )
