@@ -1,4 +1,11 @@
-.hide{
+.hide {
     display: none;
 }
 
+/* #image {
+    background-image: url("/images/egypt.jpg");
+} */
+
+.moving-down{
+    margin-top: 120px;
+}
