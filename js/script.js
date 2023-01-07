@@ -26,9 +26,13 @@ $(document).ready(
                 'url("./images/egypt.jpg")',
                 'url("./images/egypt1.jpg")',
                 'url("./images/italy2.jpg")',
-                'url("./images/kenya.jpg")',
                 'url("./images/maldives1.jpg")',
                 'url("./images/paris.jpg")',
+                'url("./images/italy-rome-colosseum.jpg")',
+                'url("./images/peru.jpg")',
+                'url("./images/masai-mara-kenya.jpg")',
+                'url("./images/statue-of-liberty-us.jpg")',
+
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
@@ -43,23 +47,34 @@ $(document).ready(
         setInterval(changeImage, 3000);
 
         // set increment and decrement factor for rooms and adults fields
-        function changeCount(id, jTag){
+        function changeCount(id, jTag) {
             // increase count
             if (id.includes('increase')) {
                 $(`#${id}`).on("click", function () {
                     currentNumRooms = parseInt(currentNumRooms) + 1;
                     jTag.val(`${currentNumRooms}`);
-                })}
+                })
+            }
             // decrease count
-            else if (id.includes('decrease')){
-                $(`#${id}`).on("click", function(){        
-                    if (parseInt(currentNumRooms)>1){
+            else if (id.includes('decrease')) {
+                $(`#${id}`).on("click", function () {
+                    if (parseInt(currentNumRooms) > 1) {
                         currentNumRooms = parseInt(currentNumRooms) - 1;
+<<<<<<< HEAD
+                        jTag.val(`${currentNumRooms}`);
+                    }
+                    else (console.log("Boi, you can't book lower than a room!!"))
+                }
+                    else(console.log("Boi, you can't book lower than a room!!"))
+                }
+                )
+=======
                         jTag.val(`${currentNumRooms}`);}
                     else{
                         console.log("Boi, you can't book lower than a room!!")
                     }
                 })}
+>>>>>>> bb750460d438bb404e3e7c3953a128c4c7cc23be
             }
         }
     )
