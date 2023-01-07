@@ -93,7 +93,7 @@ $(document).ready(
             $("#rooms").val(`${num}`)
         })
 
-        // api calls
+        // api calls assist
         function callBookingDotCom(url, apiKey=bookingDotComAPIKey){
             return {"async": true,
             "crossDomain": true,
@@ -104,6 +104,8 @@ $(document).ready(
                 "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
             }}
         };
+
+        var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${cityName}&locale=en-gb`
 
         }
     )
