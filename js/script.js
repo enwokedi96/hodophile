@@ -93,7 +93,17 @@ $(document).ready(
             $("#rooms").val(`${num}`)
         })
 
-
+        // api calls
+        function callBookingDotCom(url, apiKey=bookingDotComAPIKey){
+            return {"async": true,
+            "crossDomain": true,
+            "url": url,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": apiKey,
+                "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
+            }}
+        };
 
         }
     )
