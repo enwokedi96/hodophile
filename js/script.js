@@ -8,6 +8,10 @@ $(document).ready(
         var currentNumRooms = $("#rooms").val();
         var currentNumAdults = $("#adults").val();
 
+        // load keys
+        var bookingDotComAPIKey = config["booking-API_KEY"]
+        var openWeatherAPIKey = config["openWeather-API_KEY"]
+
         // add click event for manual search
         manual.on('click', function () {
             manualAuto.addClass('hide')
@@ -88,6 +92,8 @@ $(document).ready(
             // update value
             $("#rooms").val(`${num}`)
         })
+
+
 
         }
     )
