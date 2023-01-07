@@ -9,3 +9,16 @@
 .moving-down{
     margin-top: 120px;
 }
+
+.blockquote h1{
+  font-size: 100px;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  text-shadow: 2px 2px white;
+}
+
+.blockquote-footer p{
+    font-size: 25px;
+    font-family: cursive;
+    color:white;
+    text-shadow: 2px 2px rgb(119, 5, 5);
+   }
