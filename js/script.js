@@ -1,12 +1,16 @@
 $(document).ready(
     function () {
+        var userCityChoice="";
+        var currentNumRooms="";
+        var currentNumAdults="";
+        var userFromDate=""
+        var userToDate=""
+
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
         var manualSearch = $('#services-manual');
         var closeManual = $("#close"); // close button
         const imageTag = $('#image') // tag attached to body
-        var currentNumRooms = $("#rooms").val();
-        var currentNumAdults = $("#adults").val();
         var fromDate = $("#from-date"); // input field for start date
         var toDate = $("#to-date"); // input field for end date
         var todaysDate = moment().format("YYYY-MM-DD");
@@ -152,9 +156,27 @@ $(document).ready(
                 $("#recommendations").empty();}
         })
 
-        $("#from-date").on("click",function(){
-            console.log()
-            console.log($("#from-date").val())
+        // listen for both date fields
+        fromDate.on("change",function(){
+            userFromDate = fromDate.val();
+            console.log(userFromDate,userToDate)
+        })
+        toDate.on("change",function(){
+            userToDate = toDate.val();
+            console.log(userFromDate,userToDate)
+            var compareUserFromDate = new Date(userFromDate)
+            var compareUserToDate = new Date(userToDate)
+            if (compareUserFromDate<compareUserToDate){
+                console.log('all good')
+            }
+            else if (compareUserFromDate>compareUserToDate){
+                console.log('errrorrr!!! should be less than');
+                toDate.val("err")
+            }
+            else if (compareUserFromDate==compareUserToDate){
+                console.log('errrorrr!!! check dates! should be less than')
+                toDate.val("err")
+            }
         })
 
         }

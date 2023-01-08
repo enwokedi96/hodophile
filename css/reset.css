@@ -10,6 +10,10 @@
     margin-top: 120px;
 }
 
+.moving-up{
+    margin-bottom: -15px;
+}
+
 .blockquote h1{
   font-size: 100px;
   font-family: Brush Script MT, Brush Script Std, cursive;

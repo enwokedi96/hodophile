@@ -96,15 +96,23 @@
             <div id="recommendations" class="hide"></div>
           </div>
           <!-- state duration of stay -->
-          <div class="md-form mb-3 mt-2" id="stay-duration">
-            <i class="fas fa-calendar"> Enter duration of stay</i><br>
-            <div class="input-group">
-              <label for="from-date" class="h6 mt-2">From -</label>
-              <input type="date" value="2023-01-01" id="from-date" class="form-control validate" required>
-              <label for="to-date" class="h6 mt-2 ml-2"> To -</label>
-              <input type="date" value="2023-01-01" id="to-date" class="form-control validate" required>
-            </div>
-          </div>
+          <form class="row mb-3 mt-3" id="stay-duration">
+            <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
+              <div class="col-md-6">
+                <label for="from-date" class="form-label"></label>
+                <div class="input-group">
+                  <span class="input-group-text" id="inputGroupPrepend2">From</span>
+                  <input type="date" class="form-control" id="from-date"  aria-describedby="inputGroupPrepend2" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="to-date" class="form-label"></label>
+                <div class="input-group">
+                  <span class="input-group-text" id="inputGroupPrepend3">To</span>
+                  <input type="date" class="form-control" id="to-date"  aria-describedby="inputGroupPrepend3" required>
+                </div>
+              </div>
+          </form>
           <!-- number of rooms -->
           <div class="input-group mb-3">
             <!-- put in expected number of adults -->
@@ -143,7 +151,7 @@
           </div>
           <!-- submit all -->
           <div class="d-flex justify-content-center mb-3">
-            <button class="btn btn-deep-orange btn-primary">Submit</button>
+            <button class="btn btn-deep-orange btn-primary" type="submit">Submit</button>
           </div>
         </div>
       </div>
