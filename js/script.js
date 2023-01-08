@@ -249,14 +249,33 @@ $(document).ready(
             $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
                 function (response) {
                     console.log(response);
-                    
+                    if (Object.keys(response).length>2){
+                        totNumResults = Object.keys(response.results).length
+
+                        for (let i=0; i<totNumResults; i++){
+                            var newResult = `<form class="mb-2 mx-3 p-2" id="result-${i}"></form>`;
+                            //newResult.css
+                            var imgPlusHotelName = $("<div class='input-group'>");
+                            imgPlusHotelName.append(`<img src = ${response.results[i].main_photo_url}>`)
+                            newResult.append(imgPlusHotelName)
+                        }
+                    }
+                    else {
+                        searchResults.append(`<div>${response.message}</div>`)
+                    }
                 })
+            // reveal search results
+            manualSearch.addClass('hide');
+            manualAuto.addClass('hide');
+            searchResults.removeClass('hide');
         })
 
         // add click event to close search results
         closeSearch.on('click', function () {
-            manualSearch.addClass('hide');
-            manualAuto.removeClass('hide');
+            searchResults.empty()
+            manualSearch.removeClass('hide');
+            searchResults.addClass('hide');
+            manualAuto.addClass('hide');
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`)
         })
