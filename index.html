@@ -75,7 +75,6 @@
 
   <!-- When user clicks manual, display search options, same as above -->
   <div class="container-md hide" id="services-manual">
-    <div class="row">
       <!-- display location and listings -->
       <!-- first search option -->
       <div style= "background:white;" class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="manual-search">
@@ -114,33 +113,34 @@
               </div>
           </form>
           <!-- number of rooms -->
-          <div class="input-group mb-3">
-            <!-- put in expected number of adults -->
-            <div class="h6 mt-2"><i class="fas fa-user"></i> Adults -</div>
-            <div class="input-group-prepend">
-              <button id="decrease-adults" class="btn btn-outline-danger" type="button"><i
-                  class="fas fa-chevron-down"></i></button>
+          <form class="row mt-4">
+            <div class="col-6 mt-2">
+              <!-- put in expected number of adults -->
+              <div class="h6 input-group">
+                <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
+                <button id="decrease-adults" class="btn btn-outline-danger" type="button">
+                  <i class="fas fa-chevron-down"></i></button>
+                <input id="adults" type="text" class="form-control" value="1">
+                <button id="increase-adults" class="btn btn-outline-primary" type="button">
+                  <i class="fas fa-chevron-up"></i></button>
+              </div>
             </div>
-            <input id="adults" type="text" class="form-control" value="1">
-            <div class="input-group-append">
-              <button id="increase-adults" class="btn btn-outline-primary" type="button"><i
-                  class="fas fa-chevron-up"></i></button>
+              <!-- put in expected number of rooms -->
+            <div class="col-6 mt-2">
+              <div class="h6 input-group">
+                <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
+                <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
+                  <i class="fas fa-chevron-down"></i></button>
+                <input id="rooms" type="text" class="form-control" value="1">
+                <button id="increase-rooms" class="btn btn-outline-primary" type="button">
+                  <i class="fas fa-chevron-up"></i></button>
+              </div>
             </div>
-            <!-- put in expected number of rooms -->
-            <div class="h6 mt-2 ml-2"><i class="fas fa-bed"></i> Rooms -</div>
-            <div class="input-group-prepend">
-              <button id="decrease-rooms" class="btn btn-outline-danger" type="button"><i
-                  class="fas fa-chevron-down"></i></button>
-            </div>
-            <input id="rooms" type="text" class="form-control" value="1">
-            <div class="input-group-append">
-              <button id="increase-rooms" class="btn btn-outline-primary" type="button"><i
-                  class="fas fa-chevron-up"></i></button>
-            </div>
-          </div>
+          </form>
           <!--  -->
           <!-- filter hotel search by what metric? -->
-          <div class="input-group mb-3">
+          <form class="row mt-4 mb-3">
+            <div class="col-2 offset-4 input-group">
             <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Filter -</div>
             <select class="custom-select" id="filter-options">
               <option selected>Choose preferred hotel filter...</option>
@@ -148,7 +148,8 @@
               <option value="price">Price</option>
               <option value="review_score">Review Score</option>
             </select>
-          </div>
+            </div>
+          </form>
           <!-- submit all -->
           <div class="d-flex justify-content-center mb-3">
             <button class="btn btn-deep-orange btn-primary" type="submit">Submit</button>
@@ -156,7 +157,6 @@
         </div>
       </div>
     </div>
-  </div>
 
   <!-- When user clicks automatic, display search options, same as above -->
   <div class="container-md hide" id="services-automatic">
