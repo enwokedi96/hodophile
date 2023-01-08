@@ -14,6 +14,12 @@
     margin-bottom: -15px;
 }
 
+.moving-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .blockquote h1{
   font-size: 100px;
   font-family: Brush Script MT, Brush Script Std, cursive;
@@ -49,7 +55,7 @@
 }
 
 /* css for results div */
-#search-results{
+#search-results-all{
     background-color: white;
     color: black;
     font-size: large;
@@ -64,3 +70,4 @@
     visibility: hidden;
     z-index: 1;
 }
+

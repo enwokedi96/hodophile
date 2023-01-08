@@ -249,6 +249,7 @@ $(document).ready(
             $.ajax(callApiDojoBooking(url,bookingDotComAPIKey))
             .done(
                 function (response) {
+                    // hide spin once api json is loaded
                     $("#spinner").css("visibility", "hidden");
                     console.log(response);
                     if (Object.keys(response).length>2){
@@ -263,7 +264,7 @@ $(document).ready(
                         }
                     }
                     else {
-                        searchResults.append(`<div>${response.message}</div>`)
+                        searchResults.append(`<div class="moving-center">${response.message}</div>`)
                     }
                 })
             // reveal search results
