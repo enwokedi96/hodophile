@@ -14,12 +14,14 @@ $(document).ready(
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
         var manualSearch = $('#services-manual');
-        var submitManualSearch = $("#submit-manual-search")
-        var closeManual = $("#close"); // close button
+        var closeManual = $("#close"); // close button - inputs
+        var closeSearch = $("#close-results"); // close button - search res
         const imageTag = $('#image') // tag attached to body
         var fromDate = $("#from-date"); // input field for start date
         var toDate = $("#to-date"); // input field for end date
         var orderCriteriaTag = $("#order-options");
+        var searchResults = $("#search-results")
+        var submitSearch = $("#submit-search")
         var todaysDate = moment().format("YYYY-MM-DD");
         var tomorrowDate = moment().add(1, 'days').format("YYYY-MM-DD");
 
@@ -228,7 +230,7 @@ $(document).ready(
         })
 
         // listen for submit field on manual ops
-        submitManualSearch.on("click", function(){
+        submitSearch.on("click", function(){
             console.log('user initiating search');
             // repeat necessary check outside individual events
             userToDate = toDate.val();
@@ -247,7 +249,16 @@ $(document).ready(
             $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
                 function (response) {
                     console.log(response);
+                    
                 })
+        })
+
+        // add click event to close search results
+        closeSearch.on('click', function () {
+            manualSearch.addClass('hide');
+            manualAuto.removeClass('hide');
+            // reset counters
+            $("#adults").val(`1`); $("#rooms").val(`1`)
         })
 
         }
