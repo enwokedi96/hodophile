@@ -119,7 +119,7 @@ $(document).ready(
 
         // search for recommentations as user types
         $("#enter-location").on('keyup',function(event){
-            event.preventDefault()
+            event.preventDefault();
             console.log('user filling location');
             var loc = $("#enter-location").val();
             var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
@@ -160,12 +160,16 @@ $(document).ready(
         fromDate.on("change",function(){
             userFromDate = fromDate.val();
             console.log(userFromDate,userToDate)
+            // update the to-date field (help keep user on the straight and narrow path)
+            var newProposedToDate = moment(userFromDate,"YYYY-MM-DD").add(1, 'days').format("YYYY-MM-DD");
+            toDate.val(newProposedToDate)
         })
         toDate.on("change",function(){
             userToDate = toDate.val();
             console.log(userFromDate,userToDate)
             var compareUserFromDate = new Date(userFromDate)
             var compareUserToDate = new Date(userToDate)
+            // code distruptors: from-date should be less than to-date
             if (compareUserFromDate<compareUserToDate){
                 console.log('all good')
             }
