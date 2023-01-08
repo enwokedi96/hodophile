@@ -55,7 +55,7 @@
     font-size: large;
 }
 
-/* loading... */
+/* loading while API loads results... */
 #spinner {
     color: whitesmoke;
     left: 50%;
