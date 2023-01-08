@@ -43,3 +43,14 @@
     border-top: 1px solid black;
     width: 100%;
 }
+
+#manual-search{
+    background:white;
+}
+
+/* css for results div */
+#search-results{
+    background-color: white;
+    color: black;
+    font-size: large;
+}
