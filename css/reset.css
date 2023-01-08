@@ -22,3 +22,20 @@
     color:white;
     text-shadow: 2px 2px rgb(119, 5, 5);
    }
+
+/* add dropdown css */
+#recommendations{
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    color: black;
+    font-size: large;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.overline{
+    border-top: 1px solid black;
+    width: 100%;
+}

@@ -105,7 +105,43 @@ $(document).ready(
             }}
         };
 
-        var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${cityName}&locale=en-gb`
+        // search for recommentations as user types
+        $("#enter-location").on('keyup',function(event){
+            event.preventDefault()
+            console.log('user filling location');
+            var loc = $("#enter-location").val();
+            var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
+            if (loc.length>2){
+                $.ajax(callBookingDotCom(url)).done(
+                    function (response) {
+                        console.log(response);
+                        $("#recommendations").empty()
+                        //var recommendations = $("<ul></ul>") //[];
+                        for(let i=0; i<response.length; i++){
+                            if(i>0){$("#recommendations").append("<div class='overline'></div>");}
+                            var newOption =  $(`<div class="dropdown-item" id="${i}">`);
+                            newOption.append(`${response[i].label}`)
+                            $("#recommendations").append(newOption)
+                        }
+                        $("#recommendations").removeClass('hide') //.append(recommendations);
+                        // user picks an option
+                        $("#recommendations").on('click',function(event){
+                            var opt = event.target.id;
+                            var choice = document.getElementById(opt).innerHTML //$(document).find(`div#${opt}`).val()
+                            console.log(opt, choice)
+                            userCityChoice = response[opt].city_name;
+                            $("#enter-location").val(choice);
+                            // clear recommendations
+                            $("#recommendations").attr('class','hide')
+                            $("#recommendations").empty();
+                        })
+                    });
+            }
+            else{
+                $("#recommendations").attr('class','hide')
+                $("#recommendations").empty();}
+        })
+
 
         }
     )
