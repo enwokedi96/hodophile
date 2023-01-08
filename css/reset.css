@@ -23,7 +23,7 @@
     text-shadow: 2px 2px rgb(119, 5, 5);
    }
 
-/* add dropdown css */
+/* add recommendations dropdown css */
 #recommendations{
     position: absolute;
     z-index: 3;
@@ -35,7 +35,7 @@
     padding: 5px;
 }
 
-.overline{
+.overline {
     border-top: 1px solid black;
     width: 100%;
 }

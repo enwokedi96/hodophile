@@ -7,6 +7,13 @@ $(document).ready(
         const imageTag = $('#image') // tag attached to body
         var currentNumRooms = $("#rooms").val();
         var currentNumAdults = $("#adults").val();
+        var fromDate = $("#from-date") // input field for start date
+        var toDate = $("#to-date") // input field for end date
+        var todaysDate = moment().format("YYYY-MM-DD");
+        
+        // set both date fields to default to current day
+        $('input[type="date"]').val(todaysDate) 
+        $('input[type="date"]').attr('min',todaysDate) 
 
         // load keys
         var bookingDotComAPIKey = config["booking-API_KEY"]
@@ -111,6 +118,7 @@ $(document).ready(
             console.log('user filling location');
             var loc = $("#enter-location").val();
             var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
+            // when user input has reached 3 letters and greater, call on api to recommend
             if (loc.length>2){
                 $.ajax(callBookingDotCom(url)).done(
                     function (response) {
@@ -137,11 +145,16 @@ $(document).ready(
                         })
                     });
             }
+            // clear recommendedation field if user goes below 3 letters
             else{
                 $("#recommendations").attr('class','hide')
                 $("#recommendations").empty();}
         })
 
+        $("#from-date").on("click",function(){
+            console.log()
+            console.log($("#from-date").val())
+        })
 
         }
     )
