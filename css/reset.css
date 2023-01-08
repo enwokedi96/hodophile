@@ -54,3 +54,13 @@
     color: black;
     font-size: large;
 }
+
+/* loading... */
+#spinner {
+    color: whitesmoke;
+    left: 50%;
+    position: relative;
+    top: 0%;
+    visibility: hidden;
+    z-index: 1;
+}

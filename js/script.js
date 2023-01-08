@@ -20,8 +20,9 @@ $(document).ready(
         var fromDate = $("#from-date"); // input field for start date
         var toDate = $("#to-date"); // input field for end date
         var orderCriteriaTag = $("#order-options");
-        var searchResults = $("#search-results")
-        var submitSearch = $("#submit-search")
+        var searchResultsContainer = $("#search-results-all")
+        var searchResults = $("#search-results");
+        var submitSearch = $("#submit-search");
         var todaysDate = moment().format("YYYY-MM-DD");
         var tomorrowDate = moment().add(1, 'days').format("YYYY-MM-DD");
 
@@ -242,12 +243,13 @@ $(document).ready(
                     console.log('default chosen: price');
                     orderCriteria = "price";
                 }
-            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=${currentDestinationID}&room_qty=${currentNumRooms}&search_type=city&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`
-            //var url = `https://booking-com.p.rapidapi.com/v2/hotels/search?locale=en-gb&dest_id=${currentDestinationID}&checkout_date=${userToDate}&adults_number=${currentNumAdults}&dest_type=city&checkin_date=${userFromDate}&room_number=${currentNumRooms}&units=metric&order_by=${orderCriteria}&filter_by_currency=AED&children_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_ages=5%2C0&page_number=0&include_adjacency=true` //`https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=${userToDate}&adults_number=${currentNumAdults}&room_number=${currentNumRooms}&locale=en-gb&order_by=${orderCriteria}&units=metric&dest_type=${userCityChoice}&dest_id=${currentDestinationID}&filter_by_currency=GBP&checkin_date=${userFromDate}&children_ages=5%2C0&children_number=0&page_number=0&include_adjacency=true&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`
-            // initiate search sequence!!!
-            console.log(url,bookingDotComAPIKey)
-            $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
+            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=${currentDestinationID}&room_qty=${currentNumRooms}&search_type=city&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
+            console.log(url,bookingDotComAPIKey);
+            $("#spinner").css("visibility", "visible");
+            $.ajax(callApiDojoBooking(url,bookingDotComAPIKey))
+            .done(
                 function (response) {
+                    $("#spinner").css("visibility", "hidden");
                     console.log(response);
                     if (Object.keys(response).length>2){
                         totNumResults = Object.keys(response.results).length
@@ -267,14 +269,14 @@ $(document).ready(
             // reveal search results
             manualSearch.addClass('hide');
             manualAuto.addClass('hide');
-            searchResults.removeClass('hide');
+            searchResultsContainer.removeClass('hide');
         })
 
         // add click event to close search results
         closeSearch.on('click', function () {
             searchResults.empty()
             manualSearch.removeClass('hide');
-            searchResults.addClass('hide');
+            searchResultsContainer.addClass('hide');
             manualAuto.addClass('hide');
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`)
