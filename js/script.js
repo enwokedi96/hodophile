@@ -1,5 +1,7 @@
 $(document).ready(
     function () {
+        var latituide = "";
+        var longitude = "";
         var userCityChoice="";
         var currentNumRooms="";
         var currentNumAdults="";
@@ -79,6 +81,18 @@ $(document).ready(
                 "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
             }}
         };
+
+        function callApiDojoBooking(url, apiKey){
+            return {
+            "async": true,
+            "crossDomain": true,
+            "url": url,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": apiKey,
+                "X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com"
+            }
+        };}
 
         // apply to adults event and field
         $("#increase-adults").on("click",function (event){
@@ -160,6 +174,8 @@ $(document).ready(
                                 else{continue}
                             }
                             currentDestinationID = response[opt].dest_id;
+                            latituide = response[opt].latituide
+                            longitude = response[opt].longitude
                             $("#enter-location").val(choice);
                             // clear recommendations
                             $("#recommendations").attr('class','hide')
@@ -224,10 +240,11 @@ $(document).ready(
                     console.log('default chosen: price');
                     orderCriteria = "price";
                 }
-            var url = `https://booking-com.p.rapidapi.com/v2/hotels/search?locale=en-gb&dest_id=${currentDestinationID}&checkout_date=${userToDate}&adults_number=${currentNumAdults}&dest_type=city&checkin_date=${userFromDate}&room_number=${currentNumRooms}&units=metric&order_by=${orderCriteria}&filter_by_currency=AED&children_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_ages=5%2C0&page_number=0&include_adjacency=true` //`https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=${userToDate}&adults_number=${currentNumAdults}&room_number=${currentNumRooms}&locale=en-gb&order_by=${orderCriteria}&units=metric&dest_type=${userCityChoice}&dest_id=${currentDestinationID}&filter_by_currency=GBP&checkin_date=${userFromDate}&children_ages=5%2C0&children_number=0&page_number=0&include_adjacency=true&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`
+            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=${currentDestinationID}&room_qty=${currentNumRooms}&search_type=city&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`
+            //var url = `https://booking-com.p.rapidapi.com/v2/hotels/search?locale=en-gb&dest_id=${currentDestinationID}&checkout_date=${userToDate}&adults_number=${currentNumAdults}&dest_type=city&checkin_date=${userFromDate}&room_number=${currentNumRooms}&units=metric&order_by=${orderCriteria}&filter_by_currency=AED&children_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_ages=5%2C0&page_number=0&include_adjacency=true` //`https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=${userToDate}&adults_number=${currentNumAdults}&room_number=${currentNumRooms}&locale=en-gb&order_by=${orderCriteria}&units=metric&dest_type=${userCityChoice}&dest_id=${currentDestinationID}&filter_by_currency=GBP&checkin_date=${userFromDate}&children_ages=5%2C0&children_number=0&page_number=0&include_adjacency=true&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`
             // initiate search sequence!!!
             console.log(url,bookingDotComAPIKey)
-            $.ajax(callBookingDotCom(url,bookingDotComAPIKey)).done(
+            $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
                 function (response) {
                     console.log(response);
                 })
