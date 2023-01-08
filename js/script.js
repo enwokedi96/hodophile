@@ -7,13 +7,14 @@ $(document).ready(
         const imageTag = $('#image') // tag attached to body
         var currentNumRooms = $("#rooms").val();
         var currentNumAdults = $("#adults").val();
-        var fromDate = $("#from-date") // input field for start date
-        var toDate = $("#to-date") // input field for end date
+        var fromDate = $("#from-date"); // input field for start date
+        var toDate = $("#to-date"); // input field for end date
         var todaysDate = moment().format("YYYY-MM-DD");
-        
-        // set both date fields to default to current day
-        $('input[type="date"]').val(todaysDate) 
+        var tomorrowDate = moment().add(1, 'days').format("YYYY-MM-DD");
+
+        // set both date fields to default to current/next day
         $('input[type="date"]').attr('min',todaysDate) 
+        fromDate.val(todaysDate); toDate.val(tomorrowDate)
 
         // load keys
         var bookingDotComAPIKey = config["booking-API_KEY"]
