@@ -3,16 +3,21 @@ $(document).ready(
         var userCityChoice="";
         var currentNumRooms="";
         var currentNumAdults="";
-        var userFromDate=""
-        var userToDate=""
+        var currentDestinationID="";
+        var orderCriteria = "";
+        var userFromDate="";
+        var userToDate="";
+        const placeOptions = ["city_name", "name", "country"]
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
         var manualSearch = $('#services-manual');
+        var submitManualSearch = $("#submit-manual-search")
         var closeManual = $("#close"); // close button
         const imageTag = $('#image') // tag attached to body
         var fromDate = $("#from-date"); // input field for start date
         var toDate = $("#to-date"); // input field for end date
+        var orderCriteriaTag = $("#order-options");
         var todaysDate = moment().format("YYYY-MM-DD");
         var tomorrowDate = moment().add(1, 'days').format("YYYY-MM-DD");
 
@@ -63,50 +68,8 @@ $(document).ready(
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
-        // apply to adults event and field
-        $("#increase-adults").on("click",function (event){
-            // increase count
-            var num = parseInt($("#adults").val());
-            if (num>=29) {
-                console.log("Boi, you can't book higher than number 29!!");
-            }
-            else {num += 1;}
-            // update value
-            $("#adults").val(`${num}`)
-        })
-        $("#decrease-adults").on("click",function (event){
-            var num = parseInt($("#adults").val());
-            // decrease count
-            if (num==1) {
-                console.log("Boi, you can't book lower than number one!!");}
-            else {num -= 1;}
-            // update value
-            $("#adults").val(`${num}`)
-        })
-
-        // apply to rooms event and field
-        $("#increase-rooms").on("click",function (event){
-            // increase count
-            var num = parseInt($("#rooms").val());
-            if (num>=29) {
-                console.log("Boi, you can't book higher than number 29!!");}
-            else {num += 1;}
-            // update value
-            $("#rooms").val(`${num}`)
-        })
-        $("#decrease-rooms").on("click",function (event){
-            var num = parseInt($("#rooms").val());
-            // decrease count
-            if (num==1) {
-                console.log("Boi, you can't book lower than number one!!");
-            }
-            else {num -= 1;}
-            // update value
-            $("#rooms").val(`${num}`)
-        })
-
-        // api calls assist
-        function callBookingDotCom(url, apiKey=bookingDotComAPIKey){
+        // settings for api calls to assist
+        function callBookingDotCom(url, apiKey){
             return {"async": true,
             "crossDomain": true,
             "url": url,
@@ -117,6 +80,52 @@ $(document).ready(
             }}
         };
 
+        // apply to adults event and field
+        $("#increase-adults").on("click",function (event){
+            // increase count
+            var num = parseInt($("#adults").val());
+            if (num>=29) {
+                console.log("Boi, you can't book higher than number 29!!");
+            }
+            else {num += 1;}
+            // update value
+            $("#adults").val(`${num}`);
+            currentNumAdults = num;
+        })
+        $("#decrease-adults").on("click",function (event){
+            var num = parseInt($("#adults").val());
+            // decrease count
+            if (num==1) {
+                console.log("Boi, you can't book lower than number one!!");}
+            else {num -= 1;}
+            // update value
+            $("#adults").val(`${num}`);
+            currentNumAdults = num;
+        })
+
+        // apply to rooms event and field
+        $("#increase-rooms").on("click",function (event){
+            // increase count
+            var num = parseInt($("#rooms").val());
+            if (num>=29) {
+                console.log("Boi, you can't book higher than number 29!!");}
+            else {num += 1;}
+            // update value
+            $("#rooms").val(`${num}`);
+            currentNumRooms = num;
+        })
+        $("#decrease-rooms").on("click",function (event){
+            var num = parseInt($("#rooms").val());
+            // decrease count
+            if (num==1) {
+                console.log("Boi, you can't book lower than number one!!");
+            }
+            else {num -= 1;}
+            // update value
+            $("#rooms").val(`${num}`);
+            currentNumRooms = num;
+        })
+
         // search for recommentations as user types
         $("#enter-location").on('keyup',function(event){
             event.preventDefault();
@@ -125,7 +134,7 @@ $(document).ready(
             var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
             // when user input has reached 3 letters and greater, call on api to recommend
             if (loc.length>2){
-                $.ajax(callBookingDotCom(url)).done(
+                $.ajax(callBookingDotCom(url,bookingDotComAPIKey)).done(
                     function (response) {
                         console.log(response);
                         $("#recommendations").empty()
@@ -142,7 +151,15 @@ $(document).ready(
                             var opt = event.target.id;
                             var choice = document.getElementById(opt).innerHTML //$(document).find(`div#${opt}`).val()
                             console.log(opt, choice)
-                            userCityChoice = response[opt].city_name;
+                            // iteratively check placeOptions for non-empty fields to assign
+                            for (let i=0; i<placeOptions.length; i++){
+                                if (response[opt][placeOptions[i]]!=""){
+                                    userCityChoice = response[opt].name;
+                                    break;
+                                }
+                                else{continue}
+                            }
+                            currentDestinationID = response[opt].dest_id;
                             $("#enter-location").val(choice);
                             // clear recommendations
                             $("#recommendations").attr('class','hide')
@@ -162,7 +179,7 @@ $(document).ready(
             console.log(userFromDate,userToDate)
             // update the to-date field (help keep user on the straight and narrow path)
             var newProposedToDate = moment(userFromDate,"YYYY-MM-DD").add(1, 'days').format("YYYY-MM-DD");
-            toDate.val(newProposedToDate)
+            toDate.val(newProposedToDate);
         })
         toDate.on("change",function(){
             userToDate = toDate.val();
@@ -181,6 +198,39 @@ $(document).ready(
                 console.log('errrorrr!!! check dates! should be less than')
                 toDate.val("err")
             }
+        })
+
+        // listen on the order criteria
+        orderCriteriaTag.on("change", function(){
+            orderCriteria = orderCriteriaTag.val();
+            //console.log(orderCriteria, );
+            // if user doesn't pick, default is set to price
+            if (orderCriteria.split(' ').length>1){
+                console.log('default chosen: price');
+                orderCriteria = "price";
+            }
+        })
+
+        // listen for submit field on manual ops
+        submitManualSearch.on("click", function(){
+            console.log('user initiating search');
+            // repeat necessary check outside individual events
+            userToDate = toDate.val();
+            userFromDate = fromDate.val();
+            currentNumAdults = $("#adults").val()
+            currentNumRooms = $("#rooms").val();
+            orderCriteria = orderCriteriaTag.val();
+            if (orderCriteria.split(' ').length>1){
+                    console.log('default chosen: price');
+                    orderCriteria = "price";
+                }
+            var url = `https://booking-com.p.rapidapi.com/v2/hotels/search?locale=en-gb&dest_id=${currentDestinationID}&checkout_date=${userToDate}&adults_number=${currentNumAdults}&dest_type=city&checkin_date=${userFromDate}&room_number=${currentNumRooms}&units=metric&order_by=${orderCriteria}&filter_by_currency=AED&children_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_ages=5%2C0&page_number=0&include_adjacency=true` //`https://booking-com.p.rapidapi.com/v1/hotels/search?checkout_date=${userToDate}&adults_number=${currentNumAdults}&room_number=${currentNumRooms}&locale=en-gb&order_by=${orderCriteria}&units=metric&dest_type=${userCityChoice}&dest_id=${currentDestinationID}&filter_by_currency=GBP&checkin_date=${userFromDate}&children_ages=5%2C0&children_number=0&page_number=0&include_adjacency=true&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`
+            // initiate search sequence!!!
+            console.log(url,bookingDotComAPIKey)
+            $.ajax(callBookingDotCom(url,bookingDotComAPIKey)).done(
+                function (response) {
+                    console.log(response);
+                })
         })
 
         }
