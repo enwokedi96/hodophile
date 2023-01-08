@@ -155,7 +155,7 @@
           </form>
           <!-- submit all -->
           <div class="d-flex justify-content-center mb-3">
-            <button class="btn btn-deep-orange btn-primary" id="submit-manual-search" type="submit">Submit</button>
+            <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
           </div>
         </div>
       </div>
@@ -167,7 +167,10 @@
   </div>
 
   <!-- display hotel search results as successive forms here -->
-  <div>
+  <div class="container-md hide" id="search-results">
+    <div class="d-grid d-md-flex justify-content-md-end">
+      <button id="close-results" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
     <form class="mb-2 mx-3 p-2" id="result-0"></form>
     <form class="mb-2 mx-3 p-2" id="result-1"></form>
     <form class="mb-2 mx-3 p-2" id="result-2"></form>
