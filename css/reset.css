@@ -18,6 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 .blockquote h1{
@@ -69,5 +70,16 @@
     top: 0%;
     visibility: hidden;
     z-index: 1;
+}
+
+.result-head{
+    display: inline-block
+}
+
+.results{
+    /* display: inline-block; */
+    width: 100%;
+    border-bottom: 1px gray solid;
+    padding: 2px;
 }
 

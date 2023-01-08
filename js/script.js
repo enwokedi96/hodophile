@@ -250,21 +250,27 @@ $(document).ready(
             .done(
                 function (response) {
                     // hide spin once api json is loaded
+                    console.log(response)
                     $("#spinner").css("visibility", "hidden");
-                    console.log(response);
-                    if (Object.keys(response).length>2){
-                        totNumResults = Object.keys(response.results).length
-
+                    var num = Object.keys(response).length;
+                    
+                    // check if error or hit
+                    if (num>2){
+                        console.log(true, num)
+                        var totNumResults = Object.keys(response.result).length
                         for (let i=0; i<totNumResults; i++){
-                            var newResult = `<form class="mb-2 mx-3 p-2" id="result-${i}"></form>`;
-                            //newResult.css
-                            var imgPlusHotelName = $("<div class='input-group'>");
-                            imgPlusHotelName.append(`<img src = ${response.results[i].main_photo_url}>`)
-                            newResult.append(imgPlusHotelName)
+                            var newResult = $(`<div class="results" id="result-${i}"></div>`);
+                            //newResult.css()
+                            var imgPlusHotelName = $("<div class='result-head'></div>");
+                            imgPlusHotelName.append($(`<img src = "${response.result[i].main_photo_url}">`));
+                            imgPlusHotelName.text(`${response.result[i].hotel_name_trans}`)
+                            newResult.append(imgPlusHotelName);
+                            searchResultsContainer.append(newResult);
+                            console.log(i)
                         }
                     }
                     else {
-                        searchResults.append(`<div class="moving-center">${response.message}</div>`)
+                        searchResults.append(`<div class="moving-center">${response.message}</div>`);
                     }
                 })
             // reveal search results
@@ -275,7 +281,7 @@ $(document).ready(
 
         // add click event to close search results
         closeSearch.on('click', function () {
-            searchResults.empty()
+            searchResults.empty();
             manualSearch.removeClass('hide');
             searchResultsContainer.addClass('hide');
             manualAuto.addClass('hide');
