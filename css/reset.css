@@ -152,3 +152,11 @@
     background-image: url("../images/navbar-image.jpg");
     background-size:cover;
 }
+
+/* Texts in navbar */
+.nav-link{
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px whitesmoke;
+
+}
