@@ -89,6 +89,7 @@
     height: 60px;
 }
 
+/* properties of "odophile" */
 .main-text{
     font-size: 20px;
     font-weight: 900;
@@ -114,4 +115,9 @@
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent; 
     animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+}
+
+/* :hover effect of odophile */
+.main-text:hover{
+    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
 }
