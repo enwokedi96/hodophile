@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <link rel="icon" type="image/png" href="./images/main-logo1.png">
   <title>Hodophile Site</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -14,7 +15,7 @@
   <!--Nav Bar-->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Hodophile</a>
+      <a class="navbar-brand main-text" href="#"><img class="logo" src="images/logo.png">odophile</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,19 +42,19 @@
   <br>
 
   <!--Header name-->
-  <figure class="text-center mt-5">
+  <figure class="text-center">
     <blockquote class="blockquote">
       <h1 class="display-1">Hodophile</h1>
     </blockquote>
     <figcaption class="blockquote-footer">
-      <p class="lead" style="color: black"><cite><strong>"find your next dream destination easily"</strong></cite>
+      <p class="lead"><cite><strong>"find your next dream destination easily"</strong></cite>
     </figcaption>
   </figure>
   <!--Manual/Automatic container-->
   <div class="container-md text-center moving-down" id="manual-automatic">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
-        <div class="card">
+        <div class="p-5 card">
           <div class="card-body">
             <h5 class="card-title">Manual</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -62,7 +63,7 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
-        <div class="card">
+        <div class="p-5 card">
           <div class="card-body">
             <h5 class="card-title">Automatic</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -75,76 +76,89 @@
 
   <!-- When user clicks manual, display search options, same as above -->
   <div class="container-md hide" id="services-manual">
-    <div class="row">
-      <!-- display location and listings -->
-      <!-- first search option -->
-      <div style="background:white" ; class="col-lg-12 col-md-12 border border-secondary rounded" id="manual-search">
-        <!-- include button to close div -->
-        <br>
-        <div class="d-grid d-md-flex justify-content-md-end">
-          <button id="close" type="button" class="btn-close" aria-label="Close"></button>
-        </div>
-        <!-- <p>(for veteran holidayers)</p> -->
-        <div class="mb-2" role="document">
+    <!-- display location and listings -->
+    <!-- first search option -->
+    <div class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="manual-search">
+      <!-- include button to close div -->
+      <br>
+      <div class="d-grid d-md-flex justify-content-md-end">
+        <button id="close" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <!-- <p>(for veteran holidayers)</p> -->
+      <div class="mb-2" role="document">
+        <div class="d-flex justify-content-center">
           <h3>The old-fashion search</h3>
+        </div>
+        <div class="d-flex justify-content-center">
           <p>(for veteran holidayers)</p>
-          <div class="md-form mb-2">
-            <i class="fas fa-map-marker-alt"></i>
-            <label for="enter-location" class="h6">Enter destination</label>
-            <input type="text" id="enter-location" class="form-control validate"
-              placeholder="start typing and select a suggestion" required>
-            <div id="recommendations" class="hide"></div>
-          </div>
-          <!-- state duration of stay -->
-          <div class="md-form mb-3 mt-2" id="stay-duration">
-            <i class="fas fa-calendar"> Enter duration of stay</i><br>
+        </div>
+
+        <div class="md-form mb-2">
+          <i class="fas fa-map-marker-alt"></i>
+          <label for="enter-location" class="h6">Enter destination</label>
+          <input type="text" id="enter-location" class="form-control validate"
+            placeholder="start typing and select a suggestion" required>
+          <div id="recommendations" class="hide"></div>
+        </div>
+        <!-- state duration of stay -->
+        <form class="row mb-3 mt-3" id="stay-duration">
+          <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
+          <div class="col-md-6">
+            <label for="from-date" class="form-label"></label>
             <div class="input-group">
-              <label for="from-date" class="h6 mt-2">From -</label>
-              <input type="date" value="2023-01-01" id="from-date" class="form-control validate" required>
-              <label for="to-date" class="h6 mt-2 ml-2"> To -</label>
-              <input type="date" value="2023-01-01" id="to-date" class="form-control validate" required>
+              <span class="input-group-text" id="inputGroupPrepend2">From</span>
+              <input type="date" class="form-control" id="from-date" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
-          <!-- number of rooms -->
-          <div class="input-group mb-3">
+          <div class="col-md-6">
+            <label for="to-date" class="form-label"></label>
+            <div class="input-group">
+              <span class="input-group-text" id="inputGroupPrepend3">To</span>
+              <input type="date" class="form-control" id="to-date" aria-describedby="inputGroupPrepend3" required>
+            </div>
+          </div>
+        </form>
+        <!-- number of rooms -->
+        <form class="row mt-4">
+          <div class="col-6 mt-2">
             <!-- put in expected number of adults -->
-            <div class="h6 mt-2"><i class="fas fa-user"></i> Adults -</div>
-            <div class="input-group-prepend">
-              <button id="decrease-adults" class="btn btn-outline-danger" type="button"><i
-                  class="fas fa-chevron-down"></i></button>
-            </div>
-            <input id="adults" type="text" class="form-control" value="1">
-            <div class="input-group-append">
-              <button id="increase-adults" class="btn btn-outline-primary" type="button"><i
-                  class="fas fa-chevron-up"></i></button>
-            </div>
-            <!-- put in expected number of rooms -->
-            <div class="h6 mt-2 ml-2"><i class="fas fa-bed"></i> Rooms -</div>
-            <div class="input-group-prepend">
-              <button id="decrease-rooms" class="btn btn-outline-danger" type="button"><i
-                  class="fas fa-chevron-down"></i></button>
-            </div>
-            <input id="rooms" type="text" class="form-control" value="1">
-            <div class="input-group-append">
-              <button id="increase-rooms" class="btn btn-outline-primary" type="button"><i
-                  class="fas fa-chevron-up"></i></button>
+            <div class="h6 input-group">
+              <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
+              <button id="decrease-adults" class="btn btn-outline-danger" type="button">
+                <i class="fas fa-chevron-down"></i></button>
+              <input id="adults" type="text" class="form-control" value="1">
+              <button id="increase-adults" class="btn btn-outline-primary" type="button">
+                <i class="fas fa-chevron-up"></i></button>
             </div>
           </div>
-          <!--  -->
-          <!-- filter hotel search by what metric? -->
-          <div class="input-group mb-3">
-            <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Filter -</div>
-            <select class="custom-select" id="filter-options">
-              <option selected>Choose preferred hotel filter...</option>
+          <!-- put in expected number of rooms -->
+          <div class="col-6 mt-2">
+            <div class="h6 input-group">
+              <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
+              <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
+                <i class="fas fa-chevron-down"></i></button>
+              <input id="rooms" type="text" class="form-control" value="1">
+              <button id="increase-rooms" class="btn btn-outline-primary" type="button">
+                <i class="fas fa-chevron-up"></i></button>
+            </div>
+          </div>
+        </form>
+        <!--  -->
+        <!-- filter hotel search by what metric? -->
+        <form class="row mt-4 mb-3">
+          <div class="col-md-2 offset-md-4 input-group">
+            <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Order Criterion -</div>
+            <select class="custom-select" id="order-options">
+              <option selected>Choose to order by...</option>
               <option value="popularity">Popularity</option>
               <option value="price">Price</option>
               <option value="review_score">Review Score</option>
             </select>
           </div>
-          <!-- submit all -->
-          <div class="move-center mb-3">
-            <button class="btn btn-deep-orange btn-primary">Submit</button>
-          </div>
+        </form>
+        <!-- submit all -->
+        <div class="d-flex justify-content-center mb-3">
+          <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
         </div>
       </div>
     </div>
@@ -155,6 +169,31 @@
 
   </div>
 
+  <!-- display hotel search results as successive forms here -->
+  <div class="container-md hide border border-secondary rounded px-5" id="search-results-all">
+    <br>
+    <div class="row">
+      <div class="d-flex justify-content-end">
+        <button id="close-results" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <h4 class="text-center" id="results-heading">❤️ Peruse through recommended accommodations below ❤️</h4>
+      <div class="col-lg-12 col-md-12" id="search-results"></div>
+    </div>
+  </div>
+
+  <!-- loader spinning... -->
+  <div id="spinner"><i class="fa fa-spinner fa-3x fa-spin"></i></div>
+
+  <!-- weather container -->
+  <div class="container-md hide border border-secondary rounded px-5" id="weather-results-all">
+    <br>
+    <div class="row">
+      <h4 class="text-center" id="results-heading">❤️ Weather Forecast in Search Area ❤️</h4>
+      <div class="col-lg-12 col-md-12" id="weather-results"></div>
+    </div>
+  </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
@@ -164,6 +203,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- my js script -->
   <script src="./js/script.js"></script>
+  <script src="./js/config.js"></script>
 
 </body>
 
