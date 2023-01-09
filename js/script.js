@@ -9,11 +9,13 @@ $(document).ready(
         var orderCriteria = "";
         var userFromDate="";
         var userToDate="";
+        var IsAPIDojoFinished = false;
         const placeOptions = ["city_name", "name", "country"]
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
-        var userInputManualForm = $("#enter-location") // field to type in destination
+        var userInputManualForm = $("#enter-location"); // field to type in destination
+        var recommendationList = $("#recommendations");
         var manualSearch = $('#services-manual');
         var closeManual = $("#close"); // close button - inputs
         var closeSearch = $("#close-results"); // close button - search res
@@ -142,34 +144,34 @@ $(document).ready(
             if (loc.length>1){
                 $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
                     function (response) {
-                        console.log(response);
-                        $("#recommendations").empty()
+                        //console.log(response);
+                        recommendationList.empty()
                         //var recommendations = $("<ul></ul>") //[];
                         for(let i=0; i<response.length; i++){
-                            if(i>0||i<response.length-1){$("#recommendations").append("<div class='overline'></div>");}
+                            if(i>0||i<response.length-1){recommendationList.append("<div class='overline'></div>");}
                             var newOption =  $(`<div class="recommendation-item" id="${i}">`);
                             newOption.append(`${response[i].label}`)
-                            $("#recommendations").append(newOption)
+                            recommendationList.append(newOption)
                         }
                         // store most current API call
                         setInterval(localStorage.setItem('response',JSON.stringify(response)), 200); 
                         // reveal recommendations
-                        $("#recommendations").removeClass('hide') //.append(recommendations);
+                        recommendationList.removeClass('hide') //.append(recommendations);
                     })
             }
             // clear recommendedation field if user goes below 3 letters
             else{
-                $("#recommendations").attr('class','hide')
-                $("#recommendations").empty();}
+                recommendationList.attr('class','hide')
+                recommendationList.empty();}
         })
 
         // user picks an option
-        $("#recommendations").on('click',function(event){
+        recommendationList.on('click',function(event){
             var storedResponse = JSON.parse(localStorage.getItem('response'))
-            console.log(storedResponse)
+            //console.log(storedResponse)
             var opt = event.target.id;
             var choice = document.getElementById(opt).innerHTML //$(document).find(`div#${opt}`).val()
-            console.log(opt, choice)
+            //console.log(opt, choice)
             // iteratively check placeOptions for non-empty fields to assign
             for (let i=0; i<placeOptions.length; i++){
                 if (storedResponse[opt][placeOptions[i]]!=""){
@@ -184,21 +186,20 @@ $(document).ready(
             console.log(latitude,longitude)
             userInputManualForm.val(choice);
             // clear recommendations
-            $("#recommendations").attr('class','hide')
-            $("#recommendations").empty();
+            recommendationList.attr('class','hide')
+            recommendationList.empty();
         })
 
         // listen for both date fields
         fromDate.on("change",function(){
             userFromDate = fromDate.val();
-            console.log(userFromDate,userToDate)
+            //console.log(userFromDate,userToDate)
             // update the to-date field (help keep user on the straight and narrow path)
             var newProposedToDate = moment(userFromDate,"YYYY-MM-DD").add(1, 'days').format("YYYY-MM-DD");
             toDate.val(newProposedToDate);
         })
         toDate.on("change",function(){
             userToDate = toDate.val();
-            console.log(userFromDate,userToDate)
             var compareUserFromDate = new Date(userFromDate)
             var compareUserToDate = new Date(userToDate)
             // code distruptors: from-date should be less than to-date
@@ -218,7 +219,6 @@ $(document).ready(
         // listen on the order criteria
         orderCriteriaTag.on("change", function(){
             orderCriteria = orderCriteriaTag.val();
-            //console.log(orderCriteria, );
             // if user doesn't pick, default is set to price
             if (orderCriteria.split(' ').length>1){
                 console.log('default chosen: price');
@@ -240,7 +240,6 @@ $(document).ready(
                     orderCriteria = "price";
                 }
             var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
-            console.log(url,bookingDotComAPIKey);
             $("#spinner").css("visibility", "visible");
 
             // call API: check for rooms
@@ -248,29 +247,29 @@ $(document).ready(
             .done(
                 function (response) {
                     // hide spin once api json is loaded
-                    console.log(response)
                     $("#spinner").css("visibility", "hidden");
                     var num = Object.keys(response).length;
                     
                     // check if error or hit
                     if (num>3){
+                        IsAPIDojoFinished = true;
                         // if place exists but no results are found
                         if (Object.keys(response.result).length==0){
                             searchResults.append(`<div class="moving-center">${response.zero_results_message.messages[0]}</div>`);
+                            
                         }
                         // place exists and there are accommodations in the area
-                        else {
-                            console.log(totNumResults)
+                        else { 
                             var totNumResults = Object.keys(response.result).length;
                             searchResults.empty();
                             for (let i=0; i<totNumResults; i++){
                                 var newResult = $(`<div class="results" id="result-${i}"></div>`);
                                 // add each result head, containing image, name and review
                                 var imgPlusHotelName = $("<div class='result-head'></div>");
-                                console.log(response.result[i].main_photo_url)
                                 var img = $(`<img>`); img.attr('src',`${response.result[i].main_photo_url}`)
                                 // load review scores
-                                var score_num = response.result[i].review_score
+                                var score_num = response.result[i].review_score; 
+                                console.log(score_num, score_num.length)
                                 if (score_num.length==1){score_num += ".0"}
                                 var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
                                 var review_score = $('<div class="align-review-right">'); review_score.append(score)
@@ -288,17 +287,85 @@ $(document).ready(
                                 newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
                                 searchResults.append(newResult);
                             }
+                            IsAPIDojoFinished = true;
                         }
+
+                        // load weather and forecasts using longitude and latitude
+                        // for weather ops
+                        var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
+                        
+                        if (IsAPIDojoFinished==true){
+                            console.log('now fetching weather')
+                            $.ajax({
+                                url: queryURL,
+                                method: "GET"
+                                }).done(function(response) {
+                                    console.log(response)
+                                    searchCity = `${response.city.name}`;
+                                    
+                                    var tableWeather = $("<table id='todayTable'></table>");
+                                    tableWeather.css({'table-layout': 'fixed','width':'100%'})
+                                    
+                                    // loop rows and display times, weather conditions and values
+                                    var weatherUnits = ['','%','°C','kph'];
+                                    var weatherConditions = ['','Humidity','Temp','Wind']
+                                    for (let j=0; j<weatherConditions.length; j++){
+                                        var nrow = $('<tr>')
+                                        if (j==0) {nrow.append('<th></th>'); }
+                                        else {nrow.append(`<td>${weatherConditions[j]}: </td>`);}
+                                        // loop all available forecasts for today
+                                        for (let k=0; k<response.list.length; k++){
+                                            var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
+                                            // headers for time
+                                            if (splitDatetime[2]!='12:00:00'){continue;}
+                                            else{
+                                                if (j==0){
+                                                    var iconCode = `${response.list[k].weather[0].icon}`;
+                                                    var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+                                                    var iconImg =`<img class='icons' src="${iconURL}" alt="Weather icon">`; 
+                                                    var headPlusImg = $(`<th></th>`); 
+                                                    headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
+                                                    headPlusImg.append(`${splitDatetime[2].slice(0,5)}`);
+                                                    headPlusImg.append(iconImg); 
+                                                    nrow.append(headPlusImg);
+                                                  }
+                                                  // load wind conditions
+                                                  else if (j==3){
+                                                    nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
+                                                  }
+                                                  // load other weather conditions
+                                                  else {
+                                                    var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
+                                                    // convert kelvin to degree celcius
+                                                    if (weatherConditions[j]=='Temp'){
+                                                      weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100 ;
+                                                    }
+                                                    nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
+                                                  
+                                              }
+                                            }
+                                            
+                                        }
+                                        // append relevant headers and weather content into col
+                                        tableWeather.append(nrow);
+                                    }
+                                    $("#weather-results").append(tableWeather)
+                                    $("#weather-results-all").removeClass('hide');
+                                    }
+                                )
+                            }
                     }
                     else {
                         searchResults.append(`<div class="moving-center">${response.message}</div>`);
+                        IsAPIDojoFinished = true;
                     }
                 })
             // reveal search results
             manualSearch.addClass('hide');
             manualAuto.addClass('hide');
             searchResultsContainer.removeClass('hide');
-        })
+
+            })
 
         // add click event to close search results
         closeSearch.on('click', function () {
@@ -307,8 +374,8 @@ $(document).ready(
             searchResultsContainer.addClass('hide');
             manualAuto.addClass('hide');
             // reset counters
-            $("#adults").val(`1`); $("#rooms").val(`1`)
-            userInputManualForm.val("")
+            $("#adults").val(`1`); $("#rooms").val(`1`);
+            userInputManualForm.val("");
         })
 
         }
