@@ -133,14 +133,14 @@
         45deg,
         #CA4246 16.666%, 
         #E16541 16.666%, 
-        #E16541 33.333%, 
+        #0f96fd 33.333%, 
         #F18F43 33.333%, 
-        #F18F43 50%, 
-        #8B9862 50%, 
-        #8B9862 66.666%, 
-        #476098 66.666%, 
-        #476098 83.333%, 
-        #A7489B 83.333%
+        #06f616 50%, 
+        #f05f0c 50%, 
+        #c2f812 66.666%, 
+        #e4f66d 66.666%, 
+        #07f4f4 83.333%, 
+        #fc0307 83.333%
         );
    
     background-size: 100%;
@@ -185,4 +185,12 @@
 .navbar{
     background-image: url("../images/navbar-image.jpg");
     background-size:cover;
+}
+
+/* Texts in navbar */
+.nav-link{
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px whitesmoke;
+
 }
