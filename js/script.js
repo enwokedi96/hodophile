@@ -319,11 +319,12 @@ $(document).ready(
                                             // headers for time
                                             if (splitDatetime[2]!='12:00:00'){continue;}
                                             else{
+                                                // on first row, load date, time and weather icon
                                                 if (j==0){
                                                     var iconCode = `${response.list[k].weather[0].icon}`;
                                                     var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
                                                     var iconImg =`<img class='icons' src="${iconURL}" alt="Weather icon">`; 
-                                                    var headPlusImg = $(`<th></th>`); 
+                                                    var headPlusImg = $(`<th class="moving center"></th>`); 
                                                     headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
                                                     headPlusImg.append(`${splitDatetime[2].slice(0,5)}`);
                                                     headPlusImg.append(iconImg); 
@@ -341,7 +342,6 @@ $(document).ready(
                                                       weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100 ;
                                                     }
                                                     nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
-                                                  
                                               }
                                             }
                                             
@@ -370,8 +370,10 @@ $(document).ready(
         // add click event to close search results
         closeSearch.on('click', function () {
             searchResults.empty();
+            $("#weather-results").empty()
             manualSearch.removeClass('hide');
             searchResultsContainer.addClass('hide');
+            $("#weather-results-all").addClass('hide');
             manualAuto.addClass('hide');
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`);
