@@ -1,7 +1,7 @@
 $(document).ready(
     function () {
-        var latituide = "";
-        var longitude = "";
+        var latitude = "0";
+        var longitude = "0";
         var userCityChoice="";
         var currentNumRooms="";
         var currentNumAdults="";
@@ -82,7 +82,8 @@ $(document).ready(
             "headers": {
                 "X-RapidAPI-Key": apiKey,
                 "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
-            }}
+            },
+            success}
         };
 
         function callApiDojoBooking(url, apiKey){
@@ -148,48 +149,56 @@ $(document).ready(
             event.preventDefault();
             console.log('user filling location');
             var loc = $("#enter-location").val();
-            var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
+            var url = `https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${loc}&languagecode=en-us` //`https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
             // when user input has reached 3 letters and greater, call on api to recommend
-            if (loc.length>2){
-                $.ajax(callBookingDotCom(url,bookingDotComAPIKey)).done(
+            if (loc.length>1){
+                $.ajax(callApiDojoBooking(url,bookingDotComAPIKey)).done(
                     function (response) {
                         console.log(response);
                         $("#recommendations").empty()
                         //var recommendations = $("<ul></ul>") //[];
                         for(let i=0; i<response.length; i++){
                             if(i>0){$("#recommendations").append("<div class='overline'></div>");}
-                            var newOption =  $(`<div class="dropdown-item" id="${i}">`);
+                            else{$("#recommendations").append("<div>");}
+                            var newOption =  $(`<div id="${i}">`);
                             newOption.append(`${response[i].label}`)
                             $("#recommendations").append(newOption)
                         }
+                        // store most current API call
+                        setInterval(localStorage.setItem('response',JSON.stringify(response)), 200); 
+                        // reveal recommendations
                         $("#recommendations").removeClass('hide') //.append(recommendations);
-                        // user picks an option
-                        $("#recommendations").on('click',function(event){
-                            var opt = event.target.id;
-                            var choice = document.getElementById(opt).innerHTML //$(document).find(`div#${opt}`).val()
-                            console.log(opt, choice)
-                            // iteratively check placeOptions for non-empty fields to assign
-                            for (let i=0; i<placeOptions.length; i++){
-                                if (response[opt][placeOptions[i]]!=""){
-                                    userCityChoice = response[opt].name;
-                                    break;
-                                }
-                                else{continue}
-                            }
-                            currentDestinationID = response[opt].dest_id;
-                            latituide = response[opt].latituide
-                            longitude = response[opt].longitude
-                            $("#enter-location").val(choice);
-                            // clear recommendations
-                            $("#recommendations").attr('class','hide')
-                            $("#recommendations").empty();
-                        })
-                    });
+                    })
             }
             // clear recommendedation field if user goes below 3 letters
             else{
                 $("#recommendations").attr('class','hide')
                 $("#recommendations").empty();}
+        })
+
+        // user picks an option
+        $("#recommendations").on('click',function(event){
+            var storedResponse = JSON.parse(localStorage.getItem('response'))
+            console.log(storedResponse)
+            var opt = event.target.id;
+            var choice = document.getElementById(opt).innerHTML //$(document).find(`div#${opt}`).val()
+            console.log(opt, choice)
+            // iteratively check placeOptions for non-empty fields to assign
+            for (let i=0; i<placeOptions.length; i++){
+                if (storedResponse[opt][placeOptions[i]]!=""){
+                    userCityChoice = storedResponse[opt].name;
+                    break;
+                }
+                else{continue}
+            }
+            currentDestinationID = storedResponse[`${opt}`].dest_id;
+            latitude = storedResponse[`${opt}`].latitude
+            longitude = storedResponse[`${opt}`].longitude
+            console.log(latitude,longitude)
+            $("#enter-location").val(choice);
+            // clear recommendations
+            $("#recommendations").attr('class','hide')
+            $("#recommendations").empty();
         })
 
         // listen for both date fields
@@ -243,9 +252,11 @@ $(document).ready(
                     console.log('default chosen: price');
                     orderCriteria = "price";
                 }
-            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=${currentDestinationID}&room_qty=${currentNumRooms}&search_type=city&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
+            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
             console.log(url,bookingDotComAPIKey);
             $("#spinner").css("visibility", "visible");
+
+            // call API: check for rooms
             $.ajax(callApiDojoBooking(url,bookingDotComAPIKey))
             .done(
                 function (response) {
@@ -255,18 +266,26 @@ $(document).ready(
                     var num = Object.keys(response).length;
                     
                     // check if error or hit
-                    if (num>2){
-                        console.log(true, num)
-                        var totNumResults = Object.keys(response.result).length
-                        for (let i=0; i<totNumResults; i++){
-                            var newResult = $(`<div class="results" id="result-${i}"></div>`);
-                            //newResult.css()
-                            var imgPlusHotelName = $("<div class='result-head'></div>");
-                            imgPlusHotelName.append($(`<img src = "${response.result[i].main_photo_url}">`));
-                            imgPlusHotelName.text(`${response.result[i].hotel_name_trans}`)
-                            newResult.append(imgPlusHotelName);
-                            searchResultsContainer.append(newResult);
-                            console.log(i)
+                    if (num>3){
+                        // if place exists but no results are found
+                        if (Object.keys(response.result).length==0){
+                            searchResults.append(`<div class="moving-center">${response.zero_results_message.messages[0]}</div>`);
+                        }
+                        // place exists and there are accommodations in the area
+                        else {
+                            console.log(totNumResults)
+                            var totNumResults = Object.keys(response.result).length;
+                            searchResults.empty();
+                            for (let i=0; i<totNumResults; i++){
+                                var newResult = $(`<div class="results" id="result-${i}"></div>`);
+                                //newResult.css()
+                                var imgPlusHotelName = $("<div class='result-head'></div>");
+                                var img = $(`img`); img.attr('src',`${response.result[i].main_photo_url}`)
+                                imgPlusHotelName.append(img);
+                                imgPlusHotelName.text(`${response.result[i].hotel_name_trans}`);
+                                newResult.append(imgPlusHotelName);
+                                searchResults.append(newResult);
+                            }
                         }
                     }
                     else {
@@ -281,6 +300,8 @@ $(document).ready(
 
         // add click event to close search results
         closeSearch.on('click', function () {
+            latitude = "";
+            longitude = "";
             searchResults.empty();
             manualSearch.removeClass('hide');
             searchResultsContainer.addClass('hide');

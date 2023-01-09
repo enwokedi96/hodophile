@@ -79,7 +79,6 @@
 .results{
     /* display: inline-block; */
     width: 100%;
-    border-bottom: 1px gray solid;
-    padding: 2px;
+    border-bottom: 3px gray solid;
 }
 
