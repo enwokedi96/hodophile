@@ -273,14 +273,19 @@ $(document).ready(
                                 var score_num = response.result[i].review_score
                                 if (score_num.length==1){score_num += ".0"}
                                 var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
-                                var review_score = $('<div>'); review_score.append(score)
+                                var review_score = $('<div class="align-review-right">'); review_score.append(score)
                                 review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
                                 var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
-                                // append image, name and scores
-                                title.prepend(img); 
+                                // add address
+                                // <strong>Address:</strong> 
+                                var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}</div>`);
+                                // add estimated cost
+                                var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive):</strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
+                                // append search elements
+                                title.prepend(img); title.prepend(`${i+1}. `)
                                 imgPlusHotelName.append(title)
                                 imgPlusHotelName.append(review_score); 
-                                newResult.append(imgPlusHotelName);
+                                newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
                                 searchResults.append(newResult);
                             }
                         }

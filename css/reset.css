@@ -78,7 +78,7 @@
 
 /* loading while API loads results... */
 #spinner {
-    color: whitesmoke;
+    color: rgb(73, 69, 69);
     left: 50%;
     position: relative;
     top: 0%;
@@ -87,6 +87,13 @@
 }
 
 /* css for hotel recommendations */
+#results-heading{
+    border: #1b1d1d solid 2px;
+    border-radius: 20px;
+    background-color: #e5efef;
+    padding-bottom: 2px;
+}
+
 .result-head{
     display: flex;
     justify-content: space-between;
