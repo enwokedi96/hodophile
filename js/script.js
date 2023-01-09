@@ -13,6 +13,7 @@ $(document).ready(
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
+        var userInputManualForm = $("#enter-location") // field to type in destination
         var manualSearch = $('#services-manual');
         var closeManual = $("#close"); // close button - inputs
         var closeSearch = $("#close-results"); // close button - search res
@@ -73,19 +74,6 @@ $(document).ready(
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
-        // settings for api calls to assist
-        function callBookingDotCom(url, apiKey){
-            return {"async": true,
-            "crossDomain": true,
-            "url": url,
-            "method": "GET",
-            "headers": {
-                "X-RapidAPI-Key": apiKey,
-                "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
-            },
-            success}
-        };
-
         function callApiDojoBooking(url, apiKey){
             return {
             "async": true,
@@ -145,10 +133,10 @@ $(document).ready(
         })
 
         // search for recommentations as user types
-        $("#enter-location").on('keyup',function(event){
+        userInputManualForm.on('keyup',function(event){
             event.preventDefault();
             console.log('user filling location');
-            var loc = $("#enter-location").val();
+            var loc = userInputManualForm.val();
             var url = `https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${loc}&languagecode=en-us` //`https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
             // when user input has reached 3 letters and greater, call on api to recommend
             if (loc.length>1){
@@ -194,7 +182,7 @@ $(document).ready(
             latitude = storedResponse[`${opt}`].latitude
             longitude = storedResponse[`${opt}`].longitude
             console.log(latitude,longitude)
-            $("#enter-location").val(choice);
+            userInputManualForm.val(choice);
             // clear recommendations
             $("#recommendations").attr('class','hide')
             $("#recommendations").empty();
@@ -309,14 +297,13 @@ $(document).ready(
 
         // add click event to close search results
         closeSearch.on('click', function () {
-            latitude = "";
-            longitude = "";
             searchResults.empty();
             manualSearch.removeClass('hide');
             searchResultsContainer.addClass('hide');
             manualAuto.addClass('hide');
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`)
+            userInputManualForm.val("")
         })
 
         }
