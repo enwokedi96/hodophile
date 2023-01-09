@@ -45,8 +45,10 @@
     border: 2px solid black;
     border-radius: 10px;
     padding: 5px;
+    cursor:pointer;
 }
 
+/* draw line ontop container */
 .overline {
     border-top: 1px solid black;
     width: 100%;
@@ -73,14 +75,46 @@
     z-index: 1;
 }
 
+/* css for hotel recommendations */
 .result-head{
-    display: inline-block
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    width: 100%;
 }
 
 .results{
-    /* display: inline-block; */
     width: 100%;
     border-bottom: 3px gray solid;
+}
+
+.hotel-scores{
+    min-height: 35px;
+    background: linear-gradient(
+        35deg, blue 25%, purple 65%
+    );
+    font-size: 15px;
+    border: gold 2px solid;
+    border-radius: 10px;
+    padding: 4px;
+    font-weight: 500;
+    color: white;
+}
+
+.force-inline{
+    display:table-cell
+}
+
+/* recommendations: hotel name-to-link css */
+.hotel-name {
+    color:inherit;
+    text-decoration: none;
+}
+
+.hotel-name:hover {
+    color:#00A0C6; 
+    text-decoration:none; 
+    cursor:pointer;  
 }
 
 /* main-logo1 */

@@ -158,9 +158,8 @@ $(document).ready(
                         $("#recommendations").empty()
                         //var recommendations = $("<ul></ul>") //[];
                         for(let i=0; i<response.length; i++){
-                            if(i>0){$("#recommendations").append("<div class='overline'></div>");}
-                            else{$("#recommendations").append("<div>");}
-                            var newOption =  $(`<div id="${i}">`);
+                            if(i>0||i<response.length-1){$("#recommendations").append("<div class='overline'></div>");}
+                            var newOption =  $(`<div class="recommendation-item" id="${i}">`);
                             newOption.append(`${response[i].label}`)
                             $("#recommendations").append(newOption)
                         }
@@ -278,11 +277,21 @@ $(document).ready(
                             searchResults.empty();
                             for (let i=0; i<totNumResults; i++){
                                 var newResult = $(`<div class="results" id="result-${i}"></div>`);
-                                //newResult.css()
+                                // add each result head, containing image, name and review
                                 var imgPlusHotelName = $("<div class='result-head'></div>");
-                                var img = $(`img`); img.attr('src',`${response.result[i].main_photo_url}`)
-                                imgPlusHotelName.append(img);
-                                imgPlusHotelName.text(`${response.result[i].hotel_name_trans}`);
+                                console.log(response.result[i].main_photo_url)
+                                var img = $(`<img>`); img.attr('src',`${response.result[i].main_photo_url}`)
+                                // load review scores
+                                var score_num = response.result[i].review_score
+                                if (score_num.length==1){score_num += ".0"}
+                                var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
+                                var review_score = $('<div>'); review_score.append(score)
+                                review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
+                                var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
+                                // append image, name and scores
+                                title.prepend(img); 
+                                imgPlusHotelName.append(title)
+                                imgPlusHotelName.append(review_score); 
                                 newResult.append(imgPlusHotelName);
                                 searchResults.append(newResult);
                             }
