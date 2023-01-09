@@ -210,6 +210,7 @@
 .navbar {
     background-image: url("../images/black.jpg");
     background-size:cover;
+    height: 60px;
 }
 
 
