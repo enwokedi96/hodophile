@@ -60,21 +60,13 @@ $(document).ready(
                 $(`#${id}`).on("click", function () {
                     if (parseInt(currentNumRooms) > 1) {
                         currentNumRooms = parseInt(currentNumRooms) - 1;
-<<<<<<< HEAD
                         jTag.val(`${currentNumRooms}`);
                     }
-                    else (console.log("Boi, you can't book lower than a room!!"))
-                }
-                    else(console.log("Boi, you can't book lower than a room!!"))
-                }
-                )
-=======
-                        jTag.val(`${currentNumRooms}`);}
-                    else{
+                    else {
                         console.log("Boi, you can't book lower than a room!!")
                     }
-                })}
->>>>>>> bb750460d438bb404e3e7c3953a128c4c7cc23be
+                })
             }
         }
-    )
+    }
+)
