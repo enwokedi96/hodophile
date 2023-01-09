@@ -6,37 +6,38 @@
     background-image: url("/images/egypt.jpg");
 } */
 
-.moving-down{
+.moving-down {
     margin-top: 120px;
 }
 
-.moving-up{
+.moving-up {
     margin-bottom: -15px;
 }
 
-.moving-center{
+.moving-center {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
 }
+
 /* main Text "Hodophile" */
-.blockquote h1{
-  font-size: 100px;
-  font-family: Brush Script MT, Brush Script Std, cursive;
-  text-shadow: 2px 2px white;
+.blockquote h1 {
+    font-size: 100px;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    text-shadow: 2px 2px white;
 }
 
 /* second main text  */
-.blockquote-footer p{
+.blockquote-footer p {
     font-size: 25px;
     font-family: cursive;
-    color:white;
+    color: white;
     text-shadow: 2px 2px rgb(119, 5, 5);
-   }
+}
 
 /* add recommendations dropdown css */
-#recommendations{
+#recommendations {
     position: absolute;
     z-index: 3;
     background-color: white;
@@ -45,13 +46,13 @@
     border: 2px solid black;
     /* border-radius: 10px; */
     padding: 5px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.recommendation-item:hover{
-    background-color:#1b1d1d; 
-    text-decoration:none; 
-    cursor:pointer;  
+.recommendation-item:hover {
+    background-color: #1b1d1d;
+    text-decoration: none;
+    cursor: pointer;
     z-index: 200;
 }
 
@@ -65,20 +66,20 @@
     width: 100%;
 }
 
-#manual-search{
-    background:white;
+#manual-search {
+    background: white;
 }
 
 /* css for results div */
 #search-results-all,
-#weather-results-all{
+#weather-results-all {
     background-color: white;
     color: black;
     font-size: large;
     padding-bottom: 10px;
 }
 
-#weather-results-all{
+#weather-results-all {
     margin-bottom: 20px;
 }
 
@@ -93,30 +94,28 @@
 }
 
 /* css for hotel recommendations */
-#results-heading{
+#results-heading {
     border: #1b1d1d solid 2px;
     border-radius: 20px;
     background-color: #e5efef;
     padding-bottom: 2px;
 }
 
-.result-head{
+.result-head {
     display: flex;
     justify-content: space-between;
     margin: 20px;
     width: 100%;
 }
 
-.results{
+.results {
     width: 100%;
     border-bottom: 3px gray solid;
 }
 
-.hotel-scores{
+.hotel-scores {
     min-height: 35px;
-    background: linear-gradient(
-        35deg, blue 25%, purple 65%
-    );
+    background: linear-gradient(35deg, blue 25%, purple 65%);
     font-size: 15px;
     border: gold 2px solid;
     border-radius: 10px;
@@ -125,57 +124,55 @@
     color: white;
 }
 
-.force-inline{
-    display:table-cell
+.force-inline {
+    display: table-cell
 }
 
 /* recommendations: hotel name-to-link css */
 .hotel-name {
-    color:inherit;
+    color: inherit;
     text-decoration: none;
 }
 
 .hotel-name:hover {
-    color:#00A0C6; 
-    text-decoration:none; 
-    cursor:pointer;  
+    color: #00A0C6;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* main-logo1 */
-.logo{
+.logo {
     height: 60px;
 }
 
 /* properties of "odophile" */
-.main-text{
+.main-text {
     font-size: 20px;
     font-weight: 900;
     background-size: 100%;
     background-clip: text;
     background-color: #f3ec78;
-    background-image: linear-gradient(
-        45deg,
-        #CA4246 16.666%, 
-        #E16541 16.666%, 
-        #E16541 33.333%, 
-        #F18F43 33.333%, 
-        #F18F43 50%, 
-        #8B9862 50%, 
-        #8B9862 66.666%, 
-        #476098 66.666%, 
-        #476098 83.333%, 
-        #A7489B 83.333%
-        );
-   
+    background-image: linear-gradient(45deg,
+            #CA4246 16.666%,
+            #E16541 16.666%,
+            #E16541 33.333%,
+            #F18F43 33.333%,
+            #F18F43 50%,
+            #8B9862 50%,
+            #8B9862 66.666%,
+            #476098 66.666%,
+            #476098 83.333%,
+            #A7489B 83.333%);
+
     background-size: 100%;
     background-repeat: repeat;
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent; 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
 }
 
 /* :hover effect of odophile */
-.main-text:hover{
+.main-text:hover {
     animation: rainbow-text-simple-animation 0.5s ease-in forwards;
 }
 
@@ -184,9 +181,11 @@
     0% {
         background-size: 650%;
     }
+
     40% {
         background-size: 650%;
     }
+
     100% {
         background-size: 100%;
     }
@@ -197,18 +196,25 @@
     0% {
         background-size: 100%;
     }
+
     80% {
         background-size: 650%;
     }
+
     100% {
         background-size: 650%;
     }
 }
 
 /* Image of navbar */
-.navbar{
+.navbar {
     background-image: url("../images/black.jpg");
+<<<<<<< HEAD
     background-size:cover;
 }
 
 
+=======
+    background-size: cover;
+}
+>>>>>>> 1cf04c4f0a2eef1bd39658300915bdc957d747bc
