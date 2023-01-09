@@ -207,6 +207,6 @@
 
 /* Image of navbar */
 .navbar{
-    background-image: url("../images/navbar-image.jpg");
+    /* background-image: url("../images/navbar-image.jpg"); */
     background-size:cover;
 }
