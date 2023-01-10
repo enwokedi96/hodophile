@@ -95,10 +95,29 @@ body, html {
     color: black;
     font-size: large;
     padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-#weather-results-all {
+.weather-results-all {
     margin-bottom: 20px;
+}
+
+.weather-button {
+    max-width: 155px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    margin-left: 30px;
+    line-height: 60px;
+    font-weight: bold;
+    padding: 0 20px;
+    background: #e5efef;
+    border: none;
+    border-radius: 10px;
+    color: #1b1d1d;
+    cursor: pointer;
+  }
+.weather-button:hover {
+background: lightsalmon;
 }
 
 /* loading while API loads results... */

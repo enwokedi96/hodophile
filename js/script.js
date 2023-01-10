@@ -297,11 +297,81 @@ $(document).ready(
                 console.log('default chosen: price');
                 orderCriteria = "price";
             }
-            $("#spinner").css("visibility", "visible");
+            
             // all manual ops
-            if (manualOrAutoChoice=="manual"){   
-                var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
+            if (manualOrAutoChoice=="manual"){  
+
+                // ------------------------------- FIRST LOAD WEATHER COMPONENTS ---------------------------
+                // load weather and forecasts using longitude and latitude
+                // for weather ops
+                IsAPIDojoFinished = true;
+                var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
                 
+                console.log('now fetching weather');
+                var weatherButton = $("<div id='weather-button-1' class='weather-button'><a href='#weather-results-all'>Go To Weather</a></div>");
+                // add gotoweather button
+                $("#weatherButton").prepend(weatherButton); $("#weatherButton").removeClass('hide')
+                $("#weatherButton").css({'text-decoration': 'none'})
+                // call weather api
+                $.ajax({url: queryURL,
+                    method: "GET"}).done(function (response) {
+                    console.log(response);
+
+                    var tableWeather = $("<table id='todayTable'></table>");
+                    tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' });
+
+                    // loop rows and display times, weather conditions and values
+                    var weatherUnits = ['', '%', '°C', 'kph'];
+                    var weatherConditions = ['', 'Humidity', 'Temp', 'Wind'];
+                    for (let j = 0; j < weatherConditions.length; j++) {
+                        var nrow = $('<tr>');
+                        if (j == 0) { nrow.append('<th></th>'); } 
+                        else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
+                        // loop all available forecasts for today
+                        for (let k = 0; k < response.list.length; k++) {
+                            var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
+                            // headers for time
+                            if (splitDatetime[2] != '12:00:00') { continue; }
+                            else {
+                                // on first row, load date, time and weather icon
+                                if (j == 0) {
+                                    var iconCode = `${response.list[k].weather[0].icon}`;
+                                    var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+                                    var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
+                                    var headPlusImg = $(`<th class="moving center"></th>`);
+                                    headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
+                                    headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
+                                    headPlusImg.append(iconImg);
+                                    nrow.append(headPlusImg);
+                                }
+                                // load wind conditions
+                                else if (j == 3) {
+                                    nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
+                                }
+                                // load other weather conditions
+                                else {
+                                    var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
+                                    // convert kelvin to degree celcius
+                                    if (weatherConditions[j] == 'Temp') {
+                                        weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
+                                    }
+                                    nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
+                                }
+                            }
+
+                        }
+                        // append relevant headers and weather content into col
+                        tableWeather.append(nrow);
+                    }
+                    $("#weather-results").append(tableWeather)
+                    $("#weather-results-all").removeClass('hide');
+                    IsAPIDojoFinished = false;
+                })
+            
+                // -------------------------------- CALL BOOKING API FOR MANUAL OPS --------------------------------
+                var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
+                manualSearch.addClass('hide');
+                $("#spinner").css("visibility", "visible");
                 // call API: check for rooms
                 $.ajax(callApiDojoBooking(url, bookingDotComAPIKey)).done(
                         function (response) {
@@ -330,16 +400,19 @@ $(document).ready(
                                         // load review scores
                                         var score_num = response.result[i].review_score;
                                         console.log(score_num, score_num.length)
-                                        if (score_num.length == 1) { score_num += ".0" }
+                                        if (score_num==null){
+                                            score_num = "NA"
+                                        }
+                                        //if (score_num.length == 1) { score_num += ".0" }
                                         var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
                                         var review_score = $('<div class="align-review-right">'); review_score.append(score)
                                         review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
                                         var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
                                         // add address
                                         // <strong>Address:</strong> 
-                                        var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}</div>`);
+                                        var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}, ${response.result[i].country}</div>`);
                                         // add estimated cost
-                                        var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive):</strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
+                                        var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive): </strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
                                         // append search elements
                                         title.prepend(img); title.prepend(`${i + 1}. `)
                                         imgPlusHotelName.append(title)
@@ -347,7 +420,7 @@ $(document).ready(
                                         newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
                                         searchResults.append(newResult);
                                     }
-                                    IsAPIDojoFinished = true;
+                                    
                                 }
                             }
                         else {
@@ -359,68 +432,6 @@ $(document).ready(
                         manualAuto.addClass('hide');
                         searchResultsContainer.removeClass('hide');
                     })
-                // load weather and forecasts using longitude and latitude
-                // for weather ops
-                var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
-
-                if (IsAPIDojoFinished == true) {
-                    console.log('now fetching weather')
-                    $.ajax({url: queryURL,
-                        method: "GET"
-                    }).done(function (response) {
-                        console.log(response)
-
-                        var tableWeather = $("<table id='todayTable'></table>");
-                        tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' })
-
-                        // loop rows and display times, weather conditions and values
-                        var weatherUnits = ['', '%', '°C', 'kph'];
-                        var weatherConditions = ['', 'Humidity', 'Temp', 'Wind']
-                        for (let j = 0; j < weatherConditions.length; j++) {
-                            var nrow = $('<tr>')
-                            if (j == 0) { nrow.append('<th></th>'); }
-                            else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
-                            // loop all available forecasts for today
-                            for (let k = 0; k < response.list.length; k++) {
-                                var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
-                                // headers for time
-                                if (splitDatetime[2] != '12:00:00') { continue; }
-                                else {
-                                    // on first row, load date, time and weather icon
-                                    if (j == 0) {
-                                        var iconCode = `${response.list[k].weather[0].icon}`;
-                                        var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-                                        var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
-                                        var headPlusImg = $(`<th class="moving center"></th>`);
-                                        headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
-                                        headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
-                                        headPlusImg.append(iconImg);
-                                        nrow.append(headPlusImg);
-                                    }
-                                    // load wind conditions
-                                    else if (j == 3) {
-                                        nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
-                                    }
-                                    // load other weather conditions
-                                    else {
-                                        var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
-                                        // convert kelvin to degree celcius
-                                        if (weatherConditions[j] == 'Temp') {
-                                            weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
-                                        }
-                                        nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
-                                    }
-                                }
-
-                            }
-                            // append relevant headers and weather content into col
-                            tableWeather.append(nrow);
-                        }
-                        $("#weather-results").append(tableWeather)
-                        $("#weather-results-all").removeClass('hide');
-                        IsAPIDojoFinished = false;
-                    })
-                }
             }
 
             // all auto ops
@@ -486,9 +497,12 @@ $(document).ready(
             searchResults.empty();
             $("#weather-results").empty()
             manualSearch.removeClass('hide');
+            
             searchResultsContainer.addClass('hide');
             $("#weather-results-all").addClass('hide');
+            $("#weatherButton").addClass('hide')
             manualAuto.addClass('hide');
+            
             $("#spinner").css("visibility", "hidden");
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`);

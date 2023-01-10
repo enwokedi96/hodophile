@@ -69,6 +69,9 @@
       </div>
     </div>
 
+    <!-- invisible? weather button -->
+    <div id="weatherButton" class="hide"></div>
+
     <!-- When user clicks manual, display search options, same as above -->
     <div class="container-md hide" id="services-manual">
       <!-- display location and listings -->
@@ -109,123 +112,41 @@
                 <div class="d-flex justify-content-center">
                   <p>(for adventurous holidayers)</p>
                 </div>
-                <div class="dropdown" id="hemisphere-dropdown-all">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="choose-hemisphere-button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Pick your preferred hemisphere
-                  </button>
-                  <ul class="dropdown-menu" id="dropdown-menu-hemisphere" aria-labelledby="choose-hemisphere-button">
-                    <li><a class="dropdown-item" href="#">Northern Hemisphere</a></li>
-                    <li><a class="dropdown-item" href="#">Southern Hemisphere</a></li>
-                  </ul>
-                </div>
               </div>
             </div>
-            <!-- state duration of stay -->
-            <form class="row mb-3 mt-3" id="stay-duration">
-              <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
-              <div class="col-md-6">
-                <label for="from-date" class="form-label"></label>
-                <div class="input-group">
-                  <span class="input-group-text" id="inputGroupPrepend2">From</span>
-                  <input type="date" class="form-control" id="from-date" aria-describedby="inputGroupPrepend2" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="to-date" class="form-label"></label>
-                <div class="input-group">
-                  <span class="input-group-text" id="inputGroupPrepend3">To</span>
-                  <input type="date" class="form-control" id="to-date" aria-describedby="inputGroupPrepend3" required>
-                </div>
-              </div>
-            </form>
-            <!-- number of rooms -->
-            <form class="row mt-4">
-              <div class="col-6 mt-2">
-                <!-- put in expected number of adults -->
-                <div class="h6 input-group">
-                  <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
-                  <button id="decrease-adults" class="btn btn-outline-danger" type="button">
-                    <i class="fas fa-chevron-down"></i></button>
-                  <input id="adults" type="text" class="form-control" value="1">
-                  <button id="increase-adults" class="btn btn-outline-primary" type="button">
-                    <i class="fas fa-chevron-up"></i></button>
-                </div>
-              </div>
-              <!-- put in expected number of rooms -->
-              <div class="col-6 mt-2">
-                <div class="h6 input-group">
-                  <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
-                  <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
-                    <i class="fas fa-chevron-down"></i></button>
-                  <input id="rooms" type="text" class="form-control" value="1">
-                  <button id="increase-rooms" class="btn btn-outline-primary" type="button">
-                    <i class="fas fa-chevron-up"></i></button>
-                </div>
-              </div>
-            </form>
-            <!--  -->
-            <!-- filter hotel search by what metric? -->
-            <form class="row mt-4 mb-3">
-              <div class="col-md-2 offset-md-4 input-group">
-                <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Order Criterion -</div>
-                <select class="custom-select" id="order-options">
-                  <option selected>Choose to order by...</option>
-                  <option value="popularity">Popularity</option>
-                  <option value="price">Price</option>
-                  <option value="review_score">Review Score</option>
-                </select>
-              </div>
-            </form>
-            <!-- submit all -->
-            <div class="d-flex justify-content-center mb-3">
-              <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
+            <h4 class="text-center" id="results-heading">❤️ Peruse through recommended accommodations below ❤️</h4>
+            <div class="col-lg-12 col-md-12" id="search-results"></div>
+          </div>
+        </div>
+
+        <!-- display cities -->
+        <div class="container-md hide border border-secondary rounded px-5" id="city-results-all">
+          <br>
+          <div class="row">
+            <div class="d-flex justify-content-end">
+              <button id="close-cities" type="button" class="btn-close" aria-label="Close"></button>
             </div>
+            <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
+            <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
+            <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-2"></div>
+          </div>
+        </div>
+        <!-- loader spinning... -->
+        <div id="spinner"><i class="fa fa-spinner fa-3x fa-spin"></i></div>
+
+        <!-- weather container -->
+        <div class="container-md hide border border-secondary rounded px-5" id="weather-results-all">
+          <br>
+          <div class="row">
+            <h4 class="text-center" id="results-heading">❤️ Weather Forecast in Search Area ❤️</h4>
+            <div class="col-lg-12 col-md-12" id="weather-results"></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- display hotel search results as successive forms here -->
-    <div class="container-md hide border border-secondary rounded px-5" id="search-results-all">
-      <br>
-      <div class="row">
-        <div class="d-flex justify-content-end">
-          <button id="close-results" type="button" class="btn-close" aria-label="Close"></button>
-        </div>
-        <h4 class="text-center" id="results-heading">❤️ Peruse through recommended accommodations below ❤️</h4>
-        <div class="col-lg-12 col-md-12" id="search-results"></div>
+      <div class="footer">
+        This is where footer stuff
       </div>
-    </div>
-
-    <!-- display cities -->
-    <div class="container-md hide border border-secondary rounded px-5" id="city-results-all">
-      <br>
-      <div class="row">
-        <div class="d-flex justify-content-end">
-          <button id="close-cities" type="button" class="btn-close" aria-label="Close"></button>
-        </div>
-        <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
-        <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
-        <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-2"></div>
-      </div>
-    </div>
-    <!-- loader spinning... -->
-    <div id="spinner"><i class="fa fa-spinner fa-3x fa-spin"></i></div>
-
-    <!-- weather container -->
-    <div class="container-md hide border border-secondary rounded px-5" id="weather-results-all">
-      <br>
-      <div class="row">
-        <h4 class="text-center" id="results-heading">❤️ Weather Forecast in Search Area ❤️</h4>
-        <div class="col-lg-12 col-md-12" id="weather-results"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    This is where footer stuff
-  </div>
 
 </body>
 
