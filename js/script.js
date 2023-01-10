@@ -303,8 +303,7 @@ $(document).ready(
                 var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
                 
                 // call API: check for rooms
-                $.ajax(callApiDojoBooking(url, bookingDotComAPIKey))
-                    .done(
+                $.ajax(callApiDojoBooking(url, bookingDotComAPIKey)).done(
                         function (response) {
                             // hide spin once api json is loaded
                             $("#spinner").css("visibility", "hidden");
@@ -316,7 +315,6 @@ $(document).ready(
                                 // if place exists but no results are found
                                 if (Object.keys(response.result).length == 0) {
                                     searchResults.append(`<div class="moving-center">${response.zero_results_message.messages[0]}</div>`);
-
                                 }
                                 // place exists and there are accommodations in the area
                                 else {
@@ -353,7 +351,7 @@ $(document).ready(
                             }
                         else {
                             searchResults.append(`<div class="moving-center">${response.message}</div>`);
-                            IsAPIDojoFinished = true;
+                            IsAPIDojoFinished = false;
                         }
                     })
                 // reveal search results
@@ -366,8 +364,7 @@ $(document).ready(
 
                 if (IsAPIDojoFinished == true) {
                     console.log('now fetching weather')
-                    $.ajax({
-                        url: queryURL,
+                    $.ajax({url: queryURL,
                         method: "GET"
                     }).done(function (response) {
                         console.log(response)
