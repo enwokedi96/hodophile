@@ -490,6 +490,7 @@ $(document).ready(
             searchResultsContainer.addClass('hide');
             $("#weather-results-all").addClass('hide');
             manualAuto.addClass('hide');
+            $("#spinner").css("visibility", "hidden");
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`);
             userInputManualForm.val("");
