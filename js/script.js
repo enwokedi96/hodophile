@@ -40,6 +40,9 @@ $(document).ready(
         var bookingDotComAPIKey = config["booking-API_KEY"]
         var openWeatherAPIKey = config["openWeather-API_KEY"]
 
+        // load cities
+        var allCities = cities;
+
         // Optimal reusability: listen to div to ascertain which top of form to use
         // whilst other form elements are reused
         manualAuto.on('click', function (event) {
@@ -113,9 +116,9 @@ $(document).ready(
         // sift randomly through images every 3 seconds
         setInterval(changeImage, 3000);
 
-        function callApiDojoBooking(url, apiKey) {
+        function callApiDojoBooking(url, apiKey, async=true) {
             return {
-                "async": true,
+                "async": async,
                 "crossDomain": true,
                 "url": url,
                 "method": "GET",
@@ -420,29 +423,61 @@ $(document).ready(
                 manualSearch.addClass('hide');
                 manualAuto.addClass('hide');
                 searchResultsContainer.removeClass('hide');}
+
             // all auto ops
             else if (manualOrAutoChoice=="automatic"){
-
                 latitude = ""; longitude = "";
-                var coordinates = getDemRandomCoordinates()
                 // remove auto form
-                //manualSearch.addClass('hide');
-                // get names of coordinates generated, cull if necessary
-                const settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": `https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${coordinates[0][0]}${coordinates[1][0]}/nearbyCities?radius=500`,
-                    "method": "GET",
-                    "headers": {
-                        "X-RapidAPI-Key": "fe31b5ff27msh84aa01e84c5d57ap1c7192jsnc632f38f2b89",
-                        "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com"
+                manualSearch.addClass('hide');
+                $("#city-results-all").removeClass('hide');
+
+                // get random places from list
+                var randomlySelectCities=[]
+                for (var i=0; i<Object.keys(allCities).length; i++){
+                    var currentCityKey = Object.keys(allCities)[i];
+                    var currentRegionOfSearch = allCities[currentCityKey];
+                    var randomPick = currentRegionOfSearch[Math.floor(Math.random()*currentRegionOfSearch.length)];
+                    randomlySelectCities.push(randomPick);
+                }
+                console.log(randomlySelectCities)
+
+                // display randomly selected cities unto screen
+                var middleIndex = Math.ceil(randomlySelectCities.length / 2);
+                var firstHalfCities = randomlySelectCities.slice().splice(0, middleIndex);   
+                var secondHalfCities = randomlySelectCities.slice().splice(-middleIndex);
+                const timer = ms => new Promise(res => setTimeout(res, ms))
+                function appendNewCity(rowID,getCityInfoURL){
+                    $.ajax(bookingDotCom(getCityInfoURL, bookingDotComAPIKey)).done(
+                        function (response) {
+                            console.log(response);
+                            localStorage.setItem(response[0].city_name, JSON.stringify({"lat":response[0].latitude,"long":response[0].longitude}));
+                            var nextCity = $("<div class='city-images'>");
+                            var cityImg = $(`<img src=${response[0].image_url}>`);
+                            //cityImg.css("background-image",`url(${response[0].image_url})`);
+                            nextCity.append(cityImg);
+                            nextCity.append(response[0].city_name);
+                            $(rowID).append(nextCity)
+                        }
+                    );
+                }
+
+                async function runLoop(){
+                    for (var i=0; i<firstHalfCities.length; i++){
+                        console.log("Now searching: ",firstHalfCities[i])
+                        var getCityInfoURL = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${firstHalfCities[i]}&locale=en-gb` //`https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${firstHalfCities[i]}&languagecode=en-gb`
+                        // call API: check for LOCATION
+                        appendNewCity("#search-cities-1",getCityInfoURL);
+                        await timer(1100)
                     }
-                };
+                }
+
+                runLoop();
+
+                $("#search-cities-1").removeClass('hide')
+
+                // var queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${chosenPlace}&limit=5&appid=${openWeatherAPIKey}`
+                // get coordinates 
                 
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                });
-                console.log(`required location hits obtained!!`,chosenCoordinates)
             }
 
         })
@@ -459,27 +494,6 @@ $(document).ready(
             $("#adults").val(`1`); $("#rooms").val(`1`);
             userInputManualForm.val("");
         })
-
-        // random coordinate generator
-        function getDemRandomCoordinates(){
-            var lat = Array.from({length: numCountries}, () => getRandomInt(0,18)) // [...Array(6)].map(e=>~~(getRandomInt(0,180)));
-            var long = Array.from({length: numCountries}, () => getRandomInt(0,18));
-            var decimal = (Math.random() * (0.123456 - 0.0200) + 0.0200).toFixed(6)
-            if (userHemisphere.includes('South')){
-                lat = lat.map((x) => (x+decimal)*-1)
-            }
-            else{lat = lat.map((x) => (x-decimal)*1)}
-            long = long.map((x) => (x-decimal)*1)
-            console.log(long,lat);
-            return [long, lat];
-        }
-
-        // random number gen
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
 
     }
     
