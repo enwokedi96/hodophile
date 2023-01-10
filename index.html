@@ -71,6 +71,7 @@
   <!-- When user clicks manual, display search options, same as above -->
   <div class="container-md hide" id="services-manual">
     <!-- display location and listings -->
+    <div class="row">
     <!-- first search option -->
     <div class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="manual-search">
       <!-- include button to close div -->
@@ -78,21 +79,45 @@
       <div class="d-grid d-md-flex justify-content-md-end">
         <button id="close" type="button" class="btn-close" aria-label="Close"></button>
       </div>
-      <!-- <p>(for veteran holidayers)</p> -->
+    
       <div class="mb-2" role="document">
-        <div class="d-flex justify-content-center">
-          <h3>The old-fashion search</h3>
-        </div>
-        <div class="d-flex justify-content-center">
-          <p>(for veteran holidayers)</p>
-        </div>
+        
+        <div id="choice-of-top-form">
+          <div id="manual-top-form" class="hide">
+          <div class="d-flex justify-content-center">
+            <h3>The old-fashion search</h3>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p>(for veteran holidayers)</p>
+          </div>
 
-        <div class="md-form mb-2">
-          <i class="fas fa-map-marker-alt"></i>
-          <label for="enter-location" class="h6">Enter destination</label>
-          <input type="text" id="enter-location" class="form-control validate"
-            placeholder="start typing and select a suggestion" required>
-          <div id="recommendations" class="hide"></div>
+          <div class="md-form mb-2">
+            <i class="fas fa-map-marker-alt"></i>
+            <label for="enter-location" class="h6">Enter destination</label>
+            <input type="text" id="enter-location" class="form-control validate"
+              placeholder="start typing and select a suggestion" required>
+            <div id="recommendations" class="hide"></div>
+            </div>
+          </div>
+
+          <!-- automatic bit (for spontaneous holidayers)-->
+          <div id="auto-top-form" class="hide">
+            <div class="d-flex justify-content-center">
+              <h3>The spontaneous search</h3>
+            </div>
+            <div class="d-flex justify-content-center">
+              <p>(for adventurous holidayers)</p>
+            </div>
+          <div class="dropdown" id="hemisphere-dropdown-all">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="choose-hemisphere-button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pick your preferred hemisphere
+            </button>
+            <ul class="dropdown-menu" id="dropdown-menu-hemisphere" aria-labelledby="choose-hemisphere-button">
+              <li><a class="dropdown-item" href="#">Northern Hemisphere</a></li>
+              <li><a class="dropdown-item" href="#">Southern Hemisphere</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
         <!-- state duration of stay -->
         <form class="row mb-3 mt-3" id="stay-duration">
@@ -156,12 +181,95 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- When user clicks automatic, display search options, same as above -->
   <div class="container-md hide" id="services-automatic">
+    <div class="row">
+      <!-- second search option -->
+      <div class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="auto-search">
+      <br>
+      <div class="d-grid d-md-flex justify-content-md-end">
+        <button id="close" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
 
+      <div class="dropdown p-3" id="hemisphere-dropdown-all">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="choose-hemisphere-button" data-bs-toggle="dropdown" aria-expanded="false">
+          Pick your preferred hemisphere
+        </button>
+        <ul class="dropdown-menu" id="dropdown-menu-hemisphere" aria-labelledby="choose-hemisphere-button">
+          <li><a class="dropdown-item" href="#">Northern Hemisphere</a></li>
+          <li><a class="dropdown-item" href="#">Southern Hemisphere</a></li>
+        </ul>
+      </div>
+
+      <div class="hide" id="auto-form-fill">
+        <!-- state duration of stay num 2 -->
+        <form class="row mb-3 mt-3" id="stay-duration">
+          <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
+          <div class="col-md-6">
+            <label for="from-date" class="form-label"></label>
+            <div class="input-group">
+              <span class="input-group-text" id="inputGroupPrepend5">From</span>
+              <input type="date" class="form-control" id="from-date-2" aria-describedby="inputGroupPrepend5" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="to-date" class="form-label"></label>
+            <div class="input-group">
+              <span class="input-group-text" id="inputGroupPrepend6">To</span>
+              <input type="date" class="form-control" id="to-date-2" aria-describedby="inputGroupPrepend6" required>
+            </div>
+          </div>
+        </form>
+        <!-- number of rooms  num 2-->
+        <form class="row mt-4">
+          <div class="col-6 mt-2">
+            <!-- put in expected number of adults  num 2-->
+            <div class="h6 input-group">
+              <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
+              <button id="decrease-adults-2" class="btn btn-outline-danger" type="button">
+                <i class="fas fa-chevron-down"></i></button>
+              <input id="adults-2" type="text" class="form-control" value="1">
+              <button id="increase-adults-2" class="btn btn-outline-primary" type="button">
+                <i class="fas fa-chevron-up"></i></button>
+            </div>
+          </div>
+          <!-- put in expected number of rooms  num 2-->
+          <div class="col-6 mt-2">
+            <div class="h6 input-group">
+              <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
+              <button id="decrease-rooms-2" class="btn btn-outline-danger" type="button">
+                <i class="fas fa-chevron-down"></i></button>
+              <input id="rooms-2" type="text" class="form-control" value="1">
+              <button id="increase-rooms-2" class="btn btn-outline-primary" type="button">
+                <i class="fas fa-chevron-up"></i></button>
+            </div>
+          </div>
+        </form>
+
+        <!-- filter hotel search by what metric?  num 2 -->
+        <form class="row mt-4 mb-3">
+          <div class="col-md-2 offset-md-4 input-group">
+            <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Order Criterion -</div>
+            <select class="custom-select" id="order-options-2">
+              <option selected>Choose to order by...</option>
+              <option value="popularity">Popularity</option>
+              <option value="price">Price</option>
+              <option value="review_score">Review Score</option>
+            </select>
+          </div>
+        </form>
+        <!-- submit all  num 2-->
+        <div class="d-flex justify-content-center pb-3">
+          <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
+        </div>
+
+      </div>
+    </div>
   </div>
+</div>
 
   <!-- display hotel search results as successive forms here -->
   <div class="container-md hide border border-secondary rounded px-5" id="search-results-all">

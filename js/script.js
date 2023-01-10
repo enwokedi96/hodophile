@@ -1,5 +1,6 @@
 $(document).ready(
     function () {
+        var manualOrAutoChoice = ""
         var latitude = "0";
         var longitude = "0";
         var userCityChoice = "";
@@ -14,9 +15,11 @@ $(document).ready(
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
+        var auto = $("#automatic"); // auto button
         var userInputManualForm = $("#enter-location"); // field to type in destination
         var recommendationList = $("#recommendations");
-        var manualSearch = $('#services-manual');
+        var manualSearch = $('#services-manual'); // all things manual search
+        var autoSearch = $("#services-automatic"); //all things spontaneous
         var closeManual = $("#close"); // close button - inputs
         var closeSearch = $("#close-results"); // close button - search res
         const imageTag = $('#image') // tag attached to body
@@ -37,10 +40,45 @@ $(document).ready(
         var bookingDotComAPIKey = config["booking-API_KEY"]
         var openWeatherAPIKey = config["openWeather-API_KEY"]
 
-        // add click event for manual search
+        // Optimal reusability: listen to div to ascertain which top of form to use
+        // whilst other form elements are reused
+        manualAuto.on('click', function (event) {
+            manualOrAutoChoice = event.target.id;
+            console.log(`now exploring ${manualOrAutoChoice} form`);
+            if (manualOrAutoChoice=="manual"){
+                $("#auto-top-form").addClass('hide');
+                $("#manual-top-form").removeClass('hide');
+            }
+            else if (manualOrAutoChoice=="automatic"){
+                $("#manual-top-form").addClass('hide');
+                $("#auto-top-form").removeClass('hide');
+                // clear previous user select options and make sure button's enabled
+                $("#choose-hemisphere-button").prop('disabled', false);
+                $("#hemisphere-dropdown-all div").empty();
+            }
+        })
+
+        // add click event for manual button
         manual.on('click', function () {
-            manualAuto.addClass('hide')
-            manualSearch.removeClass('hide')
+            manualAuto.addClass('hide');
+            autoSearch.addClass('hide');
+            manualSearch.removeClass('hide');
+        })
+        // click event for auto
+        auto.on('click', function () {
+            manualAuto.addClass('hide');
+            manualSearch.removeClass('hide');
+            //autoSearch.removeClass('hide');
+        })
+
+        // when hemisphere value changes, get val, disable and reveal next div
+        $("#dropdown-menu-hemisphere").on('click', 
+        function (event) {
+            var userHemisphere = event.target.innerHTML;
+            console.log(userHemisphere)
+            $("#choose-hemisphere-button").dropdown("toggle");
+            $("#choose-hemisphere-button").prop('disabled', true);
+            $("#hemisphere-dropdown-all").append (`<div> user choice: ${userHemisphere}</div>`);
         })
 
         // add click event for manual search
@@ -383,6 +421,9 @@ $(document).ready(
             $("#adults").val(`1`); $("#rooms").val(`1`);
             userInputManualForm.val("");
         })
+
+        // random coordinate generator
+
 
     }
     
