@@ -318,9 +318,10 @@ $(document).ready(
                                 }
                                 // place exists and there are accommodations in the area
                                 else {
+                                    console.log(response)
                                     var totNumResults = Object.keys(response.result).length;
                                     searchResults.empty();
-                                    searchCity = `${response.city.name}`;
+                                    //searchCity = `${response.city.name}`;
                                     for (let i = 0; i < totNumResults; i++) {
                                         var newResult = $(`<div class="results" id="result-${i}"></div>`);
                                         // add each result head, containing image, name and review
@@ -351,13 +352,13 @@ $(document).ready(
                             }
                         else {
                             searchResults.append(`<div class="moving-center">${response.message}</div>`);
-                            IsAPIDojoFinished = false;
+                            IsAPIDojoFinished = true;
                         }
+                        // reveal search results
+                        manualSearch.addClass('hide');
+                        manualAuto.addClass('hide');
+                        searchResultsContainer.removeClass('hide');
                     })
-                // reveal search results
-                manualSearch.addClass('hide');
-                manualAuto.addClass('hide');
-                searchResultsContainer.removeClass('hide');
                 // load weather and forecasts using longitude and latitude
                 // for weather ops
                 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
