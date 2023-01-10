@@ -236,3 +236,8 @@ body, html {
 .nav-link{
     color:rgb(244, 223, 223);
 }
+
+
+.footer{
+    height: 200px;
+}
