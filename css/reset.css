@@ -10,14 +10,14 @@ body, html {
 * {
     box-sizing: inherit;
 }
-/* 
+
 .jumbotron{
     display: flex;
     flex-direction: column;
     align-items: stretch;
     padding: 0;
-    height: 150vh;
-} */
+    height: 110vh;
+}
 
 .hide {
     display: none;
@@ -244,4 +244,8 @@ body, html {
 
 .nav-link{
     color:rgb(244, 223, 223);
+}
+
+.footer{
+    height: 200px;
 }
