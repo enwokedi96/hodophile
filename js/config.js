@@ -1,4 +1,4 @@
 var config = {
-    "booking-API_KEY": "e8b346c0e1msh9d55ac11d7e30ebp10e165jsn9705f89af650",
-    "openWeather-API_KEY": "0cd5c10ac4be9e733204379dee60f093"
+    "booking-API_KEY": "96eca8873fmsh728f3feb451c14ap1ebe77jsn6a76d299e11e",
+    "openWeather-API_KEY": "e0b142fc28ae5a2652ae21f7fe474c2c"
 }
