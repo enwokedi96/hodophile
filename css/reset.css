@@ -16,7 +16,7 @@ body, html {
     flex-direction: column;
     align-items: stretch;
     padding: 0;
-    height: 110vh;
+    min-height: 110vh;
 }
 
 .hide {
