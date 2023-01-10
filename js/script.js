@@ -1,5 +1,6 @@
 $(document).ready(
     function () {
+        var searchCity;
         var manualOrAutoChoice = ""
         var latitude = "0";
         var longitude = "0";
@@ -137,7 +138,7 @@ $(document).ready(
                 "method": "GET",
                 "headers": {
                     "X-RapidAPI-Key": apiKey,
-                    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com"
+                    "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
                 }
             };
         }
@@ -321,6 +322,7 @@ $(document).ready(
                                 else {
                                     var totNumResults = Object.keys(response.result).length;
                                     searchResults.empty();
+                                    searchCity = `${response.city.name}`;
                                     for (let i = 0; i < totNumResults; i++) {
                                         var newResult = $(`<div class="results" id="result-${i}"></div>`);
                                         // add each result head, containing image, name and review
@@ -348,81 +350,80 @@ $(document).ready(
                                     }
                                     IsAPIDojoFinished = true;
                                 }
-
-                                // load weather and forecasts using longitude and latitude
-                                // for weather ops
-                                var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
-
-                                if (IsAPIDojoFinished == true) {
-                                    console.log('now fetching weather')
-                                    $.ajax({
-                                        url: queryURL,
-                                        method: "GET"
-                                    }).done(function (response) {
-                                        console.log(response)
-                                        searchCity = `${response.city.name}`;
-
-                                        var tableWeather = $("<table id='todayTable'></table>");
-                                        tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' })
-
-                                        // loop rows and display times, weather conditions and values
-                                        var weatherUnits = ['', '%', '°C', 'kph'];
-                                        var weatherConditions = ['', 'Humidity', 'Temp', 'Wind']
-                                        for (let j = 0; j < weatherConditions.length; j++) {
-                                            var nrow = $('<tr>')
-                                            if (j == 0) { nrow.append('<th></th>'); }
-                                            else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
-                                            // loop all available forecasts for today
-                                            for (let k = 0; k < response.list.length; k++) {
-                                                var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
-                                                // headers for time
-                                                if (splitDatetime[2] != '12:00:00') { continue; }
-                                                else {
-                                                    // on first row, load date, time and weather icon
-                                                    if (j == 0) {
-                                                        var iconCode = `${response.list[k].weather[0].icon}`;
-                                                        var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-                                                        var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
-                                                        var headPlusImg = $(`<th class="moving center"></th>`);
-                                                        headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
-                                                        headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
-                                                        headPlusImg.append(iconImg);
-                                                        nrow.append(headPlusImg);
-                                                    }
-                                                    // load wind conditions
-                                                    else if (j == 3) {
-                                                        nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
-                                                    }
-                                                    // load other weather conditions
-                                                    else {
-                                                        var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
-                                                        // convert kelvin to degree celcius
-                                                        if (weatherConditions[j] == 'Temp') {
-                                                            weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
-                                                        }
-                                                        nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
-                                                    }
-                                                }
-
-                                            }
-                                            // append relevant headers and weather content into col
-                                            tableWeather.append(nrow);
-                                        }
-                                        $("#weather-results").append(tableWeather)
-                                        $("#weather-results-all").removeClass('hide');
-                                    }
-                                    )
-                                }
                             }
-                            else {
-                                searchResults.append(`<div class="moving-center">${response.message}</div>`);
-                                IsAPIDojoFinished = true;
-                            }
-                        })
+                        else {
+                            searchResults.append(`<div class="moving-center">${response.message}</div>`);
+                            IsAPIDojoFinished = true;
+                        }
+                    })
                 // reveal search results
                 manualSearch.addClass('hide');
                 manualAuto.addClass('hide');
-                searchResultsContainer.removeClass('hide');}
+                searchResultsContainer.removeClass('hide');
+                // load weather and forecasts using longitude and latitude
+                // for weather ops
+                var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
+
+                if (IsAPIDojoFinished == true) {
+                    console.log('now fetching weather')
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+                    }).done(function (response) {
+                        console.log(response)
+
+                        var tableWeather = $("<table id='todayTable'></table>");
+                        tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' })
+
+                        // loop rows and display times, weather conditions and values
+                        var weatherUnits = ['', '%', '°C', 'kph'];
+                        var weatherConditions = ['', 'Humidity', 'Temp', 'Wind']
+                        for (let j = 0; j < weatherConditions.length; j++) {
+                            var nrow = $('<tr>')
+                            if (j == 0) { nrow.append('<th></th>'); }
+                            else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
+                            // loop all available forecasts for today
+                            for (let k = 0; k < response.list.length; k++) {
+                                var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
+                                // headers for time
+                                if (splitDatetime[2] != '12:00:00') { continue; }
+                                else {
+                                    // on first row, load date, time and weather icon
+                                    if (j == 0) {
+                                        var iconCode = `${response.list[k].weather[0].icon}`;
+                                        var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+                                        var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
+                                        var headPlusImg = $(`<th class="moving center"></th>`);
+                                        headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
+                                        headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
+                                        headPlusImg.append(iconImg);
+                                        nrow.append(headPlusImg);
+                                    }
+                                    // load wind conditions
+                                    else if (j == 3) {
+                                        nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
+                                    }
+                                    // load other weather conditions
+                                    else {
+                                        var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
+                                        // convert kelvin to degree celcius
+                                        if (weatherConditions[j] == 'Temp') {
+                                            weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
+                                        }
+                                        nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
+                                    }
+                                }
+
+                            }
+                            // append relevant headers and weather content into col
+                            tableWeather.append(nrow);
+                        }
+                        $("#weather-results").append(tableWeather)
+                        $("#weather-results-all").removeClass('hide');
+                        IsAPIDojoFinished = false;
+                    })
+                }
+            }
 
             // all auto ops
             else if (manualOrAutoChoice=="automatic"){
