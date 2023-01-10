@@ -1,3 +1,24 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden; 
+}
+
+* {
+    box-sizing: inherit;
+}
+
+/* .jumbotron{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    height: 150vh;
+} */
+
 .hide {
     display: none;
 }
@@ -49,7 +70,7 @@
     background-color: #1b1d1d;
     text-decoration: none;
     cursor: pointer;
-    z-index: 200;
+    z-index: 10;
 }
 
 .recommendation-item:hover {
@@ -82,7 +103,7 @@
 
 /* loading while API loads results... */
 #spinner {
-    color: rgb(73, 69, 69);
+    color: rgba(22, 22, 21, 0.853);
     left: 50%;
     position: relative;
     top: 0%;

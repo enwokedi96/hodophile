@@ -3,14 +3,15 @@ $(document).ready(
         var manualOrAutoChoice = ""
         var latitude = "0";
         var longitude = "0";
-        var userCityChoice = "";
+        var chosenCoordinates=[];
+        var userHemisphere = "";
         var currentNumRooms = "";
         var currentNumAdults = "";
-        var currentDestinationID = "";
         var orderCriteria = "";
         var userFromDate = "";
         var userToDate = "";
         var IsAPIDojoFinished = false;
+        const numCountries = 6;
         const placeOptions = ["city_name", "name", "country"]
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
@@ -18,8 +19,7 @@ $(document).ready(
         var auto = $("#automatic"); // auto button
         var userInputManualForm = $("#enter-location"); // field to type in destination
         var recommendationList = $("#recommendations");
-        var manualSearch = $('#services-manual'); // all things manual search
-        var autoSearch = $("#services-automatic"); //all things spontaneous
+        var manualSearch = $('#services-manual'); // all things searchwise
         var closeManual = $("#close"); // close button - inputs
         var closeSearch = $("#close-results"); // close button - search res
         const imageTag = $('#image') // tag attached to body
@@ -61,24 +61,22 @@ $(document).ready(
         // add click event for manual button
         manual.on('click', function () {
             manualAuto.addClass('hide');
-            autoSearch.addClass('hide');
             manualSearch.removeClass('hide');
         })
         // click event for auto
         auto.on('click', function () {
             manualAuto.addClass('hide');
             manualSearch.removeClass('hide');
-            //autoSearch.removeClass('hide');
         })
 
         // when hemisphere value changes, get val, disable and reveal next div
         $("#dropdown-menu-hemisphere").on('click', 
         function (event) {
-            var userHemisphere = event.target.innerHTML;
+            userHemisphere = event.target.innerHTML;
             console.log(userHemisphere)
             $("#choose-hemisphere-button").dropdown("toggle");
             $("#choose-hemisphere-button").prop('disabled', true);
-            $("#hemisphere-dropdown-all").append (`<div> user choice: ${userHemisphere}</div>`);
+            $("#hemisphere-dropdown-all").append (`<div> <strong>user choice:</strong> ${userHemisphere}</div>`);
         })
 
         // add click event for manual search
@@ -107,7 +105,8 @@ $(document).ready(
             const bg = images[Math.floor(Math.random() * images.length)];
             imageTag.css({
                 "background-image": bg,
-                "background-size": "cover"
+                "background-size": "cover",
+                "background-repeat":"no-repeat",
             });
         }
 
@@ -123,6 +122,19 @@ $(document).ready(
                 "headers": {
                     "X-RapidAPI-Key": apiKey,
                     "X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com"
+                }
+            };
+        }
+
+        function bookingDotCom(url, apiKey){
+            return {
+                "async": true,
+                "crossDomain": true,
+                "url": url,
+                "method": "GET",
+                "headers": {
+                    "X-RapidAPI-Key": apiKey,
+                    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com"
                 }
             };
         }
@@ -281,131 +293,157 @@ $(document).ready(
                 console.log('default chosen: price');
                 orderCriteria = "price";
             }
-            var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
             $("#spinner").css("visibility", "visible");
+            // all manual ops
+            if (manualOrAutoChoice=="manual"){   
+                var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
+                
+                // call API: check for rooms
+                $.ajax(callApiDojoBooking(url, bookingDotComAPIKey))
+                    .done(
+                        function (response) {
+                            // hide spin once api json is loaded
+                            $("#spinner").css("visibility", "hidden");
+                            var num = Object.keys(response).length;
 
-            // call API: check for rooms
-            $.ajax(callApiDojoBooking(url, bookingDotComAPIKey))
-                .done(
-                    function (response) {
-                        // hide spin once api json is loaded
-                        $("#spinner").css("visibility", "hidden");
-                        var num = Object.keys(response).length;
+                            // check if error or hit
+                            if (num > 3) {
+                                IsAPIDojoFinished = true;
+                                // if place exists but no results are found
+                                if (Object.keys(response.result).length == 0) {
+                                    searchResults.append(`<div class="moving-center">${response.zero_results_message.messages[0]}</div>`);
 
-                        // check if error or hit
-                        if (num > 3) {
-                            IsAPIDojoFinished = true;
-                            // if place exists but no results are found
-                            if (Object.keys(response.result).length == 0) {
-                                searchResults.append(`<div class="moving-center">${response.zero_results_message.messages[0]}</div>`);
-
-                            }
-                            // place exists and there are accommodations in the area
-                            else {
-                                var totNumResults = Object.keys(response.result).length;
-                                searchResults.empty();
-                                for (let i = 0; i < totNumResults; i++) {
-                                    var newResult = $(`<div class="results" id="result-${i}"></div>`);
-                                    // add each result head, containing image, name and review
-                                    var imgPlusHotelName = $("<div class='result-head'></div>");
-                                    var img = $(`<img>`); img.attr('src', `${response.result[i].main_photo_url}`)
-                                    // load review scores
-                                    var score_num = response.result[i].review_score;
-                                    console.log(score_num, score_num.length)
-                                    if (score_num.length == 1) { score_num += ".0" }
-                                    var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
-                                    var review_score = $('<div class="align-review-right">'); review_score.append(score)
-                                    review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
-                                    var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
-                                    // add address
-                                    // <strong>Address:</strong> 
-                                    var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}</div>`);
-                                    // add estimated cost
-                                    var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive):</strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
-                                    // append search elements
-                                    title.prepend(img); title.prepend(`${i + 1}. `)
-                                    imgPlusHotelName.append(title)
-                                    imgPlusHotelName.append(review_score);
-                                    newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
-                                    searchResults.append(newResult);
                                 }
+                                // place exists and there are accommodations in the area
+                                else {
+                                    var totNumResults = Object.keys(response.result).length;
+                                    searchResults.empty();
+                                    for (let i = 0; i < totNumResults; i++) {
+                                        var newResult = $(`<div class="results" id="result-${i}"></div>`);
+                                        // add each result head, containing image, name and review
+                                        var imgPlusHotelName = $("<div class='result-head'></div>");
+                                        var img = $(`<img>`); img.attr('src', `${response.result[i].main_photo_url}`)
+                                        // load review scores
+                                        var score_num = response.result[i].review_score;
+                                        console.log(score_num, score_num.length)
+                                        if (score_num.length == 1) { score_num += ".0" }
+                                        var score = $(`<div class="hotel-scores force-inline">${score_num}</div>`)
+                                        var review_score = $('<div class="align-review-right">'); review_score.append(score)
+                                        review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
+                                        var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
+                                        // add address
+                                        // <strong>Address:</strong> 
+                                        var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}</div>`);
+                                        // add estimated cost
+                                        var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive):</strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
+                                        // append search elements
+                                        title.prepend(img); title.prepend(`${i + 1}. `)
+                                        imgPlusHotelName.append(title)
+                                        imgPlusHotelName.append(review_score);
+                                        newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
+                                        searchResults.append(newResult);
+                                    }
+                                    IsAPIDojoFinished = true;
+                                }
+
+                                // load weather and forecasts using longitude and latitude
+                                // for weather ops
+                                var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
+
+                                if (IsAPIDojoFinished == true) {
+                                    console.log('now fetching weather')
+                                    $.ajax({
+                                        url: queryURL,
+                                        method: "GET"
+                                    }).done(function (response) {
+                                        console.log(response)
+                                        searchCity = `${response.city.name}`;
+
+                                        var tableWeather = $("<table id='todayTable'></table>");
+                                        tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' })
+
+                                        // loop rows and display times, weather conditions and values
+                                        var weatherUnits = ['', '%', '°C', 'kph'];
+                                        var weatherConditions = ['', 'Humidity', 'Temp', 'Wind']
+                                        for (let j = 0; j < weatherConditions.length; j++) {
+                                            var nrow = $('<tr>')
+                                            if (j == 0) { nrow.append('<th></th>'); }
+                                            else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
+                                            // loop all available forecasts for today
+                                            for (let k = 0; k < response.list.length; k++) {
+                                                var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
+                                                // headers for time
+                                                if (splitDatetime[2] != '12:00:00') { continue; }
+                                                else {
+                                                    // on first row, load date, time and weather icon
+                                                    if (j == 0) {
+                                                        var iconCode = `${response.list[k].weather[0].icon}`;
+                                                        var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+                                                        var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
+                                                        var headPlusImg = $(`<th class="moving center"></th>`);
+                                                        headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
+                                                        headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
+                                                        headPlusImg.append(iconImg);
+                                                        nrow.append(headPlusImg);
+                                                    }
+                                                    // load wind conditions
+                                                    else if (j == 3) {
+                                                        nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
+                                                    }
+                                                    // load other weather conditions
+                                                    else {
+                                                        var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
+                                                        // convert kelvin to degree celcius
+                                                        if (weatherConditions[j] == 'Temp') {
+                                                            weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
+                                                        }
+                                                        nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
+                                                    }
+                                                }
+
+                                            }
+                                            // append relevant headers and weather content into col
+                                            tableWeather.append(nrow);
+                                        }
+                                        $("#weather-results").append(tableWeather)
+                                        $("#weather-results-all").removeClass('hide');
+                                    }
+                                    )
+                                }
+                            }
+                            else {
+                                searchResults.append(`<div class="moving-center">${response.message}</div>`);
                                 IsAPIDojoFinished = true;
                             }
+                        })
+                // reveal search results
+                manualSearch.addClass('hide');
+                manualAuto.addClass('hide');
+                searchResultsContainer.removeClass('hide');}
+            // all auto ops
+            else if (manualOrAutoChoice=="automatic"){
 
-                            // load weather and forecasts using longitude and latitude
-                            // for weather ops
-                            var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherAPIKey}`;
-
-                            if (IsAPIDojoFinished == true) {
-                                console.log('now fetching weather')
-                                $.ajax({
-                                    url: queryURL,
-                                    method: "GET"
-                                }).done(function (response) {
-                                    console.log(response)
-                                    searchCity = `${response.city.name}`;
-
-                                    var tableWeather = $("<table id='todayTable'></table>");
-                                    tableWeather.css({ 'table-layout': 'fixed', 'width': '100%' })
-
-                                    // loop rows and display times, weather conditions and values
-                                    var weatherUnits = ['', '%', '°C', 'kph'];
-                                    var weatherConditions = ['', 'Humidity', 'Temp', 'Wind']
-                                    for (let j = 0; j < weatherConditions.length; j++) {
-                                        var nrow = $('<tr>')
-                                        if (j == 0) { nrow.append('<th></th>'); }
-                                        else { nrow.append(`<td>${weatherConditions[j]}: </td>`); }
-                                        // loop all available forecasts for today
-                                        for (let k = 0; k < response.list.length; k++) {
-                                            var splitDatetime = response.list[k].dt_txt.split(/(\s+)/);
-                                            // headers for time
-                                            if (splitDatetime[2] != '12:00:00') { continue; }
-                                            else {
-                                                // on first row, load date, time and weather icon
-                                                if (j == 0) {
-                                                    var iconCode = `${response.list[k].weather[0].icon}`;
-                                                    var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-                                                    var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
-                                                    var headPlusImg = $(`<th class="moving center"></th>`);
-                                                    headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
-                                                    headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
-                                                    headPlusImg.append(iconImg);
-                                                    nrow.append(headPlusImg);
-                                                }
-                                                // load wind conditions
-                                                else if (j == 3) {
-                                                    nrow.append(`<td>${response.list[k][weatherConditions[j].toLowerCase()].speed}${weatherUnits[j]}</td>`);
-                                                }
-                                                // load other weather conditions
-                                                else {
-                                                    var weatherVal = response.list[k].main[weatherConditions[j].toLowerCase()];
-                                                    // convert kelvin to degree celcius
-                                                    if (weatherConditions[j] == 'Temp') {
-                                                        weatherVal = Math.round(((parseFloat(weatherVal) - 273.15) + Number.EPSILON) * 100) / 100;
-                                                    }
-                                                    nrow.append(`<td>${weatherVal}${weatherUnits[j]}</td>`);
-                                                }
-                                            }
-
-                                        }
-                                        // append relevant headers and weather content into col
-                                        tableWeather.append(nrow);
-                                    }
-                                    $("#weather-results").append(tableWeather)
-                                    $("#weather-results-all").removeClass('hide');
-                                }
-                                )
-                            }
-                        }
-                        else {
-                            searchResults.append(`<div class="moving-center">${response.message}</div>`);
-                            IsAPIDojoFinished = true;
-                        }
-                    })
-            // reveal search results
-            manualSearch.addClass('hide');
-            manualAuto.addClass('hide');
-            searchResultsContainer.removeClass('hide');
+                latitude = ""; longitude = "";
+                var coordinates = getDemRandomCoordinates()
+                // remove auto form
+                //manualSearch.addClass('hide');
+                // get names of coordinates generated, cull if necessary
+                const settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": `https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${coordinates[0][0]}${coordinates[1][0]}/nearbyCities?radius=500`,
+                    "method": "GET",
+                    "headers": {
+                        "X-RapidAPI-Key": "fe31b5ff27msh84aa01e84c5d57ap1c7192jsnc632f38f2b89",
+                        "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com"
+                    }
+                };
+                
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
+                console.log(`required location hits obtained!!`,chosenCoordinates)
+            }
 
         })
 
@@ -423,7 +461,25 @@ $(document).ready(
         })
 
         // random coordinate generator
+        function getDemRandomCoordinates(){
+            var lat = Array.from({length: numCountries}, () => getRandomInt(0,18)) // [...Array(6)].map(e=>~~(getRandomInt(0,180)));
+            var long = Array.from({length: numCountries}, () => getRandomInt(0,18));
+            var decimal = (Math.random() * (0.123456 - 0.0200) + 0.0200).toFixed(6)
+            if (userHemisphere.includes('South')){
+                lat = lat.map((x) => (x+decimal)*-1)
+            }
+            else{lat = lat.map((x) => (x-decimal)*1)}
+            long = long.map((x) => (x-decimal)*1)
+            console.log(long,lat);
+            return [long, lat];
+        }
 
+        // random number gen
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
     }
     
