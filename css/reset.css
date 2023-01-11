@@ -448,4 +448,17 @@ footer{
 .full-address p{
     padding-left: 30px;
    }
-   
+
+/* hover and list style -address */
+.address__icon a:hover{
+    opacity: 1;
+}
+
+.address__icon{
+    list-style: none;
+}
+
+a{
+    text-decoration:none;
+  }
+  
