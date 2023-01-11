@@ -337,4 +337,10 @@ footer{
 	font-family:'Times New Roman', Times, serif;
 }
 
-
+/* footer image added */
+#footer{
+	padding-top: 10px;
+    padding-bottom: 0px;
+	background-image: url(../images/map5.jpeg);
+    background-size:cover;
+}
