@@ -480,6 +480,8 @@ a{
 
 
 .nav-link-text:hover{
+    background-color:#bf5b0a ;
+    border-radius: 25px;
     color: rgb(69, 3, 3);
     -webkit-text-stroke:1px rgba(25, 20, 20, 0.525);
      
