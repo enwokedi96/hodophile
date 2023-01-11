@@ -437,3 +437,15 @@ footer{
     font-weight: 600;
 }
 
+/* properties of address icons */
+.address__icon a{
+    font-size: 16px;
+    font-weight: 500;
+	color: #070707;
+}
+
+/* full address */
+.full-address p{
+    padding-left: 30px;
+   }
+   
