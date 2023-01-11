@@ -38,6 +38,13 @@ body, html {
     padding-bottom: 10px;
 }
 
+/* closes results/ going back */
+.close-results{
+    border-radius: 50%;
+    border: none;
+    margin: 15px;
+}
+
 /* main Text "Hodophile" */
 .blockquote h1 {
     font-size: 100px;
@@ -111,7 +118,7 @@ body, html {
     line-height: 60px;
     font-weight: bold;
     padding: 0 20px;
-    background: #e5efef;
+    background: #99ccd9;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -119,7 +126,7 @@ body, html {
   }
 .weather-button:hover {
 background: lightsalmon;
-color: #406666;
+color: #293030;
 }
 
 .weather-button a {
@@ -167,38 +174,22 @@ color: #406666;
     opacity: 0.85;
 }
 
-/* css for tooltip */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-  
-.tooltip .tooltiptext {
-visibility: hidden;
-width: 120px;
-background-color: black;
-color: #fff;
-text-align: center;
-border-radius: 6px;
-padding: 5px 0;
-
-/* Position the tooltip */
-position: absolute;
-z-index: 10;
-}
-  
-.tooltip:hover .tooltiptext {
-visibility: visible;
-}
-
 .results {
+    display: inline-block;
     background-color: #99ccd9;
     width: 100%;
     border-bottom: 3px gray solid;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 10px;
 }
+.results:hover {
+    background: lightsalmon;
+    color: #293030;
+    cursor: pointer;
+    }
 
-.align-review-right{
+.align-review{
     margin-top: 32px;
     margin-right: 30px;
 }
@@ -218,13 +209,13 @@ visibility: visible;
     display: table-cell
 }
 
-/* css for city images */
+/* css for auto ops: city images */
 
 .city-images{
     margin-top: 30px;
     border: black solid 4px;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
 }
 .city-images-divs{
@@ -233,6 +224,11 @@ visibility: visible;
     align-items: center;
     margin-left: 12px;
 }
+.city-images-divs:hover{
+    opacity: 0.85;
+    cursor: pointer;
+}
+
 #search-cities-1,
 #search-cities-2{
     margin-bottom: 30px;
