@@ -69,6 +69,9 @@
     </div>
   </div>
 
+  <!-- invisible? weather button -->
+  <div id="weatherButton" class="hide"></div>
+
   <!-- When user clicks manual, display search options, same as above -->
   <div class="container-md hide" id="services-manual">
     <!-- display location and listings -->
@@ -108,15 +111,6 @@
             </div>
             <div class="d-flex justify-content-center">
               <p>(for adventurous holidayers)</p>
-            </div>
-          <div class="dropdown" id="hemisphere-dropdown-all">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="choose-hemisphere-button" data-bs-toggle="dropdown" aria-expanded="false">
-              Pick your preferred hemisphere
-            </button>
-            <ul class="dropdown-menu" id="dropdown-menu-hemisphere" aria-labelledby="choose-hemisphere-button">
-              <li><a class="dropdown-item" href="#">Northern Hemisphere</a></li>
-              <li><a class="dropdown-item" href="#">Southern Hemisphere</a></li>
-              </ul>
             </div>
           </div>
         </div>
@@ -190,7 +184,9 @@
     <br>
     <div class="row">
       <div class="d-flex justify-content-end">
-        <button id="close-results" type="button" class="btn-close" aria-label="Close"></button>
+        <button type="button" class="close-results" aria-label="Close">
+          <i class="fa fa-arrow-left" aria-hidden="true">Go back bruv👀!</i>
+        </button>
       </div>
       <h4 class="text-center" id="results-heading">❤️ Peruse through recommended accommodations below ❤️</h4>
       <div class="col-lg-12 col-md-12" id="search-results"></div>
@@ -202,7 +198,9 @@
     <br>
     <div class="row">
       <div class="d-flex justify-content-end">
-        <button id="close-cities" type="button" class="btn-close" aria-label="Close"></button>
+        <button type="button" class="close-results" aria-label="Close">
+          <i class="fa fa-arrow-left" aria-hidden="true">Go back bruv👀!</i>
+        </button>
       </div>
       <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
@@ -216,7 +214,7 @@
   <div class="container-md hide border border-secondary rounded px-5" id="weather-results-all">
     <br>
     <div class="row">
-      <h4 class="text-center" id="results-heading">❤️ Weather Forecast in Search Area ❤️</h4>
+      <h4 class="text-center" id="weather-heading">❤️ Weather Forecast in Search Area ❤️</h4>
       <div class="col-lg-12 col-md-12" id="weather-results"></div>
     </div>
   </div>
@@ -228,13 +226,14 @@
 
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
   <!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
   <!-- my js scripts -->
   <script src="./js/script.js"></script>
   <script src="./config.js"></script>

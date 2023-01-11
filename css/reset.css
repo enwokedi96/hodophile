@@ -16,7 +16,7 @@ body, html {
     flex-direction: column;
     align-items: stretch;
     padding: 0;
-    height: 110vh;
+    min-height: 110vh;
 }
 
 .hide {
@@ -36,6 +36,13 @@ body, html {
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
+}
+
+/* closes results/ going back */
+.close-results{
+    border-radius: 50%;
+    border: none;
+    margin: 15px;
 }
 
 /* main Text "Hodophile" */
@@ -89,16 +96,42 @@ body, html {
 }
 
 /* css for results div */
+#city-results-all,
 #search-results-all,
 #weather-results-all {
     background-color: white;
     color: black;
     font-size: large;
     padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-#weather-results-all {
+.weather-results-all {
     margin-bottom: 20px;
+}
+
+.weather-button {
+    max-width: 155px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    margin-left: 30px;
+    line-height: 60px;
+    font-weight: bold;
+    padding: 0 20px;
+    background: #99ccd9;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #1b1d1d;
+  }
+.weather-button:hover {
+background: lightsalmon;
+color: #293030;
+}
+
+.weather-button a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* loading while API loads results... */
@@ -113,7 +146,8 @@ body, html {
 
 /* css for hotel recommendations */
 #cities-heading,
-#results-heading {
+#results-heading,
+#weather-heading {
     border: #1b1d1d solid 2px;
     border-radius: 20px;
     background-color: #e5efef;
@@ -122,14 +156,42 @@ body, html {
 
 .result-head {
     display: flex;
+    align-self: center;
+    /* justify-content: center; */
     justify-content: space-between;
     margin: 20px;
     width: 100%;
 }
 
+.result-head img{
+    margin-top: 20px;
+    border: solid 5px gray;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+.result-head img:hover{
+    opacity: 0.85;
+}
+
 .results {
+    display: inline-block;
+    background-color: #99ccd9;
     width: 100%;
     border-bottom: 3px gray solid;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 10px;
+}
+.results:hover {
+    background: lightsalmon;
+    color: #293030;
+    cursor: pointer;
+    }
+
+.align-review{
+    margin-top: 32px;
+    margin-right: 30px;
 }
 
 .hotel-scores {
@@ -147,12 +209,29 @@ body, html {
     display: table-cell
 }
 
-/* css for city images */
-#city-images{
-    border: #1b1d1d solid 1px;
-    height: 200px;
-    width: 200px;
+/* css for auto ops: city images */
+
+.city-images{
+    margin-top: 30px;
+    border: black solid 4px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
+}
+.city-images-divs{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-left: 12px;
+}
+.city-images-divs:hover{
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+#search-cities-1,
+#search-cities-2{
+    margin-bottom: 30px;
 }
 
 /* recommendations: hotel name-to-link css */
