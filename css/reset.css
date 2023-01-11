@@ -358,3 +358,24 @@ footer{
 }
 
 
+/*vertical line*/
+/* .verticalLine {
+    border-left: 2px solid rgba(6, 0, 33, 0.527);
+    height:100px; 
+    
+  } */
+
+
+
+/* About notes in footer */
+  .footer-about{
+    text-align: justify;
+    font-size: 16px;
+}
+
+.footer-about h2{
+    padding-top: 20px;
+	padding-bottom: 5px;
+	font-size: 20px;
+    font-weight: 600;
+}
