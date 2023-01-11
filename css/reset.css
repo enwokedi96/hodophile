@@ -315,7 +315,7 @@ color: #293030;
 
 /* Image of navbar */
 .navbar {
-    background-image: url("../images/map3.jpg");
+    background-image: url("../images/black.jpg");
     background-size:cover;
     height: 60px;
 }
@@ -341,7 +341,7 @@ footer{
 #footer{
 	padding-top: 10px;
     padding-bottom: 0px;
-	background-image: url(../images/map5.jpeg);
+	background-image: url(../images/black.jpg);
     background-size:cover;
 }
 
