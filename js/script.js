@@ -336,7 +336,7 @@ $(document).ready(
                                 if (j == 0) {
                                     var iconCode = `${response.list[k].weather[0].icon}`;
                                     var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-                                    var iconImg = `<img class='icons' src="${iconURL}" alt="Weather icon">`;
+                                    var iconImg = `<img alt="weather icon" class='icons' src="${iconURL}" alt="Weather icon">`;
                                     var headPlusImg = $(`<th class="moving center"></th>`);
                                     headPlusImg.append(`<div>${splitDatetime[0]}</div>`)
                                     headPlusImg.append(`${splitDatetime[2].slice(0, 5)}`);
@@ -397,7 +397,7 @@ $(document).ready(
                                         newResult.tooltip({placement: 'right'});
                                         // add each result head, containing image, name and review
                                         var imgPlusHotelName = $("<div class='result-head'></div>");
-                                        var img = $(`<img>`); img.attr('src', `${response.result[i].main_photo_url}`)
+                                        var img = $(`<img alt="hotel image">`); img.attr('src', `${response.result[i].main_photo_url}`)
                                         // load review scores
                                         var score_num = response.result[i].review_score;
                                         //console.log(score_num, score_num.length)
@@ -474,7 +474,7 @@ $(document).ready(
                         if (name==""){name = response[0].country;}
                         localStorage.setItem(name, JSON.stringify({"lat":response[0].latitude,"long":response[0].longitude}));
                         var nextCity = $(`<div class='city-images-divs'></div>`);
-                        var cityImg = $(`<img class='city-images' id="${name}" src=${response[0].image_url}>`);
+                        var cityImg = $(`<img alt="city image" class='city-images' id="${name}" src=${response[0].image_url}>`);
                         //cityImg.css("background-image",`url(${response[0].image_url})`);
                         nextCity.append(cityImg); 
                         nextCity.append(`<div><h6>${name}</h6></div>`);
