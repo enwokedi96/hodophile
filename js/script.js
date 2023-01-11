@@ -399,7 +399,7 @@ $(document).ready(
                                         var img = $(`<img>`); img.attr('src', `${response.result[i].main_photo_url}`)
                                         // load review scores
                                         var score_num = response.result[i].review_score;
-                                        console.log(score_num, score_num.length)
+                                        //console.log(score_num, score_num.length)
                                         if (score_num==null){
                                             score_num = "NA"
                                         }
@@ -410,14 +410,17 @@ $(document).ready(
                                         var title = $(`<h5><a class="hotel-name"  target="_blank" href=${response.result[i].url}> ${response.result[i].hotel_name_trans}</a></h5>`);
                                         // add address
                                         // <strong>Address:</strong> 
-                                        var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}, ${response.result[i].country}</div>`);
+                                        var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}, ${response.result[i].country_trans}</div>`);
+                                        // add about accommodation
+                                        var aboutRoom = `<div class="moving-center">${response.result[i].urgency_room_msg}</div>`
                                         // add estimated cost
                                         var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive): </strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
                                         // append search elements
                                         title.prepend(img); title.prepend(`${i + 1}. `)
                                         imgPlusHotelName.append(title)
                                         imgPlusHotelName.append(review_score);
-                                        newResult.append(imgPlusHotelName); newResult.append(address); newResult.append(cost)
+                                        newResult.append(imgPlusHotelName); newResult.append(aboutRoom);
+                                        newResult.append(address); newResult.append(cost); 
                                         searchResults.append(newResult);
                                     }
                                     
@@ -438,7 +441,7 @@ $(document).ready(
             else if (manualOrAutoChoice=="automatic"){
                 latitude = ""; longitude = "";
                 // remove auto form
-                manualSearch.addClass('hide');
+                manualSearch.addClass('hide'); 
                 $("#city-results-all").removeClass('hide');
 
                 // get random places from list
@@ -449,41 +452,44 @@ $(document).ready(
                     var randomPick = currentRegionOfSearch[Math.floor(Math.random()*currentRegionOfSearch.length)];
                     randomlySelectCities.push(randomPick);
                 }
-                console.log(randomlySelectCities)
+                console.log(randomlySelectCities);
 
                 // display randomly selected cities unto screen
                 var middleIndex = Math.ceil(randomlySelectCities.length / 2);
                 var firstHalfCities = randomlySelectCities.slice().splice(0, middleIndex);   
                 var secondHalfCities = randomlySelectCities.slice().splice(-middleIndex);
-                const timer = ms => new Promise(res => setTimeout(res, ms))
-                function appendNewCity(rowID,getCityInfoURL){
+                const timer = ms => new Promise(res => setTimeout(res, ms));
+                function appendNewCity(rowID, getCityInfoURL){
                     $.ajax(bookingDotCom(getCityInfoURL, bookingDotComAPIKey)).done(
                         function (response) {
-                            console.log(response);
-                            localStorage.setItem(response[0].city_name, JSON.stringify({"lat":response[0].latitude,"long":response[0].longitude}));
-                            var nextCity = $("<div class='city-images'>");
-                            var cityImg = $(`<img src=${response[0].image_url}>`);
+                            var name = response[0].city_name;
+                            if (name==""){name = response[0].country;}
+                            localStorage.setItem(name, JSON.stringify({"lat":response[0].latitude,"long":response[0].longitude}));
+                            var nextCity = $("<div class='city-images-divs'></div>");
+                            var cityImg = $(`<img class='city-images' src=${response[0].image_url}>`);
                             //cityImg.css("background-image",`url(${response[0].image_url})`);
-                            nextCity.append(cityImg);
-                            nextCity.append(response[0].city_name);
-                            $(rowID).append(nextCity)
+                            nextCity.append(cityImg); 
+                            nextCity.append(`<div><h6>${name}</h6></div>`);
+                            $(rowID).append(nextCity);
                         }
                     );
                 }
-
-                async function runLoop(){
+                // run loop to get location every 500ms
+                async function runLoop(searchList,firstHalfCities){
                     for (var i=0; i<firstHalfCities.length; i++){
-                        console.log("Now searching: ",firstHalfCities[i])
-                        var getCityInfoURL = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${firstHalfCities[i]}&locale=en-gb` //`https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${firstHalfCities[i]}&languagecode=en-gb`
+                        console.log("Now searching: ",firstHalfCities[i]);
+                        var getCityInfoURL = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${firstHalfCities[i]}&locale=en-gb`; //`https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${firstHalfCities[i]}&languagecode=en-gb`
                         // call API: check for LOCATION
-                        appendNewCity("#search-cities-1",getCityInfoURL);
-                        await timer(1100)
+                        appendNewCity(searchList,getCityInfoURL);
+                        await timer(500);
                     }
                 }
 
-                runLoop();
+                runLoop("#search-cities-1",firstHalfCities);
+                $("#search-cities-1").removeClass('hide');
 
-                $("#search-cities-1").removeClass('hide')
+                runLoop("#search-cities-2",secondHalfCities);
+                $("#search-cities-2").removeClass('hide');
 
                 // var queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${chosenPlace}&limit=5&appid=${openWeatherAPIKey}`
                 // get coordinates 
@@ -500,9 +506,9 @@ $(document).ready(
             
             searchResultsContainer.addClass('hide');
             $("#weather-results-all").addClass('hide');
-            $("#weatherButton").addClass('hide')
+            $("#weatherButton").addClass('hide'); $("#weatherButton").empty()
             manualAuto.addClass('hide');
-            
+
             $("#spinner").css("visibility", "hidden");
             // reset counters
             $("#adults").val(`1`); $("#rooms").val(`1`);
