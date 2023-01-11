@@ -325,3 +325,16 @@ color: #293030;
     color:rgb(244, 223, 223);
 }
 
+
+
+/* footer section start */
+footer{
+    /* display: block;
+	box-sizing:border-box; */
+	font-size:14px;
+	background: #fff;
+	overflow-x:hidden;
+	font-family:'Times New Roman', Times, serif;
+}
+
+
