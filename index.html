@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -16,18 +17,18 @@
   <!--Nav Bar-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" id="navigation">
     <div class="container"> 
-      <a class="navbar-brand main-text" href="#"><img class="logo" src="images/logo.png">odophile</a>
+      <a class="navbar-brand main-text" href="."><img class="logo" src="images/logo.png">odophile</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto bg-dark rounded">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Search via Manual</a>
+      <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link nav-link-text" href="#aboutUs">About Us</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Search via Auto</a>
+          <li class="nav-item active">
+            <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#contact-us-modal">Contact Us</a>
           </li>
         </ul>
       </div>
@@ -36,6 +37,23 @@
 
 <div class="jumbotron" id="image">
 
+  <!--Modal for contact us-->
+  <div class="modal fade" id="contact-us-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Us</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><i class="fas fa-phone"></i> Telephone: 01614567890</p>
+          <p><i class="fas fa-envelope"></i> Email: group8@noIamNotOkay.com</p>
+            <p><i class="fas fa-location-dot"></i><br>123 group 8<br>Trilogy Skills Bootcamp<br>
+            Front End Development<br> United Kingdom</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <br>
   <!--Header name-->
   <figure class="text-center">
@@ -89,11 +107,11 @@
 
         <div id="choice-of-top-form">
           <div id="manual-top-form" class="hide">
-          <div class="d-flex justify-content-center">
-            <h3>The old-fashion search</h3>
+          <div>
+            <h3 class="x-spread text-center">The old-fashion search</h3>
           </div>
-          <div class="d-flex justify-content-center">
-            <p>(for veteran holidayers)</p>
+          <div>
+            <p class="x-spread text-center">(for veteran holidayers)</p>
           </div>
 
           <div class="md-form mb-2">
@@ -107,14 +125,15 @@
 
           <!-- automatic bit (for spontaneous holidayers)-->
           <div id="auto-top-form" class="hide">
-            <div class="d-flex justify-content-center">
-              <h3>The spontaneous search</h3>
+            <div>
+              <h3 class="x-spread text-center">The spontaneous search</h3>
             </div>
-            <div class="d-flex justify-content-center">
-              <p>(for adventurous holidayers)</p>
+            <div>
+              <p class="x-spread text-center">(for adventurous holidayers)</p>
             </div>
           </div>
         </div>
+
         <!-- state duration of stay -->
         <form class="row mb-3 mt-3" id="stay-duration">
           <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
@@ -206,16 +225,6 @@
       <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-2"></div>
-
-      <div id="refresh-box">
-        <div class="d-flex justify-content-center">
-          <p class="h6">Not liking what you see huh 👀 Click below to rerun search</p>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button id="refresh" type="button" class="reload-cities" aria-label="Close">
-            <i class="fa fa-refresh" aria-hidden="true">Refresh</i>
-        </button></div>
-    </div>
     </div>
   </div>
   <!-- loader spinning... -->
@@ -237,21 +246,18 @@
 
 <!-- footer section start -->
 <footer id="footer">
-  <div class="container">
-    <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-12 ">
-                <div class="d-flex justify-content-md-end justify-content-sm-center">
-                  <a href="#nb1"><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
-                </div>                        
+  <div class="container text-center">
+    <div class="row align-items-start">
+              <div class="col-lg-4 col-md-4 col-sm-12  ">
+                <a href="."><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
+           
               </div>
 
-
-
-              <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="col-lg-4 col-md-4 col-sm-12">
               
                   <div class="footer-about " id="aboutUs">
-                    <h2> About Us</h2>
-                      <p>
+                    <h3> About Us</h3>
+                      <p style="font-size:16px;">
                           This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
                           This is the height of life!!!
                           Enjoy Every moment!!
@@ -261,12 +267,10 @@
                   </div>
               </div>
 
-
-
-        <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="social-links">
-          <h2>Follow Us</h2>
-              <ul class="social-icon">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class=" container social-links ">
+          <h3 class="ms-2">Follow Us </h3>
+              <ul class="social-icon ">
                 <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com">
                     <ion-icon name="logo-facebook"></ion-icon>
                   </a></li>
@@ -284,22 +288,7 @@
         </div>
 
 
-
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="address" id="contactUs">
-          <h2>Contact Us</h2>
-          <!-- <img src="./assets/images/about/home_line.png" alt="" class="img-fluid"> -->
-          <div class="address-links">
-                
-               <li class= "address__icon full-address"><a href="#"><i class="fas fa-home"></i> Group-8 <br><p>
-                                                                                                  Trilogy Skills Bootcamp <br>
-                                                                                                  Front end Development <br>
-                                                                                                  United Kingdom</p></a></li>
-               <li class= "address__icon"><a href="#"><i class="fas fa-phone"></i> +44 88888888</a></li>
-               <li class= "address__icon"><a href="https://www.gmail.com"><i class="fa fa-envelope"></i>  group8@gmail.com</a></li>
-          </div>
-        </div>
-      </div>
+      
          
       
     </div>
@@ -308,16 +297,18 @@
 </footer>
 <!-- footer section end -->
 <!-- footer copy right section start -->
-<section id="copy-right">
-  <div class="copy-right-sec"><i class="fa fa-copyright"></i>  
-    Hodophile 2023 Powerd By <a href="#">edxBootcamp</a> 
+<div id="copy-right">
+  <div class="copy-right-sec p-1 ms-4 text-center"><i class="fas fa-copyright"></i>  
+    Hodophile 2023 Powered By <a href="#">edxBootcamp</a> 
   </div>
-</section>
+</div>
 <!-- footer copy right section end -->
 </div>
 
-</body>
 
+</body>
+  <!-- followus icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <!-- Bootstrap -->
