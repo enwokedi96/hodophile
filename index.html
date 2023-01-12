@@ -16,26 +16,24 @@
 
   <!--Nav Bar-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" id="navigation">
-    <div class="container"> 
+    <div class="container-md"> 
       <a class="navbar-brand main-text" href="."><img class="logo" src="images/logo.png">odophile</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      <button class="navbar-toggler mb-4 line-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
+      <div class="collapse navbar-collapse mb-1" id="navbarNav">
+        <ul class="navbar-nav px-2">
+          <li class="nav-item active ms-auto">
             <a class="nav-link nav-link-text" href="#aboutUs">About Us</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active ms-auto">
             <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#contact-us-modal">Contact Us</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-<div class="jumbotron" id="image">
 
   <!--Modal for contact us-->
   <div class="modal fade" id="contact-us-modal" tabindex="-1">
@@ -46,15 +44,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p><i class="fas fa-phone"></i> Telephone: 01614567890</p>
-          <p><i class="fas fa-envelope"></i> Email: group8@noIamNotOkay.com</p>
-            <p><i class="fas fa-location-dot"></i><br>123 group 8<br>Trilogy Skills Bootcamp<br>
+          <p><i class="fas fa-phone"></i><strong> Telephone:</strong> 01614567890</p>
+          <p><i class="fas fa-envelope"></i><strong> Email:</strong> group8@noIamNotOkay.com</p>
+          <p><i class="fas fa-thumbtack"></i><strong> Address:</strong><br>123 group 8<br>Trilogy Skills Bootcamp<br>
             Front End Development<br> United Kingdom</p>
         </div>
       </div>
     </div>
   </div>
-  <br>
+
+<div class="jumbotron" id="image">
+
   <!--Header name-->
   <figure class="text-center">
     <blockquote class="blockquote">
@@ -298,7 +298,7 @@
 <!-- footer section end -->
 <!-- footer copy right section start -->
 <div id="copy-right">
-  <div class="copy-right-sec p-1 ms-4 text-center"><i class="fas fa-copyright"></i>  
+  <div class="copy-right-sec p-1 text-center"><i class="fas fa-copyright"></i>  
     Hodophile 2023 Powered By <a href="#">edxBootcamp</a> 
   </div>
 </div>

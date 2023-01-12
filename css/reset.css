@@ -5,16 +5,12 @@ body, html {
     height: 100%;
     box-sizing: border-box;
     overflow-x: hidden; 
-    background: linear-gradient(45deg,black, gray, blue)
+    /* background: linear-gradient(45deg,black, gray, blue) */
+    background-image: url("../images/egypt.jpg");
 }
 
 * {
     box-sizing: inherit;
-}
-
-.navbar-nav {
-    margin-left: auto;
-    padding-left: 5px;
 }
 
 .jumbotron{
@@ -363,7 +359,15 @@ color: #293030;
     }
 }
 
-/* Image of navbar */
+/* All things nav: Image of navbar */
+.navbar-nav {
+    margin-left: auto;
+    padding-right: 15px;
+    background-color: #1b1d1d;
+    max-width: fit-content;
+    border-radius: 10px;
+}
+
 .navbar {
     background-image: url("../images/black.jpg");
     background-size:cover;
@@ -416,6 +420,11 @@ h3{
     background-size: contain;
 }
 
+.copy-right-sec{
+    background-color: #9caaaa;
+    max-width: 100%;
+}
+
 
 /*vertical line*/
 /* .verticalLine {
@@ -423,8 +432,6 @@ h3{
     height:100px; 
     
   } */
-
-
 
 /* About notes in footer */
   .footer-about{
@@ -535,17 +542,17 @@ a{
     /* -webkit-text-stroke:1px rgb(21, 20, 20); */
     padding-left: 20px;
     /* color: rgb(214, 241, 10); */
-    text-shadow:1px 5px rgba(91, 90, 90, 0.422);
+    /* text-shadow:1px 5px rgba(91, 90, 90, 0.422); */
 }
 
 
-.nav-link-text:hover{
+/* .nav-link-text:hover{
     background-color:#bf5b0a ;
     border-radius: 25px;
     color: rgb(69, 3, 3);
     -webkit-text-stroke:1px rgba(25, 20, 20, 0.525);
      
-  }
+  } */
 
 #nb1-div{
     display: flex;
