@@ -5,10 +5,16 @@ body, html {
     height: 100%;
     box-sizing: border-box;
     overflow-x: hidden; 
+    background: linear-gradient(45deg,black, gray, blue)
 }
 
 * {
     box-sizing: inherit;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    padding-left: 5px;
 }
 
 .jumbotron{
@@ -19,12 +25,14 @@ body, html {
     min-height: 110vh;
 }
 
+/* enabler for UX and transitiosn between pages */
 .hide {
-    display: none;
+    display: none !important;
 }
 
+/* for moving and positioning elements */
 .moving-down {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .moving-up {
@@ -36,6 +44,10 @@ body, html {
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
+}
+
+.spread-out{
+    width: 100%;
 }
 
 /* closes results/ going back */
@@ -99,10 +111,14 @@ body, html {
 #city-results-all,
 #search-results-all,
 #weather-results-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     color: black;
     font-size: large;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    padding-top: 25px;
     margin-bottom: 15px;
 }
 
@@ -110,7 +126,10 @@ body, html {
     margin-bottom: 20px;
 }
 
-.weather-button {
+/* components for weather and refresh button */
+.sticky,
+.weather-button,
+#refresh {
     max-width: 155px;
     margin-top: 20px;
     margin-bottom: 12px;
@@ -124,14 +143,44 @@ body, html {
     cursor: pointer;
     color: #1b1d1d;
   }
-.weather-button:hover {
+.sticky:hover,
+.weather-button:hover,
+#refresh:hover {
 background: lightsalmon;
 color: #293030;
+}
+
+#refresh{
+    margin-top: 0px;
+}
+#refresh-box{
+    border:rgb(7, 7, 7) solid 2px;
+    box-sizing:border-box;
 }
 
 .weather-button a {
     text-decoration: none;
     color: inherit;
+}
+
+.sticky{
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    justify-content: center;
+    align-items: center;
+    bottom: 10px;
+    z-index: 20;
+    margin-left: 0px;
+    height: 140px;
+    width: 40px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+}
+.sticky a{
+    text-orientation: inherit;
+    color: #000;
 }
 
 /* loading while API loads results... */
@@ -142,6 +191,7 @@ color: #293030;
     top: 0%;
     visibility: hidden;
     z-index: 200;
+    margin-top: 5px;
 }
 
 /* css for hotel recommendations */
@@ -329,12 +379,21 @@ color: #293030;
 
 /* footer section start */
 footer{
+    color: whitesmoke;
     /* display: block;
 	box-sizing:border-box; */
 	font-size:14px;
 	background: #fff;
 	overflow-x:hidden;
 	font-family:'Times New Roman', Times, serif;
+    
+}
+
+h3{
+    text-align: left;
+    border-bottom:2px solid white;
+    width: 120px;
+    font-size: 20px;
 }
 
 /* footer image added */
@@ -347,7 +406,7 @@ footer{
 
 /* Footer image properties */
 .logo-footer-img{
-    height: 220px;
+    height: 200px;
     display: flex;
     margin-left: 10px;
     /* margin-left: auto;
@@ -373,7 +432,7 @@ footer{
     font-size: 16px;
 }
 
-.footer-about h2{
+.footer-about{
     padding-top: 20px;
 	padding-bottom: 5px;
 	font-size: 20px;
@@ -382,12 +441,13 @@ footer{
 
 
 /* heading follow us */
-.social-links h2{
+.social-links{
     padding-top: 20px;
 	padding-bottom: 5px;
     text-align: center;
 	font-size: 20px;
     font-weight: 600;
+
 }
 
 /* Properties of social icons - follow us */
@@ -395,11 +455,11 @@ footer{
 {
  /* position: relative; */
  display: flex;
- flex-direction: row;
- justify-content: center;
+ justify-content: flex-start;
+ padding-left: 1px;
  /*align-items: left; */
  margin: 5px 0;
- flex-wrap: wrap;
+
 }
 
 /* deleting listing property, color,display */
@@ -410,7 +470,7 @@ footer{
 
 .social-icon__link {
  font-size: 40px;
- color: rgb(7, 7, 7);
+ color:whitesmoke;
  margin: 0 10px;
  display: inline-block; 
  transition: 0.5s;
@@ -418,7 +478,7 @@ footer{
 
 /* icon hover property - follow us -icons */
 .social-icon__link:hover {
-    color: #07070794;
+    color: #8d898994;
   transform: translateY(-10px);
 }
 
@@ -441,7 +501,7 @@ footer{
 .address__icon a{
     font-size: 16px;
     font-weight: 500;
-	color: #070707;
+	color: #ffffffd3;
 }
 
 /* full address */
@@ -486,3 +546,11 @@ a{
     -webkit-text-stroke:1px rgba(25, 20, 20, 0.525);
      
   }
+
+#nb1-div{
+    display: flex;
+    justify-content: start;
+    height: 200px;
+    width: 200px;
+    padding-left: 200px;
+}
