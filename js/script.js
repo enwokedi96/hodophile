@@ -2,7 +2,7 @@ $(document).ready(
     function () {
 
         // important!!
-        var choiceOfBookingAPI = "" //"apiDojo"
+        var choiceOfBookingAPI = "apiDojo"
 
         // Other variables
         var searchCity;
@@ -207,7 +207,7 @@ $(document).ready(
             }
             // when user input has reached 3 letters and greater, call on api to recommend
             if (loc.length > 2) {
-                $.ajax(bookingDotCom(url, bookingDotComAPIKey)).done(
+                $.ajax(functionChoice(url, bookingDotComAPIKey)).done(
                     function (response) {
                         //console.log(response);
                         recommendationList.empty()
@@ -398,7 +398,7 @@ $(document).ready(
                 manualSearch.addClass('hide');
                 $("#spinner").css("visibility", "visible");
                 // call API: check for rooms
-                $.ajax(bookingDotCom(url, bookingDotComAPIKey)).done(
+                $.ajax(functionChoice(url, bookingDotComAPIKey)).done(
                         function (response) {
                             // hide spin once api json is loaded
                             $("#spinner").css("visibility", "hidden");
@@ -512,7 +512,7 @@ $(document).ready(
             var secondHalfCities = randomlySelectCities.slice().splice(-middleIndex);
             
             function appendNewCity(rowID, getCityInfoURL){
-                $.ajax(bookingDotCom(getCityInfoURL, bookingDotComAPIKey)).done(
+                $.ajax(functionChoice(getCityInfoURL, bookingDotComAPIKey)).done(
                     function (response) {
                         var name = response[0].city_name;
                         if (name==""){name = response[0].country;}
