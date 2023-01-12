@@ -330,7 +330,7 @@ color: #293030;
 
 /* Image of navbar */
 .navbar {
-    background-image: url("../images/map3.jpg");
+    background-image: url("../images/black.jpg");
     background-size:cover;
     height: 60px;
 }
@@ -344,6 +344,7 @@ color: #293030;
 
 /* footer section start */
 footer{
+    color: whitesmoke;
     /* display: block;
 	box-sizing:border-box; */
 	font-size:14px;
@@ -356,13 +357,13 @@ footer{
 #footer{
 	padding-top: 10px;
     padding-bottom: 0px;
-	background-image: url(../images/map5.jpeg);
+	background-image: url(../images/black.jpg);
     background-size:cover;
 }
 
 /* Footer image properties */
 .logo-footer-img{
-    height: 220px;
+    height: 200px;
     display: flex;
     margin-left: 10px;
     /* margin-left: auto;
@@ -425,7 +426,7 @@ footer{
 
 .social-icon__link {
  font-size: 40px;
- color: rgb(7, 7, 7);
+ color:whitesmoke;
  margin: 0 10px;
  display: inline-block; 
  transition: 0.5s;
@@ -433,7 +434,7 @@ footer{
 
 /* icon hover property - follow us -icons */
 .social-icon__link:hover {
-    color: #07070794;
+    color: #8d898994;
   transform: translateY(-10px);
 }
 
@@ -456,7 +457,7 @@ footer{
 .address__icon a{
     font-size: 16px;
     font-weight: 500;
-	color: #070707;
+	color: #ffffffd3;
 }
 
 /* full address */
