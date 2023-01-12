@@ -351,6 +351,14 @@ footer{
 	background: #fff;
 	overflow-x:hidden;
 	font-family:'Times New Roman', Times, serif;
+    
+}
+
+h3{
+    text-align: left;
+    border-bottom:2px solid white;
+    width: 120px;
+    font-size: 20px;
 }
 
 /* footer image added */
@@ -389,7 +397,7 @@ footer{
     font-size: 16px;
 }
 
-.footer-about h2{
+.footer-about{
     padding-top: 20px;
 	padding-bottom: 5px;
 	font-size: 20px;
@@ -398,12 +406,13 @@ footer{
 
 
 /* heading follow us */
-.social-links h2{
+.social-links{
     padding-top: 20px;
 	padding-bottom: 5px;
     text-align: center;
 	font-size: 20px;
     font-weight: 600;
+
 }
 
 /* Properties of social icons - follow us */
@@ -411,11 +420,11 @@ footer{
 {
  /* position: relative; */
  display: flex;
- flex-direction: row;
- justify-content: center;
+ justify-content: flex-start;
+ padding-left: 1px;
  /*align-items: left; */
  margin: 5px 0;
- flex-wrap: wrap;
+
 }
 
 /* deleting listing property, color,display */
