@@ -20,7 +20,7 @@ body, html {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .moving-down {
@@ -99,10 +99,14 @@ body, html {
 #city-results-all,
 #search-results-all,
 #weather-results-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     color: black;
     font-size: large;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    padding-top: 25px;
     margin-bottom: 15px;
 }
 
@@ -110,7 +114,9 @@ body, html {
     margin-bottom: 20px;
 }
 
-.weather-button {
+/* components for weather and refresh button */
+.weather-button,
+#refresh {
     max-width: 155px;
     margin-top: 20px;
     margin-bottom: 12px;
@@ -124,9 +130,18 @@ body, html {
     cursor: pointer;
     color: #1b1d1d;
   }
-.weather-button:hover {
+.weather-button:hover,
+#refresh:hover {
 background: lightsalmon;
 color: #293030;
+}
+
+#refresh{
+    margin-top: 0px;
+}
+#refresh-box{
+    border:rgb(7, 7, 7) solid 2px;
+    box-sizing:border-box;
 }
 
 .weather-button a {
@@ -486,3 +501,11 @@ a{
     -webkit-text-stroke:1px rgba(25, 20, 20, 0.525);
      
   }
+
+#nb1-div{
+    display: flex;
+    justify-content: start;
+    height: 200px;
+    width: 200px;
+    padding-left: 200px;
+}

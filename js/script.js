@@ -439,7 +439,7 @@ $(document).ready(
                         searchResultsContainer.removeClass('hide');
                     })
             }
-
+            // set boolean that monitors page UX
             if (redirectFromAuto==true){
                 manualOrAutoChoice="automatic";
                 redirectFromAuto=false;
@@ -451,6 +451,9 @@ $(document).ready(
             // remove auto form
             manualSearch.addClass('hide'); 
             cityResultsContainer.removeClass('hide');
+            // ensure previous city search is cleared
+            $("#search-cities-1").empty(); $("#search-cities-2").empty()
+            $("#search-cities-1").addClass('hide'); $("#search-cities-2").addClass('hide');
 
             // get random places from list
             var randomlySelectCities=[]
@@ -482,7 +485,7 @@ $(document).ready(
                     }
                 );
             }
-            // run loop to get location every 500ms
+            // run loop to get location every 1100ms
             async function runLoop(searchList,firstHalfCities){
                 for (var i=0; i<firstHalfCities.length; i++){
                     console.log("Now searching: ",firstHalfCities[i]);
@@ -490,7 +493,7 @@ $(document).ready(
                     var getCityInfoURL = `https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${firstHalfCities[i]}&languagecode=en-gb`
                     // call API: check for LOCATION
                     appendNewCity(searchList,getCityInfoURL);
-                    await timer(1100);
+                    await timer(1100); // delay calls
                 }
             }
 
@@ -507,8 +510,18 @@ $(document).ready(
 
         })
 
+        // want to run again? click to get new locations
+        $("#refresh").on("click",function(){
+            // clear all incriminating records (again)
+            $("#search-cities-1").empty(); $("#search-cities-2").empty()
+            $("#search-cities-1").addClass('hide'); $("#search-cities-2").addClass('hide');
+            // rerun auto
+            manualOrAutoChoice="automatic";
+            submitSearch.click();
+        })
+
         // add listener to city page 
-        $("#city-results-all").on("click", function(event){
+        cityResultsContainer.on("click", function(event){
             var chosenCity = event.target.id;
             var coordinates = JSON.parse(localStorage.getItem(`${chosenCity}`));
             console.log(coordinates)
