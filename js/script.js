@@ -283,6 +283,11 @@ $(document).ready(
             }
         })
 
+        // tooltip
+        $( function() {
+            $( document ).tooltip();
+          } );
+
         // listen for submit field on manual ops
         submitSearch.on("click", function () {
             console.log('user initiating search');
@@ -394,7 +399,6 @@ $(document).ready(
                                     //searchCity = `${response.city.name}`;
                                     for (let i = 0; i < totNumResults; i++) {
                                         var newResult = $(`<a class="results" title="Click To Book!" href=${response.result[i].url} target="_blank"></a>`);
-                                        newResult.tooltip({placement: 'right'});
                                         // add each result head, containing image, name and review
                                         var imgPlusHotelName = $("<div class='result-head'></div>");
                                         var img = $(`<img alt="hotel image">`); img.attr('src', `${response.result[i].main_photo_url}`)
@@ -409,7 +413,7 @@ $(document).ready(
                                         var review_score = $('<div class="align-review">'); review_score.append(score)
                                         review_score.append(`<div class="force-inline">${response.result[i].review_score_word}</div>`)
                                         var title = $(`<h5><a class="hotel-name" title="Click to Google Hotel!" target="_blank" href="http://www.google.com/search?q=${response.result[i].hotel_name_trans}"> ${response.result[i].hotel_name_trans}</a></h5>`);
-                                        title.tooltip({placement: 'top'});
+                                        //title.tooltip({placement: 'top'});
                                         // add address
                                         // <strong>Address:</strong> 
                                         var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}, ${response.result[i].country_trans}</div>`);

@@ -11,6 +11,10 @@ body, html {
     box-sizing: inherit;
 }
 
+.navbar-nav {
+    margin-left: auto;
+}
+
 .jumbotron{
     display: flex;
     flex-direction: column;
