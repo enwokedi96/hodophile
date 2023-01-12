@@ -24,12 +24,14 @@ body, html {
     min-height: 110vh;
 }
 
+/* enabler for UX and transitiosn between pages */
 .hide {
     display: none !important;
 }
 
+/* for moving and positioning elements */
 .moving-down {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .moving-up {
