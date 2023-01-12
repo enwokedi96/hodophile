@@ -187,6 +187,7 @@ color: #293030;
     top: 0%;
     visibility: hidden;
     z-index: 200;
+    margin-top: 5px;
 }
 
 /* css for hotel recommendations */
