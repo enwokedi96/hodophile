@@ -16,13 +16,13 @@
 
   <!--Nav Bar-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" id="navigation">
-    <div class="container"> 
+    <div class="container">
       <a class="navbar-brand main-text" href="#"><img class="logo" src="images/logo.png">odophile</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link nav-link-text" href="#aboutUs">About Us</a>
@@ -35,61 +35,170 @@
     </div>
   </nav>
 
-<div class="jumbotron" id="image">
+  <div class="jumbotron" id="image">
 
-  <br>
-  <!--Header name-->
-  <figure class="text-center">
-    <blockquote class="blockquote">
-      <h1 class="display-1">Hodophile</h1>
-    </blockquote>
-    <figcaption class="blockquote-footer">
-      <p class="lead"><cite><strong>"find your next dream destination easily"</strong></cite>
-    </figcaption>
-  </figure>
-  <!--Manual/Automatic container-->
-  <div class="container-md text-center moving-down" id="manual-automatic">
-    <div class="row align-items-center">
-      <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
-        <div class="p-4 card">
-          <div class="card-body">
-            <h5 class="card-title">Manual</h5>
-            <p class="card-text">Got a destination in mind? Click below to peruse accommodations for your holiday getaway!!</p>
-            <a href="#" class="btn btn-primary" id="manual">Manual</a>
+    <br>
+    <!--Header name-->
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <h1 class="display-1">Hodophile</h1>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        <p class="lead"><cite><strong>"find your next dream destination easily"</strong></cite>
+      </figcaption>
+    </figure>
+    <!--Manual/Automatic container-->
+    <div class="container-md text-center moving-down" id="manual-automatic">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
+          <div class="p-4 card">
+            <div class="card-body">
+              <h5 class="card-title">Manual</h5>
+              <p class="card-text">Got a destination in mind? Click below to peruse accommodations for your holiday
+                getaway!!</p>
+              <a href="#" class="btn btn-primary" id="manual">Manual</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
+          <div class="p-4 card">
+            <div class="card-body">
+              <h5 class="card-title">Automatic</h5>
+              <p class="card-text">Feeling travel-spontaneous? Look no further! Click below to get the best
+                recommendations and lodgings!</p>
+              <a href="#" class="btn btn-primary" id="automatic">Automatic</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-4 auto">
-        <div class="p-4 card">
-          <div class="card-body">
-            <h5 class="card-title">Automatic</h5>
-            <p class="card-text">Feeling travel-spontaneous? Look no further! Click below to get the best recommendations and lodgings!</p>
-            <a href="#" class="btn btn-primary" id="automatic">Automatic</a>
+
+      <!-- invisible? weather button -->
+      <div id="weatherButton" class="hide"></div>
+
+      <!-- When user clicks manual, display search options, same as above -->
+      <div class="container-md hide" id="services-manual">
+        <!-- display location and listings -->
+        <div class="row">
+          <!-- first search option -->
+          <div class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="manual-search">
+            <!-- include button to close div -->
+            <br>
+            <div class="d-grid d-md-flex justify-content-md-end">
+              <button id="close" type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+
+            <div class="mb-2" role="document">
+
+              <div id="choice-of-top-form">
+                <div id="manual-top-form" class="hide">
+                  <div class="d-flex justify-content-center">
+                    <h3>The old-fashion search</h3>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <p>(for veteran holidayers)</p>
+                  </div>
+
+                  <div class="md-form mb-2">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <label for="enter-location" class="h6">Enter destination</label>
+                    <input type="text" id="enter-location" class="form-control validate"
+                      placeholder="start typing and select a suggestion" required>
+                    <div id="recommendations" class="hide"></div>
+                  </div>
+                </div>
+
+                <!-- automatic bit (for spontaneous holidayers)-->
+                <div id="auto-top-form" class="hide">
+                  <div class="d-flex justify-content-center">
+                    <h3>The spontaneous search</h3>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <p>(for adventurous holidayers)</p>
+                  </div>
+                </div>
+              </div>
+              <!-- state duration of stay -->
+              <form class="row mb-3 mt-3" id="stay-duration">
+                <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
+                <div class="col-md-6">
+                  <label for="from-date" class="form-label"></label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="inputGroupPrepend2">From</span>
+                    <input type="date" class="form-control" id="from-date" aria-describedby="inputGroupPrepend2"
+                      required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="to-date" class="form-label"></label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="inputGroupPrepend3">To</span>
+                    <input type="date" class="form-control" id="to-date" aria-describedby="inputGroupPrepend3" required>
+                  </div>
+                </div>
+              </form>
+              <!-- number of rooms -->
+              <form class="row mt-4">
+                <div class="col-6 mt-2">
+                  <!-- put in expected number of adults -->
+                  <div class="h6 input-group">
+                    <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
+                    <button id="decrease-adults" class="btn btn-outline-danger" type="button">
+                      <i class="fas fa-chevron-down"></i></button>
+                    <input id="adults" type="text" class="form-control" value="1">
+                    <button id="increase-adults" class="btn btn-outline-primary" type="button">
+                      <i class="fas fa-chevron-up"></i></button>
+                  </div>
+                </div>
+                <!-- put in expected number of rooms -->
+                <div class="col-6 mt-2">
+                  <div class="h6 input-group">
+                    <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
+                    <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
+                      <i class="fas fa-chevron-down"></i></button>
+                    <input id="rooms" type="text" class="form-control" value="1">
+                    <button id="increase-rooms" class="btn btn-outline-primary" type="button">
+                      <i class="fas fa-chevron-up"></i></button>
+                  </div>
+                </div>
+              </form>
+              <!--  -->
+              <!-- filter hotel search by what metric? -->
+              <form class="row mt-4 mb-3">
+                <div class="col-md-2 offset-md-4 input-group">
+                  <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Order Criterion -</div>
+                  <select class="custom-select" id="order-options">
+                    <option selected>Choose to order by...</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="price">Price</option>
+                    <option value="review_score">Review Score</option>
+                  </select>
+                </div>
+              </form>
+              <!-- submit all -->
+              <div class="d-flex justify-content-center mb-3">
+                <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- invisible? weather button -->
-  <div id="weatherButton" class="hide"></div>
-
-  <!-- When user clicks manual, display search options, same as above -->
-  <div class="container-md hide" id="services-manual">
-    <!-- display location and listings -->
-    <div class="row">
-    <!-- first search option -->
-    <div class="col-lg-12 col-md-12 border border-secondary rounded px-5" id="manual-search">
-      <!-- include button to close div -->
-      <br>
-      <div class="d-grid d-md-flex justify-content-md-end">
-        <button id="close" type="button" class="btn-close" aria-label="Close"></button>
+      <!-- display hotel search results as successive forms here -->
+      <div class="container-md hide border border-secondary rounded px-5" id="search-results-all">
+        <br>
+        <div class="row">
+          <div class="d-flex justify-content-end">
+            <button type="button" class="close-results" aria-label="Close">
+              <i class="fa fa-arrow-left" aria-hidden="true">Go back bruv👀!</i>
+            </button>
+          </div>
+          <h4 class="text-center" id="results-heading">❤️ Peruse through recommended accommodations below ❤️</h4>
+          <div class="col-lg-12 col-md-12" id="search-results"></div>
+        </div>
       </div>
-    
-      <div class="mb-2" role="document">
 
-        <div id="choice-of-top-form">
-          <div id="manual-top-form" class="hide">
+      <div id="choice-of-top-form">
+        <div id="manual-top-form" class="hide">
           <div>
             <h3 class="spread-out text-center">The old-fashion search</h3>
           </div>
@@ -97,88 +206,46 @@
             <p class="spread-out text-center">(for veteran holidayers)</p>
           </div>
 
-          <div class="md-form mb-2">
-            <i class="fas fa-map-marker-alt"></i>
-            <label for="enter-location" class="h6">Enter destination</label>
-            <input type="text" id="enter-location" class="form-control validate"
-              placeholder="start typing and select a suggestion" required>
-            <div id="recommendations" class="hide"></div>
-            </div>
-          </div>
-
-          <!-- automatic bit (for spontaneous holidayers)-->
-          <div id="auto-top-form" class="hide">
-            <div>
-              <h3 class="spread-out text-center">The spontaneous search</h3>
-            </div>
-            <div>
-              <p class="spread-out text-center">(for adventurous holidayers)</p>
+          <!-- weather container -->
+          <div class="container-md hide border border-secondary rounded px-5" id="weather-results-all">
+            <br>
+            <div class="row">
+              <h4 class="text-center" id="weather-heading">❤️ Weather Forecast in Search Area ❤️</h4>
+              <div class="col-lg-12 col-md-12" id="weather-results"></div>
             </div>
           </div>
         </div>
-        <!-- state duration of stay -->
-        <form class="row mb-3 mt-3" id="stay-duration">
-          <div class="input-group h6 moving-up"><i class="fas fa-calendar"></i> Enter duration of stay </div>
-          <div class="col-md-6">
-            <label for="from-date" class="form-label"></label>
-            <div class="input-group">
-              <span class="input-group-text" id="inputGroupPrepend2">From</span>
-              <input type="date" class="form-control" id="from-date" aria-describedby="inputGroupPrepend2" required>
-            </div>
+
+        <!-- automatic bit (for spontaneous holidayers)-->
+        <div id="auto-top-form" class="hide">
+          <div>
+            <h3 class="spread-out text-center">The spontaneous search</h3>
           </div>
-          <div class="col-md-6">
-            <label for="to-date" class="form-label"></label>
-            <div class="input-group">
-              <span class="input-group-text" id="inputGroupPrepend3">To</span>
-              <input type="date" class="form-control" id="to-date" aria-describedby="inputGroupPrepend3" required>
-            </div>
+          <div>
+            <p class="spread-out text-center">(for adventurous holidayers)</p>
           </div>
-        </form>
-        <!-- number of rooms -->
-        <form class="row mt-4">
-          <div class="col-6 mt-2">
-            <!-- put in expected number of adults -->
-            <div class="h6 input-group">
-              <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
-              <button id="decrease-adults" class="btn btn-outline-danger" type="button">
-                <i class="fas fa-chevron-down"></i></button>
-              <input id="adults" type="text" class="form-control" value="1">
-              <button id="increase-adults" class="btn btn-outline-primary" type="button">
-                <i class="fas fa-chevron-up"></i></button>
-            </div>
-          </div>
-          <!-- put in expected number of rooms -->
-          <div class="col-6 mt-2">
-            <div class="h6 input-group">
-              <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
-              <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
-                <i class="fas fa-chevron-down"></i></button>
-              <input id="rooms" type="text" class="form-control" value="1">
-              <button id="increase-rooms" class="btn btn-outline-primary" type="button">
-                <i class="fas fa-chevron-up"></i></button>
-            </div>
-          </div>
-        </form>
-        <!--  -->
-        <!-- filter hotel search by what metric? -->
-        <form class="row mt-4 mb-3">
-          <div class="col-md-2 offset-md-4 input-group">
-            <div class="h6 mt-2"><i class="fas fa-filter"></i></i> Order Criterion -</div>
-            <select class="custom-select" id="order-options">
-              <option selected>Choose to order by...</option>
-              <option value="popularity">Popularity</option>
-              <option value="price">Price</option>
-              <option value="review_score">Review Score</option>
-            </select>
-          </div>
-        </form>
-        <!-- submit all -->
-        <div class="d-flex justify-content-center mb-3">
-          <button class="btn btn-deep-orange btn-primary" id="submit-search" type="submit">Submit</button>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3 col-md-3 col-sm-12">
+
+        <div class="footer-about " id="aboutUs">
+          <h2> About Us</h2>
+          <p>
+            This is a user-friendly website that allows users to search known holiday destinations and access
+            information on hotels in the area as well as weather conditions in the holiday destination.
+            This is the height of life!!!
+            Enjoy Every moment!!
+            Feel the Joy!!
+            ❤️❤️
+          </p>
         </div>
       </div>
     </div>
-    </div>
+  </div>
+  </div>
   </div>
 
   <!-- display hotel search results as successive forms here -->
@@ -215,8 +282,9 @@
         <div class="d-flex justify-content-center">
           <button id="refresh" type="button" class="reload-cities" aria-label="Close">
             <i class="fa fa-refresh" aria-hidden="true">Refresh</i>
-        </button></div>
-    </div> 
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <!-- loader spinning... -->
@@ -233,87 +301,101 @@
 
   <div class="sticky"><a href="#navigation">Back To Top!</a></div>
 
-  
-</div>
 
-<!-- footer section start -->
-<footer id="footer">
-  <div class="container text-center">
-    <div class="row align-items-start">
-              <div class="col-lg-4 col-md-4 col-sm-12  ">
-                <a href="#nb1"><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
-           
-              </div>
+  </div>
 
-              <div class="col-lg-4 col-md-4 col-sm-12">
-              
-                  <div class="footer-about " id="aboutUs">
-                    <h3> About Us</h3>
-                      <p style="font-size:16px;">
-                          This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
-                          This is the height of life!!!
-                          Enjoy Every moment!!
-                          Feel the Joy!!
-                          ❤️❤️
-                      </p>
-                  </div>
-              </div>
+  <!-- footer section start -->
+  <footer id="footer">
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col-lg-4 col-md-4 col-sm-12  ">
+          <a href="#nb1"><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
+
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+
+          <div class="footer-about " id="aboutUs">
+            <h3> About Us</h3>
+            <p style="font-size:16px;">
+              This is a user-friendly website that allows users to search known holiday destinations and access
+              information on hotels in the area as well as weather conditions in the holiday destination.
+              This is the height of life!!!
+              Enjoy Every moment!!
+              Feel the Joy!!
+              ❤️❤️
+            </p>
+          </div>
+        </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
           <div class=" container social-links ">
-          <h3 class="ms-2">Follow Us </h3>
-              <ul class="social-icon ">
-                <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                  </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://www.twitter.com">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                  </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://www.linkedin.com">
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                  </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                  </a></li>
-              </ul>           
+            <h3 class="ms-2">Follow Us </h3>
+            <ul class="social-icon ">
+              <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a></li>
+              <li class="social-icon__item"><a class="social-icon__link" href="https://www.twitter.com">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a></li>
+              <li class="social-icon__item"><a class="social-icon__link" href="https://www.linkedin.com">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </a></li>
+              <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a></li>
+            </ul>
           </div>
         </div>
 
 
-      
-         
-      
-    </div>
-  </div>
 
-</footer>
-<!-- footer section end -->
-<!-- footer copy right section start -->
-<section id="copy-right">
-  <div class="copy-right-sec p-2 ms-4" style="color:white;"><i class="fa fa-copyright"></i>  
-    Hodophile 2023 Powered By <a href="#">edxBootcamp</a> 
+
+
+      </div>
+
+  </footer>
+  <!-- footer section end -->
+  <!-- footer copy right section start -->
+  <section id="copy-right">
+    <div class="copy-right-sec"><i class="fa fa-copyright"></i>
+      Hodophile 2023 Powerd By <a href="#">edxBootcamp</a>
+
+
+    </div>
+
+  </section>
+  <!-- footer copy right section end -->
   </div>
-</section>
-<!-- footer copy right section end -->
-</div>
+  <!-- How it works -->
+
+  </footer>
+  <!-- footer section end -->
+  <!-- footer copy right section start -->
+  <section id="copy-right">
+    <div class="copy-right-sec p-2 ms-4" style="color:white;"><i class="fa fa-copyright"></i>
+      Hodophile 2023 Powered By <a href="#">edxBootcamp</a>
+    </div>
+  </section>
+  <!-- footer copy right section end -->
+  </div>
 
 
 </body>
-  <!-- followus icons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <!-- Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <!-- my js scripts -->
-  <script src="./js/script.js"></script>
-  <script src="./config.js"></script>
-  <script src="./js/cities.js"></script>
+<!-- followus icons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- my js scripts -->
+<script src="./js/script.js"></script>
+<script src="./config.js"></script>
+<script src="./js/cities.js"></script>
 
 </html>
