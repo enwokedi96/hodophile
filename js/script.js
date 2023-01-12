@@ -15,7 +15,7 @@ $(document).ready(
         var redirectFromAuto = false;
 
         const placeOptions = ["city_name", "name", "country"] // iterate through and get the best available location identifier
-        const timer = ms => new Promise(res => setTimeout(res, ms));
+        const timer = ms => new Promise(res => setTimeout(res, ms)); // delay set
 
         var manualAuto = $('#manual-automatic'); // container for manual and automatic
         var manual = $('#manual'); // manual button
@@ -47,6 +47,8 @@ $(document).ready(
 
         // load cities
         var allCities = cities;
+
+        // 
 
         // Optimal reusability: listen to div to ascertain which top of form to use
         // whilst other form elements are reused
@@ -94,7 +96,6 @@ $(document).ready(
                 'url("./images/peru.jpg")',
                 'url("./images/masai-mara-kenya.jpg")',
                 'url("./images/statue-of-liberty-us.jpg")',
-
             ]
 
             const bg = images[Math.floor(Math.random() * images.length)];
@@ -106,8 +107,9 @@ $(document).ready(
         }
 
         // sift randomly through images every 3 seconds
-        setInterval(changeImage, 3000);
+        setInterval(changeImage, 2000);
 
+        // accommodation search APIs
         function callApiDojoBooking(url, apiKey, async=true) {
             return {
                 "async": async,
@@ -187,7 +189,8 @@ $(document).ready(
             event.preventDefault();
             console.log('user filling location');
             var loc = userInputManualForm.val();
-            var url = `https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${loc}&languagecode=en-us` //`https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
+            //var url = `https://booking-com.p.rapidapi.com/v1/hotels/locations?name=${loc}&locale=en-gb`
+            var url = `https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete?text=${loc}&languagecode=en-us` //
             // when user input has reached 3 letters and greater, call on api to recommend
             if (loc.length > 2) {
                 $.ajax(callApiDojoBooking(url, bookingDotComAPIKey)).done(
@@ -373,6 +376,7 @@ $(document).ready(
                 })
             
                 // -------------------------------- CALL BOOKING API FOR MANUAL OPS --------------------------------
+                //var url = `https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?checkin_date=${userFromDate}&room_number=${currentNumRooms}&order_by=${orderCriteria}&latitude=${latitude}&units=metric&checkout_date=${userToDate}&filter_by_currency=GDP&adults_number=${currentNumAdults}&locale=en-gb&longitude=${longitude}&page_number=0&include_adjacency=true&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`
                 var url = `https://apidojo-booking-v1.p.rapidapi.com/properties/list?offset=0&arrival_date=${userFromDate}&departure_date=${userToDate}&guest_qty=${currentNumAdults}&dest_ids=0&room_qty=${currentNumRooms}&search_type=latlong&children_qty=2&children_age=5%2C7&search_id=none&price_filter_currencycode=USD&latitude=${latitude}&longitude=${longitude}&order_by=${orderCriteria}&languagecode=en-us&travel_purpose=leisure`;
                 manualSearch.addClass('hide');
                 $("#spinner").css("visibility", "visible");
@@ -418,6 +422,8 @@ $(document).ready(
                                         // <strong>Address:</strong> 
                                         var address = $(`<div class="moving-center">${response.result[i].address}, ${response.result[i].city}, ${response.result[i].country_trans}</div>`);
                                         // add about accommodation
+                                        var description = response.result[i].urgency_room_msg;
+                                        if (typeof description == undefined){description = "No description of rooms was provided!"}
                                         var aboutRoom = `<div class="moving-center">${response.result[i].urgency_room_msg}</div>`
                                         // add estimated cost
                                         var cost = $(`<div class="moving-center"><strong>Estimated Cost (all-inclusive): </strong> ${response.result[i].price_breakdown.all_inclusive_price} ${response.result[i].price_breakdown.currency}</div>`)
