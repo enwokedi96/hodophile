@@ -30,6 +30,11 @@ body, html {
     display: none !important;
 }
 
+/* spread */
+.x-spread{
+    width: 100%;
+}
+
 /* for moving and positioning elements */
 .moving-down {
     margin-top: 80px;
