@@ -5,10 +5,16 @@ body, html {
     height: 100%;
     box-sizing: border-box;
     overflow-x: hidden; 
+    background: linear-gradient(45deg,black, gray, blue)
 }
 
 * {
     box-sizing: inherit;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    padding-left: 5px;
 }
 
 .jumbotron{
@@ -19,12 +25,14 @@ body, html {
     min-height: 110vh;
 }
 
+/* enabler for UX and transitiosn between pages */
 .hide {
     display: none !important;
 }
 
+/* for moving and positioning elements */
 .moving-down {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .moving-up {
@@ -115,6 +123,7 @@ body, html {
 }
 
 /* components for weather and refresh button */
+.sticky,
 .weather-button,
 #refresh {
     max-width: 155px;
@@ -130,6 +139,7 @@ body, html {
     cursor: pointer;
     color: #1b1d1d;
   }
+.sticky:hover,
 .weather-button:hover,
 #refresh:hover {
 background: lightsalmon;
@@ -147,6 +157,26 @@ color: #293030;
 .weather-button a {
     text-decoration: none;
     color: inherit;
+}
+
+.sticky{
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    justify-content: center;
+    align-items: center;
+    bottom: 10px;
+    z-index: 20;
+    margin-left: 0px;
+    height: 140px;
+    width: 40px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+}
+.sticky a{
+    text-orientation: inherit;
+    color: #000;
 }
 
 /* loading while API loads results... */
