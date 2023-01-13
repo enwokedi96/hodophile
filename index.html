@@ -74,7 +74,7 @@
         </p>
         <p class="text-justify">Start typing your destination and allow our system pull out suggestions to aid your search.
           Simply click on the desired destination, fill the rest of the form and click Submit. </p> <img class="img-fluid" src="./nav-images/manual-form.PNG">
-          
+
         <p class="text-justify">And now you wait! Leave it to us to pull the best recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay. <img class="img-fluid" src="./nav-images/rooms-recommends.png"></p>
         <p>You can also preview the weather forecast at your destination while you wait, or view again by clicking <img class="img-fluid" style="display: inline; height: 40px;" src="./nav-images/weather-button.PNG">.</p>
         <div class="d-flex justify-content-center"><img class="img-fluid" src="./nav-images/weather-forecast.PNG"></div>
@@ -88,7 +88,7 @@
         <p>Simply fill out the form and submit. <img class="img-fluid" alt="auto-form" src="./nav-images/auto-form.PNG"> </p>
         <p>Our system will then recommend anywhere between 6 - 8 destinations world over. 
           <div class="d-flex justify-content-center" style="margin-top: -20px;"><img class="img-fluid" src="./nav-images/auto-recommends.PNG"></div></p>
-        <p>Not liking any of the recommendations? You can refresh the search and get new ones 👍.
+        <p>Not liking any of the recommendations? You can refresh <img style="height: 40px;" src="./nav-images/refresh-cities.PNG"> the search and get new ones 👍.
           Take your pick and leave it to us to recommend accommodations (curated with ❤️).</p>
         <p>Your Indulgence, Our Satisfaction.</p>
       </div>
@@ -202,7 +202,7 @@
             <!-- put in expected number of adults -->
             <div class="h6 input-group">
               <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
-              <button id="decrease-adults" class="btn btn-outline-danger" type="button">
+              <button id="decrease-adults" class="btn btn-outline-danger" style="border-top-left-radius: 7px;border-bottom-left-radius: 7px;" type="button">
                 <i class="fas fa-chevron-down"></i></button>
               <input id="adults" type="text" class="form-control" value="1">
               <button id="increase-adults" class="btn btn-outline-primary" type="button">
@@ -213,7 +213,7 @@
           <div class="col-6 mt-2">
             <div class="h6 input-group">
               <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
-              <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
+              <button id="decrease-rooms" class="btn btn-outline-danger" style="border-top-left-radius: 7px;border-bottom-left-radius: 7px;" type="button">
                 <i class="fas fa-chevron-down"></i></button>
               <input id="rooms" type="text" class="form-control" value="1">
               <button id="increase-rooms" class="btn btn-outline-primary" type="button">
@@ -269,6 +269,10 @@
       <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-2"></div>
+      <div class="d-flex justify-content-center">
+        <div>Fancy none? Click <button id="reload-cities" class="btn btn-outline-primary" type="button">
+          <i class="fas fa-sync-alt"></i></button> to refresh</div>
+      </div>
     </div>
   </div>
   <!-- loader spinning... -->

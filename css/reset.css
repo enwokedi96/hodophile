@@ -73,6 +73,12 @@ body, html {
     text-shadow: 2px 2px rgb(119, 5, 5);
 }
 
+/* round button edges */
+.round-edges{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
 /* add recommendations dropdown css */
 #recommendations {
     position: absolute;
@@ -128,10 +134,9 @@ body, html {
     margin-bottom: 20px;
 }
 
-/* components for weather and refresh button */
+/* components for weather and buttons */
 .sticky,
-.weather-button,
-#refresh {
+.weather-button {
     max-width: 155px;
     margin-top: 20px;
     margin-bottom: 12px;
@@ -146,18 +151,9 @@ body, html {
     color: #1b1d1d;
   }
 .sticky:hover,
-.weather-button:hover,
-#refresh:hover {
+.weather-button:hover {
 background: lightsalmon;
 color: #293030;
-}
-
-#refresh{
-    margin-top: 0px;
-}
-#refresh-box{
-    border:rgb(7, 7, 7) solid 2px;
-    box-sizing:border-box;
 }
 
 .weather-button a {

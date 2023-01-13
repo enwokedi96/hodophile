@@ -521,7 +521,7 @@ $(document).ready(
         })
 
         // want to run again? click to get new locations
-        $("#refresh").on("click",function(){
+        $("#reload-cities").on("click",function(){
             // clear all incriminating records (again)
             $("#search-cities-1").empty(); $("#search-cities-2").empty()
             $("#search-cities-1").addClass('hide'); $("#search-cities-2").addClass('hide');
