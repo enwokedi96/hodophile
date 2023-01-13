@@ -19,11 +19,11 @@ First, click the "manual" button.
 
 Then start typing your destination and allow our system pull out suggestions to aid your search. Simply click on the desired destination, fill the rest of the form and click Submit. 
 
-<img style="height: 120px;" src="./nav-images/manual-form.PNG">
+<img style="height: 240px;" src="./nav-images/manual-form.PNG">
 
 The next page will present lodging recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay. 
 
-<img style="height: 200px;" src="./nav-images/rooms-recommends.png">
+<img style="height: 280px;" src="./nav-images/rooms-recommends.png">
 
 The user can also preview the weather forecast at your destination while you wait, or view again by clicking 
 <img style="display: inline; height: 40px;" src="./nav-images/weather-button.PNG">. 
@@ -32,12 +32,12 @@ The user can also preview the weather forecast at your destination while you wai
 
 To book a place, click on your choice to get redirected to the specific accommodation on booking.com. Users can also click on the name of the lodge to automatically Google the hotel and get more info.
 
-<img style="height: 120px;" src="./nav-images/search-more-on-hotel.PNG">
+<img style="height: 80px;" src="./nav-images/search-more-on-hotel.PNG">
 
 *. Search with the automatic option
 Feeling spontaneous? This option will randomly search out all-time favorite all around the world. To get started, click "Automatic" button on our homepage.
 
-<img style="height: 80px;" alt="auto-first" src="./nav-images/auto-first.PNG">
+<img style="height: 120px;" alt="auto-first" src="./nav-images/auto-first.PNG">
 
 Simply fill out the form and submit. 
 
