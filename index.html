@@ -16,26 +16,28 @@
 
   <!--Nav Bar-->
   <nav class="navbar navbar-expand-md bg-body-tertiary" id="navigation">
-    <div class="container"> 
+    <div class="container-md"> 
       <a class="navbar-brand main-text" href="."><img class="logo" src="images/logo.png">odophile</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      <button class="navbar-toggler mb-4 bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="fa fa-bars"> </i><!-- <span class="navbar-toggler-icon"></span> -->
       </button>
-      <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
+      <div class="collapse navbar-collapse mb-1" id="navbarNav">
+        <ul class="navbar-nav px-2">
+          <li class="nav-item active ms-auto">
             <a class="nav-link nav-link-text" href="#aboutUs">About Us</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active ms-auto">
             <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#contact-us-modal">Contact Us</a>
+          </li>
+          <li class="nav-item active ms-auto">
+            
+            <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#how-to-use-modal">Navigation</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-<div class="jumbotron" id="image">
 
   <!--Modal for contact us-->
   <div class="modal fade" id="contact-us-modal" tabindex="-1">
@@ -46,15 +48,57 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p><i class="fas fa-phone"></i> Telephone: 01614567890</p>
-          <p><i class="fas fa-envelope"></i> Email: group8@noIamNotOkay.com</p>
-            <p><i class="fas fa-location-dot"></i><br>123 group 8<br>Trilogy Skills Bootcamp<br>
+          <p><i class="fas fa-phone"></i><strong> Telephone:</strong> +44 0161 467 890</p>
+          <p><i class="fas fa-envelope"></i><strong> Email:</strong> group8@noIamNotOkay.com</p>
+          <p><i class="fas fa-thumbtack"></i><strong> Address:</strong></p> <p class="moving-right">123 group 8<br>Trilogy Skills Bootcamp<br>
             Front End Development<br> United Kingdom</p>
         </div>
       </div>
     </div>
   </div>
-  <br>
+
+<!--Modal for contact us-->
+<div class="modal fade" id="how-to-use-modal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">How To Navigate Site</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-justify">Οur website provides the possibility to search accommodations for holiday destinations you want to visit 
+          or, if you can't decide where you want to go, then leave it to us 😉</p>
+        <p><strong>1. Search with the manual option.</strong> <br>This option will give you the ability to search the places you want to visit. 
+          Please see instructions below on how to use it:<br>
+          First, click the manual button.<div class="d-flex justify-content-center"><img class="img-fluid" alt="manual-first" src="./nav-images/manual-first.PNG"></div>
+        </p>
+        <p class="text-justify">Start typing your destination and allow our system pull out suggestions to aid your search.
+          Simply click on the desired destination, fill the rest of the form and click Submit. </p> <img class="img-fluid" src="./nav-images/manual-form.PNG">
+
+        <p class="text-justify">And now you wait! Leave it to us to pull the best recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay. <img class="img-fluid" src="./nav-images/rooms-recommends.png"></p>
+        <p>You can also preview the weather forecast at your destination while you wait, or view again by clicking <img class="img-fluid" style="display: inline; height: 40px;" src="./nav-images/weather-button.PNG">.</p>
+        <div class="d-flex justify-content-center"><img class="img-fluid" src="./nav-images/weather-forecast.PNG"></div>
+        <p>To book a place, click on your choice to get redirected to the specific accommodation on booking.com. And peradventure any accommodations look particularly sus🤭, click on the name of the lodge to 
+          automatically Google the hotel.</p><div class="d-flex justify-content-center"><img class="img-fluid" style="height: 80px;" src="./nav-images/search-more-on-hotel.PNG"></div>
+        <br>
+        <!-- <p>You can also</p> -->
+        <p><strong>2. Search with the automatic option.</strong> <br>Feeling a tad spontaneous? This option will randomly search out all-time favorite all around the world.
+        To get started, click "Automatic" button on our homepage.</p>
+        <div class="d-flex justify-content-center"><img class="img-fluid" alt="auto-first" src="./nav-images/auto-first.PNG"></div>
+        <p>Simply fill out the form and submit. <img class="img-fluid" alt="auto-form" src="./nav-images/auto-form.PNG"> </p>
+        <p>Our system will then recommend anywhere between 6 - 8 destinations world over. 
+          <div class="d-flex justify-content-center" style="margin-top: -20px;"><img class="img-fluid" src="./nav-images/auto-recommends.PNG"></div></p>
+        <p>Not liking any of the recommendations? You can refresh <img style="height: 40px;" src="./nav-images/refresh-cities.PNG"> the search and get new ones 👍.
+          Take your pick and leave it to us to recommend accommodations (curated with ❤️).</p>
+        <p>Your Indulgence, Our Satisfaction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="jumbotron" id="image">
+
   <!--Header name-->
   <figure class="text-center">
     <blockquote class="blockquote">
@@ -158,7 +202,7 @@
             <!-- put in expected number of adults -->
             <div class="h6 input-group">
               <div class="mt-2"><i class="fas fa-user"></i> Adults -</div>
-              <button id="decrease-adults" class="btn btn-outline-danger" type="button">
+              <button id="decrease-adults" class="btn btn-outline-danger" style="border-top-left-radius: 7px;border-bottom-left-radius: 7px;" type="button">
                 <i class="fas fa-chevron-down"></i></button>
               <input id="adults" type="text" class="form-control" value="1">
               <button id="increase-adults" class="btn btn-outline-primary" type="button">
@@ -169,7 +213,7 @@
           <div class="col-6 mt-2">
             <div class="h6 input-group">
               <div class="mt-2"><i class="fas fa-bed"></i> Rooms -</div>
-              <button id="decrease-rooms" class="btn btn-outline-danger" type="button">
+              <button id="decrease-rooms" class="btn btn-outline-danger" style="border-top-left-radius: 7px;border-bottom-left-radius: 7px;" type="button">
                 <i class="fas fa-chevron-down"></i></button>
               <input id="rooms" type="text" class="form-control" value="1">
               <button id="increase-rooms" class="btn btn-outline-primary" type="button">
@@ -225,6 +269,10 @@
       <h4 class="text-center" id="cities-heading">❤️ Pick one of the following destinations ❤️</h4>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-1"></div>
       <div class="col-lg-12 col-md-12 d-flex justify-content-center" id="search-cities-2"></div>
+      <div class="d-flex justify-content-center">
+        <div>Fancy none? Click <button id="reload-cities" class="btn btn-outline-primary" type="button">
+          <i class="fas fa-sync-alt"></i></button> to refresh</div>
+      </div>
     </div>
   </div>
   <!-- loader spinning... -->
@@ -247,29 +295,31 @@
 <!-- footer section start -->
 <footer id="footer">
   <div class="container text-center">
-    <div class="row align-items-start">
-              <div class="col-lg-4 col-md-4 col-sm-12  ">
-                <a href="."><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
-           
-              </div>
+    <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="d-flex justify-content-md-start justify-content-sm-center">
+              <a href="."><img src="images/main-logo1.png" alt="our H icon" class="logo-footer-img"></a>
+            </div>
+          </div>
 
-              <div class="col-lg-4 col-md-4 col-sm-12">
-              
+              <div class="col-lg-4 col-md-4 col-sm-12 ">
                   <div class="footer-about " id="aboutUs">
-                    <h3> About Us</h3>
-                      <p style="font-size:16px;">
-                          This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
-                          This is the height of life!!!
-                          Enjoy Every moment!!
-                          Feel the Joy!!
-                          ❤️❤️
-                      </p>
-                  </div>
+                    <div class="x-spread d-flex justify-content-center">
+                      <h3 id="aboutUs-head"> About Us</h3>
+                    </div>
+                        <p style="font-size:16px;">
+                            This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
+                            This is the height of life!!!
+                            Enjoy Every moment!!
+                            Feel the Joy!!
+                            ❤️❤️
+                        </p>
+                </div>
               </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
           <div class=" container social-links ">
-          <h3 class="ms-2">Follow Us </h3>
+          <div class="x-spread d-flex justify-content-center"><h3 id="followUs-head" class="ms-2">Follow Us </h3></div>
               <ul class="social-icon ">
                 <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com">
                     <ion-icon name="logo-facebook"></ion-icon>
@@ -298,7 +348,7 @@
 <!-- footer section end -->
 <!-- footer copy right section start -->
 <div id="copy-right">
-  <div class="copy-right-sec p-1 ms-4 text-center"><i class="fas fa-copyright"></i>  
+  <div class="copy-right-sec p-1 text-center"><i class="fas fa-copyright"></i>  
     Hodophile 2023 Powered By <a href="#">edxBootcamp</a> 
   </div>
 </div>
