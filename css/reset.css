@@ -40,6 +40,10 @@ body, html {
     margin-bottom: -15px;
 }
 
+.moving-right{
+    margin-left: 25px;
+}
+
 .moving-center {
     display: flex;
     justify-content: center;
@@ -177,7 +181,7 @@ color: #293030;
 }
 .sticky a{
     text-orientation: inherit;
-    color: #000;
+    color: rgb(35, 33, 33);
 }
 
 /* loading while API loads results... */
@@ -361,12 +365,14 @@ color: #293030;
 
 /* All things nav: Image of navbar */
 .navbar-nav {
+    width: 100%;
     margin-left: auto;
     padding-right: 15px;
     background-color: #1b1d1d;
     max-width: fit-content;
     border-radius: 10px;
 }
+
 
 .navbar {
     background-image: url("../images/black.jpg");
@@ -446,15 +452,17 @@ h3{
     font-weight: 600;
 }
 
+#aboutUs-head,
+#followUs-head{
+    width: 50%;
+    text-align: center;
+}
+
 
 /* heading follow us */
 .social-links{
     padding-top: 20px;
 	padding-bottom: 5px;
-    text-align: center;
-	font-size: 20px;
-    font-weight: 600;
-
 }
 
 /* Properties of social icons - follow us */
@@ -462,9 +470,8 @@ h3{
 {
  /* position: relative; */
  display: flex;
- justify-content: flex-start;
+ justify-content: center;
  padding-left: 1px;
- /*align-items: left; */
  margin: 5px 0;
 
 }

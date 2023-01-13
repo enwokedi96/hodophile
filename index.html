@@ -18,9 +18,9 @@
   <nav class="navbar navbar-expand-md bg-body-tertiary" id="navigation">
     <div class="container-md"> 
       <a class="navbar-brand main-text" href="."><img class="logo" src="images/logo.png">odophile</a>
-      <button class="navbar-toggler mb-4 line-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      <button class="navbar-toggler mb-4 bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="fa fa-bars"> </i><!-- <span class="navbar-toggler-icon"></span> -->
       </button>
       <div class="collapse navbar-collapse mb-1" id="navbarNav">
         <ul class="navbar-nav px-2">
@@ -29,6 +29,10 @@
           </li>
           <li class="nav-item active ms-auto">
             <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#contact-us-modal">Contact Us</a>
+          </li>
+          <li class="nav-item active ms-auto">
+            
+            <a class="nav-link nav-link-text" data-bs-toggle="modal" href= "#how-to-use-modal">Navigation</a>
           </li>
         </ul>
       </div>
@@ -44,14 +48,44 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p><i class="fas fa-phone"></i><strong> Telephone:</strong> 01614567890</p>
+          <p><i class="fas fa-phone"></i><strong> Telephone:</strong> +44 0161 467 890</p>
           <p><i class="fas fa-envelope"></i><strong> Email:</strong> group8@noIamNotOkay.com</p>
-          <p><i class="fas fa-thumbtack"></i><strong> Address:</strong><br>123 group 8<br>Trilogy Skills Bootcamp<br>
+          <p><i class="fas fa-thumbtack"></i><strong> Address:</strong></p> <p class="moving-right">123 group 8<br>Trilogy Skills Bootcamp<br>
             Front End Development<br> United Kingdom</p>
         </div>
       </div>
     </div>
   </div>
+
+<!--Modal for contact us-->
+<div class="modal fade" id="how-to-use-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">How To Navigate Site</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Οur website provides the possibility to search accommodations for holiday destinations you want to visit 
+          or, if you can't decide where you want to go, then leave it to us 😉</p>
+        <p>1. Search with the manual option. <br>This option will give you the ability to search the places you want to visit. 
+          Please see instructions below on how to use it:<br>
+          First, click the manual button.
+        </p>
+        <p>Start typing your destination and allow our system pull out suggestions to aid your search.
+          Simply click on the desired destination, fill the rest of the form and click Submit. </p>
+        <p>And now you wait! Leave it to us to pull the best recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay.</p>
+        <p>You can also preview the weather forecast at your destination while you wait, or view again again at the bottom by clicking <img src=""></p>
+        <p>To book a place, click on your choice to get redirected to the specific accommodation on booking.com</p>
+        <p>2. Search with the automatic option. </p><br> Feeling a tad spontaneous? This option will randomly search out all-time favorite all around the world.
+        <p>To get started, click "Automatic" button on our homepage.</p>
+        <p>Simply fill out the form and submit </p>
+        <p>Our system will then recommend between 6 - 8 destinations world over. Take your pick and leave it to us to recommend accommodations (curated with ❤️)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="jumbotron" id="image">
 
@@ -247,29 +281,31 @@
 <!-- footer section start -->
 <footer id="footer">
   <div class="container text-center">
-    <div class="row align-items-start">
-              <div class="col-lg-4 col-md-4 col-sm-12  ">
-                <a href="."><img src="images/main-logo1.png" alt=".." class="logo-footer-img"></a>
-           
-              </div>
+    <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="d-flex justify-content-md-start justify-content-sm-center">
+              <a href="."><img src="images/main-logo1.png" alt="our H icon" class="logo-footer-img"></a>
+            </div>
+          </div>
 
-              <div class="col-lg-4 col-md-4 col-sm-12">
-              
+              <div class="col-lg-4 col-md-4 col-sm-12 ">
                   <div class="footer-about " id="aboutUs">
-                    <h3> About Us</h3>
-                      <p style="font-size:16px;">
-                          This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
-                          This is the height of life!!!
-                          Enjoy Every moment!!
-                          Feel the Joy!!
-                          ❤️❤️
-                      </p>
-                  </div>
+                    <div class="x-spread d-flex justify-content-center">
+                      <h3 id="aboutUs-head"> About Us</h3>
+                    </div>
+                        <p style="font-size:16px;">
+                            This is a user-friendly website that allows users to search known holiday destinations and access information on hotels in the area as well as weather conditions in the holiday destination.
+                            This is the height of life!!!
+                            Enjoy Every moment!!
+                            Feel the Joy!!
+                            ❤️❤️
+                        </p>
+                </div>
               </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
           <div class=" container social-links ">
-          <h3 class="ms-2">Follow Us </h3>
+          <div class="x-spread d-flex justify-content-center"><h3 id="followUs-head" class="ms-2">Follow Us </h3></div>
               <ul class="social-icon ">
                 <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com">
                     <ion-icon name="logo-facebook"></ion-icon>
