@@ -7,6 +7,9 @@ Enjoy Every moment!!
 Feel the Joy!!
 ❤️❤️
 
+## Installation
+Visit our live website [here](https://enwokedi96.github.io/hodophile/).
+
 ## Usage
 
 Οur website provides the possibility to search accommodations for holiday destinations the user wants to visit and also recommend possible holiday places.
@@ -23,7 +26,7 @@ Then start typing your destination and allow our system pull out suggestions to 
 
 The next page will present lodging recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay. 
 
-<img style="height: 280px;" src="./nav-images/rooms-recommends.png">
+<img style="height: 320px;" src="./nav-images/rooms-recommends.png">
 
 The user can also preview the weather forecast at your destination while you wait, or view again by clicking 
 <img style="display: inline; height: 40px;" src="./nav-images/weather-button.PNG"> button. 
@@ -37,7 +40,7 @@ To book a place, click on your choice to get redirected to the specific accommod
 *. Search with the automatic option
 Feeling spontaneous? This option will randomly search out all-time favorite all around the world. To get started, click "Automatic" button on our homepage.
 
-<img style="height: 120px;" alt="auto-first" src="./nav-images/auto-first.PNG">
+<img style="height: 160px;" alt="auto-first" src="./nav-images/auto-first.PNG">
 
 Simply fill out the form and submit. 
 
@@ -45,7 +48,7 @@ Simply fill out the form and submit.
 
 Our system will then recommend anywhere between 6 - 8 destinations world over.
 
-<img style="height: 200px;" src="./nav-images/auto-recommends.PNG">
+<img style="height: 320px;" src="./nav-images/auto-recommends.PNG">
 
 Not liking any of the recommendations? You can refresh <img style="height: 40px;" src="./nav-images/refresh-cities.PNG"> the search and get new ones 
 
