@@ -18,15 +18,15 @@ Visit our live website [here](https://enwokedi96.github.io/hodophile/).
 This option will give you the ability to search the places you want to visit. 
 First, click the "manual" button.
 
-<img style="height: 120px;" alt="manual-first" src="./nav-images/manual-first.PNG">
+<img style="height: 160px;" alt="manual-first" src="./nav-images/manual-first.PNG">
 
 Then start typing your destination and allow our system pull out suggestions to aid your search. Simply click on the desired destination, fill the rest of the form and click Submit. 
 
-<img style="height: 320px;" src="./nav-images/manual-form.PNG">
+<img style="height: 300px;" src="./nav-images/manual-form.PNG">
 
 The next page will present lodging recommendations suited to your needs, alongside addresses, ratings and estimated cost for duration of stay. 
 
-<img style="height: 320px;" src="./nav-images/rooms-recommends.png">
+<img style="height: 300px;" src="./nav-images/rooms-recommends.png">
 
 The user can also preview the weather forecast at your destination while you wait, or view again by clicking 
 <img style="display: inline; height: 40px;" src="./nav-images/weather-button.PNG"> button. 
