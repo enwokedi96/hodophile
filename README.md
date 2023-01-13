@@ -37,7 +37,7 @@ To book a place, click on your choice to get redirected to the specific accommod
 
 <img style="height: 80px;" src="./nav-images/search-more-on-hotel.PNG">
 
-*. Search with the automatic option
+* Search with the automatic option.
 Feeling spontaneous? This option will randomly search out all-time favorite all around the world. To get started, click "Automatic" button on our homepage.
 
 <img style="height: 160px;" alt="auto-first" src="./nav-images/auto-first.PNG">
